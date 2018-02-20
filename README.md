@@ -1,6 +1,6 @@
 # Locavore
 
-> connecting locally-minded consumers to the businesses in their community.
+> Connecting locally-minded consumers to the businesses in their community.
 
 ## Team
 
