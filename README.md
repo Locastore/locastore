@@ -1,4 +1,4 @@
-# Locavore
+# Locastore
 
 > Connecting locally-minded consumers to the businesses in their community.
 
