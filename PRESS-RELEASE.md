@@ -5,10 +5,11 @@
   > Locavore gives consumers a platform to support local businesses and purchase the things they need from the community that they care about.
   
 ## Problem ##
-  > People have a desire to support their community but have difficulties accessing local products conveniently. 
+  > People have a desire to support their community but have difficulties accessing local products conveniently.
 
 ## Solution ##
-  > Give locally-minded consumers a platform for accessing and doing business with local companies. 
+  > Give locally-minded consumers a platform for accessing and doing business with local companies.
+  > Lessening the environmental impact from shipping and transportation of goods by tapping into products within your geography.
   
 ## How to Get Started ##
   > Search for products based on your geographical location and Locavore will connect you with your local marketplace.
