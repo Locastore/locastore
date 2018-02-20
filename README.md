@@ -1,12 +1,12 @@
-# Project Name
+# Locavore
 
-> Pithy project description
+> connecting locally-minded consumers to the businesses in their community.
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Evaline Bai
+  - __Scrum Master__: Michael Butak
+  - __Lead Engineer__: Norbie Magno
 
 ## Table of Contents
 
