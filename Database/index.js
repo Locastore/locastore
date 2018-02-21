@@ -1,18 +1,18 @@
-const mongoose = require('mongoose');
+const mongoose = require(‘mongoose’);
+mongoose.connect('mongodb://localhost/');
 
 const Schema = mongoose.Schema;
 
 let LocaRecords = new Schema ({
-  column1: String,
-  column2: String,
-  column3: String,
-  column4: String,
-  column5: String,
-  column6: String,
-  column7: String,
-  column8: String
+  businessName: {type: String, unique: true},
+  address: String,
+  hours: String,
+  phone: String,
+  photos: String,
+  website: String,
+  description: String,
 });
 
-let LocaRecord = mongoose.model('LocaRecord', LocaRecords);
+let LocaRecord = mongoose.model('LocaRecords', LocaRecords);
 
 module.exports = LocaRecord;

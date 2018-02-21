@@ -1,13 +1,24 @@
-// server code here
 const express = require('express');
-
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const app = express();
-const PORT = 3000;
+
+app.use(bodyParser.json());
+app.use(cors());
+app.use(express.static(__dirname + '/../client/dist'));
+
+app.post('/location', (req, res) => {
+
+  res.send('success');
+});
 
 app.get('/', (req, res) => {
   res.send('success');
 });
 
-app.listen(PORT, () => {
-  console.log(`Listening for requests on ${PORT}`);
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`Listening for requests on ${port}`);
 });
