@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-mongoose.connect = ('mongodb://localhost/test');  // <--- to be updated / deleted
-const db = mongoose.connection;
 
-var LocaSchema = mongoose.Schema({
+const Schema = mongoose.Schema;
+
+let LocaRecords = new Schema ({
   column1: String,
   column2: String,
   column3: String,
@@ -13,3 +13,6 @@ var LocaSchema = mongoose.Schema({
   column8: String
 });
 
+let LocaRecord = mongoose.model('LocaRecord', LocaRecords);
+
+module.exports = LocaRecord;
