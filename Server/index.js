@@ -10,11 +10,21 @@ app.use(cors());
 app.use(express.static(__dirname + '/../Client/dist'));
 
 app.post('/location', (req, res) => {
-  var location = req.body.text;
-  util.getLocationData(location, (data) => {
-    // determine how to interact with places API
-  })
-  res.send('success');
+  let location = req.body.text;
+  util.getCoordinateData(location, function(data) {
+    let long = data.results[0].geometry.location.lng;
+    let lat = data.results[0].geometry.location.lat;
+    util.getLocationData(lat, long, '', function(data) {
+      data.results.forEach((store) => {
+        let place_id = store.place_id;
+        util.getPlaceDetails(place_id, function(data) {
+          console.log(data);
+          //then from here, gather the place details + place data and render to business view
+          res.send('Successfully gathered place details');
+        })
+      });
+    });
+  });
 });
 
 app.get('/location', (req, res) => {
@@ -35,7 +45,6 @@ app.post('/products', (req, res) => {
 })
 
 app.get('/products', (req, res) => {
-  db.
   res.send('success');
 });
 
