@@ -14,78 +14,75 @@ https://maps.googleapis.com/maps/api/place/nearbysearch/json?type=store&location
 https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJqZitiLrMj4ARGTbRPXeLFgE&key={KEY}
 
 */
-let getCoordinateData = (location, callback) => {
-  let options = {
+const getCoordinateData = (location, callback) => {
+  const options = {
     url: `https://maps.googleapis.com/maps/api/geocode/json?address='${location}'&key=${config.key}`,
     method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'User-Agent': 'request'
-    }
-  }
+  };
   request(options, (err, res, body) => {
     if (err) {
-      console.log('Unable to obtain coordinate data from google API ' + err);
+      console.log(`Unable to obtain coordinate data from google API ${err}`);
     } else {
       console.log('Successfully obtained coordinate data from google!');
-      // need to verify how google API returns this data
       callback(JSON.parse(body));
     }
   });
-}
+};
 
-let getAutoCompleteData = (location, callback) => {
-  let options = {
-    url: `https://maps.googleapis.com/maps/api/place/autocomplete/json?components=country:us&types=(cities)&input=${location}&key=${config.key}`,
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'User-Agent': 'request'
-    }
-  }
-  request(options, (err, res, body) => {
-    callback(locationData);
-  });
-}
+// const getAutoCompleteData = (location, callback) => {
+//   const options = {
+//     url: `https://maps.googleapis.com/maps/api/place/autocomplete/json?components=country:us&types=(cities)&input=${location}&key=${config.key}`,
+//     method: 'GET',
+//     headers: {
+//       'Accept': 'application/json',
+//       'User-Agent': 'request'
+//     },
+//   };
+//   request(options, (err, res, body) => {
+//     callback(locationData);
+//   });
+// };
 
-let getLocationData = (lat, long, keyword, callback) => {
-  let options = {
+const getLocationData = (lat, long, keyword, callback) => {
+  const options = {
     // Currently hardcoding radius to 15 miles, can make this a dropdown option in future
     url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?type=store&location=${lat},${long}&keyword=${keyword}&radius=24140&key=${config.key}`,
     method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'User-Agent': 'request'
-    }
-  }
+  };
   request(options, (err, res, body) => {
     if (err) {
-      console.log('Unable to get google place API data: ' + err);
+      console.log(`Unable to get google place API data: ${err}`);
     } else {
-      console.log('Successfully retrieved google place API data');
+      console.log('Successfully retrieved google location API data');
       callback(JSON.parse(body));
     }
   });
-}
+};
 
-let getPlaceDetails = (placeId, callback) => {
-  let options = {
-    url: `https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${config.key}`,
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'User-Agent': 'request'
-    }
-  }
-  request(options, (err, res, body) => {
-    if (err) {
-      console.log('Unable to get google place API data: ' + err);
-    } else {
-      console.log('Successfully retrieved google place API data');
-      callback(JSON.parse(body));
-    }
+const getPlaceDetails = (storeData) => {
+  return new Promise((resolve, reject) => {
+    const options = {
+      url: `https://maps.googleapis.com/maps/api/place/details/json?placeid=${storeData.place_id}&key=${config.key}`,
+      method: 'GET',
+    };
+    request(options, (err, res, body) => {
+      if (err) {
+        console.log(`Unable to get google place API data: ${err}`);
+        reject(err);
+      } else {
+        console.log('Successfully retrieved google place details API data');
+        let data = JSON.parse(body);
+        data = data.result;
+        storeData.address = data.formatted_address;
+        storeData.phone = data.formatted_phone_number;
+        storeData.hours = data.opening_hours.weekday_text;
+        storeData.photos = data.photos;
+        storeData.website = data.website;
+        resolve(storeData);
+      }
+    });
   });
-}
+};
 
 exports.getCoordinateData = getCoordinateData;
 exports.getLocationData = getLocationData;
