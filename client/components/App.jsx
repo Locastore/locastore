@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Search from './Search.jsx';
+import Business from './Business.jsx';
 import './App.css';
 
 class App extends React.Component {
@@ -30,6 +31,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Search onSearch={this.search.bind(this)}/>
+        <Business businesses={this.state.stores} />
         <h2>Live Well, Shop Locally-Owned</h2>
       </div>
     );

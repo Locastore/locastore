@@ -75,7 +75,7 @@ const getPlaceDetails = (storeData) => {
         data = data.result;
         storeData.address = data.formatted_address;
         storeData.phone = data.formatted_phone_number;
-        storeData.hours = data.opening_hours.weekday_text;
+        // storeData.hours = data.opening_hours.weekday_text;
         storeData.photos = data.photos;
         storeData.website = data.website;
         resolve(storeData);
