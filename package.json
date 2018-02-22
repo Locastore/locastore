@@ -21,6 +21,7 @@
   "homepage": "https://github.com/Locastore/Locastore#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-preset-env": "^1.6.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",

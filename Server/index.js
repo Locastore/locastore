@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const util = require('../helpers/helpers.js');
-const db = require('../database/index.js');
+// const db = require('../database/index.js');
 const app = express();
 
 app.use(bodyParser.json());
