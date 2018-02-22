@@ -6,18 +6,17 @@ const config = require('../config.js');
 OPTIONAL 0): autocomplete at some point
 1) Use user search input to query google geocode API and retrieve
 coordinates. https://maps.googleapis.com/maps/api/geocode/json?address='95051'&key={KEY}
-
 2) Take coordinates from #1, then search google place API and grab nearby businesses.
 https://maps.googleapis.com/maps/api/place/nearbysearch/json?type=store&location=37.3598283,-121.9814354&keyword='flowers'&radius=10000&key={KEY}
-
 3) Take business ID from #2 and grab more business details from google details API
 https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJqZitiLrMj4ARGTbRPXeLFgE&key={KEY}
 
 */
+
 const getCoordinateData = (location, callback) => {
   const options = {
     url: `https://maps.googleapis.com/maps/api/geocode/json?address='${location}'&key=${config.key}`,
-    method: 'GET',
+    method: 'GET'
   };
   request(options, (err, res, body) => {
     if (err) {
@@ -47,7 +46,7 @@ const getLocationData = (lat, long, keyword, callback) => {
   const options = {
     // Currently hardcoding radius to 15 miles, can make this a dropdown option in future
     url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?type=store&location=${lat},${long}&keyword=${keyword}&radius=24140&key=${config.key}`,
-    method: 'GET',
+    method: 'GET'
   };
   request(options, (err, res, body) => {
     if (err) {
@@ -63,7 +62,7 @@ const getPlaceDetails = (storeData) => {
   return new Promise((resolve, reject) => {
     const options = {
       url: `https://maps.googleapis.com/maps/api/place/details/json?placeid=${storeData.place_id}&key=${config.key}`,
-      method: 'GET',
+      method: 'GET'
     };
     request(options, (err, res, body) => {
       if (err) {
