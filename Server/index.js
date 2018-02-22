@@ -1,13 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const util = require('../Helpers/helpers.js');
-const db = require('../Database/index.js');
+const util = require('../helpers/helpers.js');
+const db = require('../database/index.js');
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.static(__dirname + '/../Client/dist'));
+app.use(express.static(__dirname + '/../client/dist'));
 
 app.post('/location', (req, res) => {
   let location = req.body.text;
