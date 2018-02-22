@@ -1,11 +1,11 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var comp_dir = path.join(__dirname, '/client/index.jsx');
+var comp_dir = path.join(__dirname, '/client/components');
 var dist_dir = path.join(__dirname, '/client/dist');
 
 module.exports = {
-  entry: comp_dir,
+  entry: `${comp_dir}/index.jsx`,
   resolve: {
     extensions: ['.js', '.jsx', '.css']
   },

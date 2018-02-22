@@ -24,9 +24,7 @@ class App extends React.Component {
       <div>
         <div>
           <h1>Test, does this render to DOM?</h1>
-          <SearchView
-          search={this.search}
-          />
+          <SearchView search={this.search}/>
 
         </div>
       </div>
