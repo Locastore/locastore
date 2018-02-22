@@ -13,6 +13,7 @@ class App extends React.Component {
 
   search(event) {
     // listen for form submit event
+    console.log(event);
     // grab search term (location) from event obj
     // do axios post request to '/location' endpoint with search term as body.
     // server should serve up /
