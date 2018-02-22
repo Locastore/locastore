@@ -22,7 +22,7 @@ class Search extends React.Component {
     return (
       <div>
         <button type="button" onClick={this.search.bind(this)}>Go Local!</button>
-        <input type="text" value={this.state.locations}></input>
+        <input type="text" value={this.state.locations} onChange={this.onChange.bind(this)}></input>
       </div>
     )
   }
