@@ -13,7 +13,7 @@ class App extends React.Component {
   }
 
   search(location) {
-    axios.post('/locations', {
+    axios.post('/location', {
       text: `${location}`
     })
     .then(res => {
