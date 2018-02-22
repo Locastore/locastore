@@ -19,22 +19,21 @@ app.post('/location', (req, res) => {
         let place_id = store.place_id;
         util.getPlaceDetails(place_id, function(data) {
           console.log(data);
-          //then from here, gather the place details + place data and render to business view
-          res.send('Successfully gathered place details');
+          res.send(data);
         })
       });
     });
   });
 });
 
-app.get('/location', (req, res) => {
-  db.LocaRecord.find({}).limit(12).exec((err, places) => {
-    if (err) {
-      console.log(err);
-    }
-    res.status(200).send(places);
-  });
-});
+// app.get('/location', (req, res) => {
+//   db.LocaRecord.find({}).limit(12).exec((err, places) => {
+//     if (err) {
+//       console.log(err);
+//     }
+//     res.status(200).send(places);
+//   });
+// });
 
 app.post('/products', (req, res) => {
   var product = req.body.text;
