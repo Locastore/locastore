@@ -1,7 +1,7 @@
 import React from 'react';
 
-class Search extends React.Component {
-  constructor (props) {
+class ProductSearch extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
       term: ''
@@ -14,18 +14,18 @@ class Search extends React.Component {
     })
   }
 
-  search() {
+  prodsearch() {
     this.props.onSearch(this.state.term);
   }
 
   render() {
     return (
       <div>
-        <button type="button" onClick={this.search.bind(this)}>Go Local!</button>
+        <button type="button" onClick={this.prodsearch.bind(this)}>Search Local Retailers</button>
         <input type="text" onChange={this.onChange.bind(this)}></input>
       </div>
     )
   }
 }
 
-export default Search;
+export default ProductSearch;
