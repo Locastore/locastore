@@ -3,16 +3,13 @@ mongoose.connect('mongodb://localhost/');
 
 const Schema = mongoose.Schema;
 
-let LocaRecords = new Schema ({
-  businessName: {type: String, unique: true},
-  address: String,
-  hours: String,
-  phone: String,
-  photos: String,
-  website: String,
-  description: String,
+let Users = new Schema ({
+  username: {type: String, unique: true},
+  email: String,
+  password: String,
+  favorites: [{name: String, ID: String, url: String}]
 });
 
-let LocaRecord = mongoose.model('LocaRecords', LocaRecords);
+let User = mongoose.model('User', Users);
 
-module.exports = LocaRecord;
+module.exports = User;

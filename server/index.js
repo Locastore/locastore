@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const util = require('../helpers/helpers.js');
 const path = require('path');
-// const db = require('../database/index.js');
+const db = require('../database/index.js');
 const app = express();
 
 app.use(bodyParser.json());
@@ -70,7 +70,10 @@ app.post('/product', (req, res) => {
 
 app.post('/signup', function (req, res, next) {
   console.log(req.body);
-  res.send('here you go client.  no more 404');
+  let username = req.username;
+
+  db.create()
+  res.send('server has received new signup form data');
 })
 
 app.get('/product', (req, res) => {

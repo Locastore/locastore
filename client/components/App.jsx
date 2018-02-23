@@ -54,7 +54,6 @@ class App extends React.Component {
   }
 
   signupSubmit(signup) {
-    console.log(signup, '<-this is the signup objject');
     let username = signup.username;
     let email = signup.email;
     let password = signup.password;
@@ -64,6 +63,7 @@ class App extends React.Component {
       password: `${password}`
     })
     .then(res => {
+      console.log(res.data);
       axios.get('/')
     })
     .catch((err) => {

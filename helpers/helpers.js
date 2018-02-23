@@ -1,5 +1,6 @@
 const request = require('request');
 const config = require('../config.js');
+const db = require('../database/index.js');
 
 /*
 
@@ -83,6 +84,11 @@ const getPlaceDetails = (storeData) => {
   });
 };
 
+// const checkUsername = (username) => {
+
+// }
+
 exports.getCoordinateData = getCoordinateData;
 exports.getLocationData = getLocationData;
 exports.getPlaceDetails = getPlaceDetails;
+// exports.checkUsername =checkUsername;
