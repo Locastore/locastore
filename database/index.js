@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/');
-
 const Schema = mongoose.Schema;
 
 let Users = new Schema ({

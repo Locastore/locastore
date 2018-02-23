@@ -3,8 +3,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const util = require('../helpers/helpers.js');
 const path = require('path');
-const db = require('../database/index.js');
+const User = require('../database/index.js');
 const app = express();
+const mongoose = require('mongoose');
+const MONGODB_URI = 'mongodb://localhost/locastoreTest'
+mongoose.connect(MONGODB_URI, { useMongoClient: true });
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -69,10 +72,11 @@ app.post('/product', (req, res) => {
 });
 
 app.post('/signup', function (req, res, next) {
-  console.log(req.body);
-  let username = req.username;
-
-  db.create()
+  console.log(req.body, '<-- the body of new user data');
+  let username = new User(req.body);
+  username.save(function () {
+    console.log(`user has been added to db.`);
+  });
   res.send('server has received new signup form data');
 })
 
