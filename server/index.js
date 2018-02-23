@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const util = require('../helpers/helpers.js');
+const path = require('path');
 // const db = require('../database/index.js');
 const app = express();
 
@@ -71,6 +72,9 @@ app.get('/product', (req, res) => {
   res.send('success');
 });
 
+app.get('/*', (req, res) => {
+  res.redirect('/');
+})
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {

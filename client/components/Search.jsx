@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Search extends React.Component {
   constructor (props) {
@@ -21,7 +22,9 @@ class Search extends React.Component {
   render() {
     return (
       <div>
-        <button type="button" onClick={this.search.bind(this)}>Go Local!</button>
+        <Link to="/location">
+          <button type="button" onClick={this.search.bind(this)}>Go Local!</button>
+        </Link>
         <input type="text" onChange={this.onChange.bind(this)}></input>
       </div>
     )

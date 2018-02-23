@@ -9,6 +9,14 @@ import Signup from './Signup.jsx';
 //import logo from './logo.svg';
 import './App.css';
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from 'react-router-dom';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -66,27 +74,28 @@ class App extends React.Component {
 
   render() {
     return (
+
+      <Router> 
       <div className="app">
         
-        {/*<Signup signupSubmit={this.signupSubmit.bind(this)}/>
-        <Search onSearch={this.search.bind(this)}/>
-        <ProductSearch onSearch={this.prodsearch.bind(this)}/>
-        <Business businesses={this.state.stores} />
-        <h2>Live Well, Shop Locally-Owned</h2>*/}
-        
-        <div className="overlay">
-        {/*<img src={logo} alt="Locastore"/>*/}
-        <Nav />
-         <h1 className="live-well">live well</h1>
-         <h1 className="shop-local">shop local</h1>
-        </div>
-
-        {/*<div className="search">
+        {/*<Signup signupSubmit={this.signupSubmit.bind(this)}/> */}
+        <Route exact path="/" render={ () =>
           <Search onSearch={this.search.bind(this)}/>
-          <ProductSearch onSearch={this.prodsearch.bind(this)}/>
-          <Business businesses={this.state.stores} />
-        </div>*/}
+          <div className="overlay">
+          {/*<img src={logo} alt="Locastore"/>*/}
+            <Nav />
+            <h1 className="live-well">live well</h1>
+            <h1 className="shop-local">shop local</h1>
+          </div>
+        } />
+        <Route path="/location"
+               render={ () =>
+                <ProductSearch onSearch={this.prodsearch.bind(this)}/>
+               } />
+        <Business businesses={this.state.stores} />
+        <h2>Live Well, Shop Locally-Owned</h2>
       </div>
+      </Router>
     );
   }
 }
