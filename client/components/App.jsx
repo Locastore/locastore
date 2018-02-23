@@ -6,6 +6,14 @@ import ProductSearch from './ProductSearch.jsx';
 import Business from './Business.jsx';
 import './App.css';
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from 'react-router-dom';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -44,12 +52,19 @@ class App extends React.Component {
 
   render() {
     return (
+      <Router>
       <div className="App">
-        <Search onSearch={this.search.bind(this)}/>
-        <ProductSearch onSearch={this.prodsearch.bind(this)}/>
+        <Route exact path="/" render={ () =>
+          <Search onSearch={this.search.bind(this)}/>
+        } />
+        <Route path="/location"
+               render={ () =>
+                <ProductSearch onSearch={this.prodsearch.bind(this)}/>
+               } />
         <Business businesses={this.state.stores} />
         <h2>Live Well, Shop Locally-Owned</h2>
       </div>
+      </Router>
     );
   }
 }

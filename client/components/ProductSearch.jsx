@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class ProductSearch extends React.Component {
   constructor(props) {
@@ -21,7 +22,9 @@ class ProductSearch extends React.Component {
   render() {
     return (
       <div>
-        <button type="button" onClick={this.prodsearch.bind(this)}>Search Local Retailers</button>
+        <Link to="/location">
+          <button type="button" onClick={this.prodsearch.bind(this)}>Search Local Retailers</button>
+        </Link>
         <input type="text" onChange={this.onChange.bind(this)}></input>
       </div>
     )
