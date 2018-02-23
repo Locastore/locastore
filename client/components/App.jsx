@@ -6,7 +6,6 @@ import Search from './Search.jsx';
 import ProductSearch from './ProductSearch.jsx';
 import Business from './Business.jsx';
 import Signup from './Signup.jsx';
-//import logo from './logo.svg';
 import './App.css';
 
 import {
@@ -72,28 +71,30 @@ class App extends React.Component {
     })
   }
 
-  render() {
+render() {
     return (
+      <Router>
+      <div>
 
-      <Router> 
-      <div className="app">
-        
         {/*<Signup signupSubmit={this.signupSubmit.bind(this)}/> */}
+
         <Route exact path="/" render={ () =>
-          <Search onSearch={this.search.bind(this)}/>
-          <div className="overlay">
-          {/*<img src={logo} alt="Locastore"/>*/}
-            <Nav />
-            <h1 className="live-well">live well</h1>
-            <h1 className="shop-local">shop local</h1>
+          <div className="home">
+            <div className="overlay">
+              <Nav />
+              <h1 className="live-well">live well</h1>
+              <h1 className="shop-local">shop local</h1>
+            </div>
+              <Search onSearch={this.search.bind(this)}/>
           </div>
         } />
-        <Route path="/location"
-               render={ () =>
-                <ProductSearch onSearch={this.prodsearch.bind(this)}/>
-               } />
+
+        <Route path="/location" render={ () =>
+          <ProductSearch onSearch={this.prodsearch.bind(this)}/>
+        } />
+
         <Business businesses={this.state.stores} />
-        <h2>Live Well, Shop Locally-Owned</h2>
+
       </div>
       </Router>
     );
