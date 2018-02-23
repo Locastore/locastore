@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import Nav from './Nav.jsx';
 import Search from './Search.jsx';
 import ProductSearch from './ProductSearch.jsx';
 import Business from './Business.jsx';
-import './App.css';
 import Signup from './Signup.jsx';
+//import logo from './logo.svg';
+import './App.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -64,12 +66,26 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <Signup signupSubmit={this.signupSubmit.bind(this)}/>
+      <div className="app">
+        
+        {/*<Signup signupSubmit={this.signupSubmit.bind(this)}/>
         <Search onSearch={this.search.bind(this)}/>
         <ProductSearch onSearch={this.prodsearch.bind(this)}/>
         <Business businesses={this.state.stores} />
-        <h2>Live Well, Shop Locally-Owned</h2>
+        <h2>Live Well, Shop Locally-Owned</h2>*/}
+        
+        <div className="overlay">
+        {/*<img src={logo} alt="Locastore"/>*/}
+        <Nav />
+         <h1 className="live-well">live well</h1>
+         <h1 className="shop-local">shop local</h1>
+        </div>
+
+        {/*<div className="search">
+          <Search onSearch={this.search.bind(this)}/>
+          <ProductSearch onSearch={this.prodsearch.bind(this)}/>
+          <Business businesses={this.state.stores} />
+        </div>*/}
       </div>
     );
   }
