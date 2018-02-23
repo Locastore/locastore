@@ -5,9 +5,9 @@ const BusinessList = (props) => {
 
 return (
   <div>
-      {props.businesses.map(function(business) {
+      {props.businesses.map((business, index) => {
         return (
-          <BusinessListEntry business={business} />
+          <BusinessListEntry key={index} business={business} />
         )
       })}
   </div>
