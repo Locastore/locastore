@@ -21,7 +21,7 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="search">
         <Link to="/location">
           <button type="button" onClick={this.search.bind(this)}>Go Local!</button>
         </Link>

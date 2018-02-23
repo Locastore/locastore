@@ -22,15 +22,19 @@ module.exports = {
         loader: 'style-loader!css-loader'
       },
       {
-        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-        loader: 'url-loader',
+        test: /\.(png|jpg|gif|svg)$/,
+        use: [{
+          loader: 'url-loader'
+        }],
         options: {
           limit: 10000
         }
       },
       {
         test: /\.(png|jpg|gif)$/,
-        loader: 'file-loader',
+        use: [{
+          loader: 'file-loader'
+        }],
         options: {}
       },
       {
