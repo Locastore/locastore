@@ -55,9 +55,9 @@ class App extends React.Component {
 
   signupSubmit(signup) {
     console.log(signup.target, '<-this is the signup.target');
-    let username = signup.target.username;
-    let email = signup.target.email;
-    let password = signup.target.password;
+    let username = signup.username;
+    let email = signup.email;
+    let password = signup.password;
     axios.post('/signup', {
       username: `${username}`,
       email: `${email}`,
@@ -74,27 +74,25 @@ class App extends React.Component {
 render() {
     return (
       <Router>
-      <div>
-
+      <div className="app">
         {/*<Signup signupSubmit={this.signupSubmit.bind(this)}/> */}
-
         <Route exact path="/" render={ () =>
-          <div className="home">
-            <div className="overlay">
-              <Nav />
-              <h1 className="live-well">live well</h1>
-              <h1 className="shop-local">shop local</h1>
-            </div>
-              <Search onSearch={this.search.bind(this)}/>
+          <div>
+          <div className="overlay">
+          {/*<img src={logo} alt="Locastore"/>*/}
+            <Nav />
+            <Search onSearch={this.search.bind(this)}/>
+            <h1 className="live-well">live well</h1>
+            <h1 className="shop-local">shop local</h1>
+          </div>
           </div>
         } />
-
-        <Route path="/location" render={ () =>
-          <ProductSearch onSearch={this.prodsearch.bind(this)}/>
-        } />
-
+        <Route path="/location"
+               render={ () =>
+                <ProductSearch onSearch={this.prodsearch.bind(this)}/>
+               } />
         <Business businesses={this.state.stores} />
-
+        <h2>Live Well, Shop Locally-Owned</h2>
       </div>
       </Router>
     );

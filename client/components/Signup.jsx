@@ -4,30 +4,57 @@ class Signup extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      username: '',
+      email: '',
+      password: ''
     }
   }
+
+  onChangeUsername (event) {
+    this.setState({
+      username: event.target.value
+    })
+  }
+
+  onChangeEmail (event) {
+    this.setState({
+      email: event.target.value
+    })
+  }
+
+  onChangePassword (event) {
+    this.setState({
+      password: event.target.value
+    })
+  }
+
+  onFormSubmit() {
+    this.props.SingupSubmit(this.state);
+  }
+
+
 
   render () {
     return (
       <div>
       <h3>Signup for Locastore</h3>
-      <form onSubmit={this.SignupSubmit}>
+      <form >
         <label>
           Create Username
-          <input type="text" name="username"/>
+          <input onChange={this.onChangeUsername.bind(this)} type="text" name="username"/>
         </label>
         <br />
         <label>
           Your Email Address
-          <input type="email" name="email"/>
+          <input onChange={this.onChangeEmail.bind(this)} type="email" name="email"/>
         </label>
         <br />
         <label>
           Create Password
-          <input type="text" name="password"/>
+          <input onChange={this.onChangePassword.bind(this)} type="text" name="password"/>
         </label>
         <br />
-        <input type="submit" value="Submit"/>
+        <input onClick={this.onFormSubmit.bind(this)} type="submit" value="Submit"/>
       </form>
     </div>)
   }
