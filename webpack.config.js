@@ -5,6 +5,7 @@ var comp_dir = path.join(__dirname, '/client/components');
 var dist_dir = path.join(__dirname, '/client/dist');
 
 module.exports = {
+  devtool: 'inline-source-map',
   entry: `${comp_dir}/Index.jsx`,
   resolve: {
     extensions: ['.js', '.jsx', '.css']
