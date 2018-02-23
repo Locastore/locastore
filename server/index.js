@@ -68,6 +68,11 @@ app.post('/product', (req, res) => {
   });
 });
 
+app.post('/signup', function (req, res, next) {
+  console.log(req.body);
+  res.send('here you go client.  no more 404');
+})
+
 app.get('/product', (req, res) => {
   res.send('success');
 });

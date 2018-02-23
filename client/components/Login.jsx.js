@@ -1,11 +1,10 @@
 import React from 'react';
 
-class Signup extends React.Component {
+class Login extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       username: '',
-      email: '',
       password: ''
     }
   }
@@ -18,12 +17,6 @@ class Signup extends React.Component {
     })
   }
 
-  onChangeEmail (event) {
-    this.setState({
-      email: event.target.value
-    })
-  }
-
   onChangePassword (event) {
     this.setState({
       password: event.target.value
@@ -33,7 +26,7 @@ class Signup extends React.Component {
   onFormSubmit() {
     // console.log('FORM SUBMITTED!')
     // console.log(this.props);
-    this.props.signupSubmit(this.state);
+    this.props.loginSubmit(this.state);
     // this.props.fix();
   }
 
@@ -41,21 +34,16 @@ class Signup extends React.Component {
 
   render () {
     return (
-      <div className="signup">
-      <h3>Signup for Locastore</h3>
+      <div className="login">
+      <h3>Login</h3>
       <form >
         <label>
-          Create Username
+          Enter Username
           <input onChange={this.onChangeUsername.bind(this)} type="text" name="username"/>
         </label>
         <br />
         <label>
-          Your Email Address
-          <input onChange={this.onChangeEmail.bind(this)} type="email" name="email"/>
-        </label>
-        <br />
-        <label>
-          Create Password
+          Enter Password
           <input onChange={this.onChangePassword.bind(this)} type="text" name="password"/>
         </label>
         <br />
@@ -65,4 +53,4 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup;
+export default Login;

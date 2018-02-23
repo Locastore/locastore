@@ -6,6 +6,7 @@ import Search from './Search.jsx';
 import ProductSearch from './ProductSearch.jsx';
 import Business from './Business.jsx';
 import Signup from './Signup.jsx';
+import Login from './Login.jsx';
 import './App.css';
 
 import {
@@ -22,7 +23,6 @@ class App extends React.Component {
     this.state = {
       stores: []
     }
-    // this.userFormSubmit=this.userFormSubmit.bind(this);
   }
 
   search(location) {
@@ -54,7 +54,7 @@ class App extends React.Component {
   }
 
   signupSubmit(signup) {
-    console.log(signup.target, '<-this is the signup.target');
+    console.log(signup, '<-this is the signup objject');
     let username = signup.username;
     let email = signup.email;
     let password = signup.password;
@@ -71,28 +71,38 @@ class App extends React.Component {
     })
   }
 
+
 render() {
     return (
       <Router>
-      <div className="app">
-        {/*<Signup signupSubmit={this.signupSubmit.bind(this)}/> */}
+      <div>
+
+        <Signup
+        signupSubmit={this.signupSubmit.bind(this)}
+        />
+        {/*<Login
+        loginSubmit={this.loginSubmit.bind(this)}
+        />*/}
+
         <Route exact path="/" render={ () =>
-          <div>
-          <div className="overlay">
-          {/*<img src={logo} alt="Locastore"/>*/}
-            <Nav />
-            <Search onSearch={this.search.bind(this)}/>
-            <h1 className="live-well">live well</h1>
-            <h1 className="shop-local">shop local</h1>
-          </div>
+          <div className="home">
+            <div className="overlay">
+              <Nav />
+              <h1 className="live-well">live well</h1>
+              <h1 className="shop-local">shop local</h1>
+            </div>
+              <Search onSearch={this.search.bind(this)}/>
           </div>
         } />
-        <Route path="/location"
-               render={ () =>
-                <ProductSearch onSearch={this.prodsearch.bind(this)}/>
-               } />
+        {/*<Route exact path="/signup" render={ () =>
+          <Signup signupSubmit={this.signupSubmit.bind(this)}/>
+        } />*/}
+        <Route path="/location" render={ () =>
+          <ProductSearch onSearch={this.prodsearch.bind(this)}/>
+        } />
+
         <Business businesses={this.state.stores} />
-        <h2>Live Well, Shop Locally-Owned</h2>
+
       </div>
       </Router>
     );
