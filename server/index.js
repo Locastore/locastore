@@ -4,6 +4,7 @@ const cors = require('cors');
 const util = require('../helpers/helpers.js');
 const path = require('path');
 const User = require('../database/index.js');
+// const UserNameIsInUse = require('../helpers/helpers.js');
 const app = express();
 const mongoose = require('mongoose');
 const MONGODB_URI = 'mongodb://localhost/locastoreTest'
@@ -72,12 +73,17 @@ app.post('/product', (req, res) => {
 });
 
 app.post('/signup', function (req, res, next) {
-  console.log(req.body, '<-- the body of new user data');
-  let username = new User(req.body);
-  username.save(function () {
+  // console.log(req.body, '<-- the body of new user data');
+  let newuser = req.body.username;
+  if(util.NameIsInUse(newuser)) {
+    res.send('Error, that username already in use. Choose another username.')
+  } else {
+  let saveUser = new User(req.body);
+  saveUser.save(function () {
     console.log(`user has been added to db.`);
   });
-  res.send('server has received new signup form data');
+  res.send(`${newuser} has been added to the database.`);
+  }
 })
 
 app.get('/product', (req, res) => {
@@ -92,3 +98,5 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Listening for requests on ${port}`);
 });
+
+

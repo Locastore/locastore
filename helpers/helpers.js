@@ -1,6 +1,6 @@
 const request = require('request');
 const config = require('../config.js');
-const db = require('../database/index.js');
+const User = require('../database/index.js');
 
 /*
 
@@ -84,11 +84,17 @@ const getPlaceDetails = (storeData) => {
   });
 };
 
-// const checkUsername = (username) => {
-
-// }
+const NameIsInUse = (newuser) => {
+  User.findOne({username: newuser}, function ( err, user ) {
+    if (err) {
+      return false;
+    } else {
+      return true;
+    }
+  })
+}
 
 exports.getCoordinateData = getCoordinateData;
 exports.getLocationData = getLocationData;
 exports.getPlaceDetails = getPlaceDetails;
-// exports.checkUsername =checkUsername;
+exports.NameIsInUse = NameIsInUse;
