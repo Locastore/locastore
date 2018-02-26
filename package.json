@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "start": "node server/index.js",
-    "server-dev": "nodemon server/index.js",
+    "server-dev": "nodemon --inspect server/index.js",
     "react-dev": "webpack -d --watch",
     "lint": "./node_modules/.bin/eslint"
   },

@@ -4,7 +4,7 @@ const cors = require('cors');
 const util = require('../helpers/helpers.js');
 const path = require('path');
 const User = require('../database/index.js');
-// const UserNameIsInUse = require('../helpers/helpers.js');
+// const nameIsInUse = require('../helpers/helpers.js');
 const app = express();
 const mongoose = require('mongoose');
 const MONGODB_URI = 'mongodb://localhost/locastoreTest'
@@ -73,17 +73,18 @@ app.post('/product', (req, res) => {
 });
 
 app.post('/signup', function (req, res, next) {
-  // console.log(req.body, '<-- the body of new user data');
-  let newuser = req.body.username;
-  if(util.NameIsInUse(newuser)) {
-    res.send('Error, that username already in use. Choose another username.')
-  } else {
-  let saveUser = new User(req.body);
-  saveUser.save(function () {
-    console.log(`user has been added to db.`);
-  });
-  res.send(`${newuser} has been added to the database.`);
-  }
+  let newUser = req.body.username;
+  util.nameIsInUse(newUser, function (found) {
+    if (found) {
+      res.send(`${newUser} is already in use, choose another username`)
+    } else {
+      console.log(`about to add ${newUser} to db`);
+      let successResponse = function (data) {
+      res.send(`${data} has been added to the database, <--sent to client.`);
+      }
+      util.addUser(req.body, newUser, successResponse);
+      }
+  })
 })
 
 app.get('/product', (req, res) => {

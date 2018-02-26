@@ -63,7 +63,7 @@ class App extends React.Component {
       password: `${password}`
     })
     .then(res => {
-      console.log(res.data);
+      console.log(res.data, '<-- res.data in the axios post request from the server');
       axios.get('/')
     })
     .catch((err) => {

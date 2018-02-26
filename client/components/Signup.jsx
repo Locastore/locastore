@@ -31,10 +31,8 @@ class Signup extends React.Component {
   }
 
   onFormSubmit() {
-    // console.log('FORM SUBMITTED!')
-    // console.log(this.props);
+    // console.log(this.state,'<-- this.state from the react onFormSubmit to be sent via singupSubmit');
     this.props.signupSubmit(this.state);
-    // this.props.fix();
   }
 
 
