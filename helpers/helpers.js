@@ -41,11 +41,11 @@ const getCoordinateData = (location, callback) => {
 //     callback(locationData);
 //   });
 // };
-
+// https://maps.googleapis.com/maps/api/place/nearbysearch/json?type=store&location=37.3598283,-121.9814354&keyword=''&rankby=distance&key=AIzaSyAcjoB6fSfFu-Qk-RkqStE6AjEjGz07kqg
 const getLocationData = (lat, long, keyword, callback) => {
   const options = {
-    // Currently hardcoding radius to 15 miles, can make this a dropdown option in future
-    url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?type=store&location=${lat},${long}&keyword=${keyword}&radius=24140&key=${config.key}`,
+    // Ranking by distance because google API default ranks by prominence
+    url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?type=store&location=${lat},${long}&keyword=${keyword}&rankby=distance&key=${config.key}`,
     method: 'GET'
   };
   request(options, (err, res, body) => {
@@ -64,6 +64,7 @@ const getPlaceDetails = (storeData) => {
       url: `https://maps.googleapis.com/maps/api/place/details/json?placeid=${storeData.place_id}&key=${config.key}`,
       method: 'GET'
     };
+    console.log(options);
     request(options, (err, res, body) => {
       if (err) {
         console.log(`Unable to get google place API data: ${err}`);
@@ -74,7 +75,10 @@ const getPlaceDetails = (storeData) => {
         data = data.result;
         storeData.address = data.formatted_address;
         storeData.phone = data.formatted_phone_number;
-        // storeData.hours = data.opening_hours.weekday_text;
+        // This data doesn't always exist
+        if (data.opening_hours) {
+          storeData.hours = data.opening_hours.weekday_text;
+        }
         storeData.photos = data.photos;
         storeData.website = data.website;
         resolve(storeData);
@@ -83,6 +87,69 @@ const getPlaceDetails = (storeData) => {
   });
 };
 
+// Yelp API option
+const yelpSearch = (loc, keyword) => {
+  // categories based on https://www.yelp.com/developers/documentation/v3/all_category_list
+  // Find non food related businesses
+  return new Promise((resolve, reject) => {
+    const YELP_CATEGORIES = `active,arts,auto,beautysvc,bicycles,education,
+                        health,homeservices,hotelstravel,localservices,
+                        nightlife,pets,professional,realestate,religiousorgs,
+                        shopping`;
+
+    const options = {
+      url: 'https://api.yelp.com/v3/businesses/search',
+      headers: {
+        Authorization: `Bearer ${config.yelpKey}`
+      },
+      qs: {
+        location: loc,
+        radius: 24000, // in meters, about 15 miles
+        categories: YELP_CATEGORIES
+      }
+    };
+
+    if (keyword !== '') {
+      options.qs.term = keyword;
+    }
+
+    request(options, (err, res, body) => {
+      if (err) {
+        console.log(`Unable to get yelp API data: ${err}`);
+        reject(err);
+      } else {
+        console.log('Successfully queried Yelp API');
+        resolve(JSON.parse(body));
+      }
+    });
+  });
+};
+
+const yelpSearchDetails = (storeData) => {
+  return new Promise((resolve, reject) => {
+    const options = {
+      url: `https://api.yelp.com/v3/businesses/${storeData.place_id}`,
+      headers: {
+        Authorization: `Bearer ${config.yelpKey}`
+      }
+    };
+
+    request(options, (err, res, body) => {
+      if (err) {
+        console.log(`Unable to get yelp detailed business data: ${err}`);
+        reject(err);
+      } else {
+        const data = JSON.parse(body);
+        storeData.hours = data.hours;
+        storeData.photos = data.photos;
+        resolve(storeData);
+      }
+    });
+  });
+};
+
+exports.yelpSearch = yelpSearch;
+exports.yelpSearchDetails = yelpSearchDetails;
 exports.getCoordinateData = getCoordinateData;
 exports.getLocationData = getLocationData;
 exports.getPlaceDetails = getPlaceDetails;

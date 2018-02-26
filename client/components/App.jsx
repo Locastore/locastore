@@ -74,18 +74,17 @@ class App extends React.Component {
 render() {
     return (
       <Router>
-      <div>
-
+      <div className="app">
         {/*<Signup signupSubmit={this.signupSubmit.bind(this)}/> */}
-
         <Route exact path="/" render={ () =>
           <div className="home">
             <div className="overlay">
+          {/*<img src={logo} alt="Locastore"/>*/}
               <Nav />
+              <Search onSearch={this.search.bind(this)}/>
               <h1 className="live-well">live well</h1>
               <h1 className="shop-local">shop local</h1>
             </div>
-              <Search onSearch={this.search.bind(this)}/>
           </div>
         } />
 

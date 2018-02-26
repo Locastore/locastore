@@ -8,64 +8,72 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.static(__dirname + '/../client/dist'));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 let locationRetainer = '';
 
 app.post('/location', (req, res) => {
-  let location = req.body.text;
+  const location = req.body.text;
   locationRetainer = location.slice();
-  console.log(locationRetainer);
-  util.getCoordinateData(location, (data) => {
-    const { lng, lat } = data.results[0].geometry.location;
-    util.getLocationData(lat, lng, '', (locData) => {
+  util.yelpSearch(location)
+    .then((results) => {
       const promiseArr = [];
-      locData.results.forEach((store) => {
-        let storeData = {
+      results.businesses.forEach((store) => {
+        const storeData = {
           name: store.name,
-          place_id: store.place_id,
+          place_id: store.id,
+          address: store.location.display_address.join(' '),
+          phone: store.display_phone,
+          website: store.url.split('?')[0]
         };
-        promiseArr.push(util.getPlaceDetails(storeData));
+        promiseArr.push(util.yelpSearchDetails(storeData));
       });
       Promise.all(promiseArr)
-        .then((results) => {
-          console.log('Successfully finished all google API queries!');
-          res.send(results);
+        .then((yelpData) => {
+          console.log('Successfully finished all yelp API queries');
+          res.status(200).send(yelpData);
         })
         .catch((err) => {
-          console.log(`Failed to complete google API queries: ${err}`);
-          res.send(`Failed to complete google API queries: ${err}`);
+          console.log(`Failed to complete yelp API queries: ${err}`);
+          res.status(500).send(`Failed to complete yelp API queries: ${err}`);
         });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send('Failed to retrieve business data from Yelp API');
     });
-  });
 });
 
 app.post('/product', (req, res) => {
-  let product = req.body.text;
-  let prodLocation = locationRetainer.slice();
-  console.log(prodLocation);
-  util.getCoordinateData(prodLocation, (data) => {
-    const { lng, lat } = data.results[0].geometry.location;
-    util.getLocationData(lat, lng, product, (locData) => {
+  const product = req.body.text;
+  const prodLocation = locationRetainer.slice();
+  util.yelpSearch(prodLocation, product)
+    .then((results) => {
       const promiseArr = [];
-      locData.results.forEach((store) => {
-        let storeData = {
+      results.businesses.forEach((store) => {
+        const storeData = {
           name: store.name,
-          place_id: store.place_id,
+          place_id: store.id,
+          address: store.location.display_address.join(' '),
+          phone: store.display_phone,
+          website: store.url.split('?')[0]
         };
-        promiseArr.push(util.getPlaceDetails(storeData));
+        promiseArr.push(util.yelpSearchDetails(storeData));
       });
       Promise.all(promiseArr)
-        .then((results) => {
-          console.log('Successfully finished all google API queries!');
-          res.send(results);
+        .then((yelpData) => {
+          console.log('Successfully finished all yelp API queries');
+          res.status(200).send(yelpData);
         })
         .catch((err) => {
-          console.log(`Failed to complete google API queries: ${err}`);
-          res.send(`Failed to complete google API queries: ${err}`);
+          console.log(`Failed to complete yelp API queries: ${err}`);
+          res.status(500).send(`Failed to complete yelp API queries: ${err}`);
         });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send('Failed to retrieve business data from Yelp API');
     });
-  });
 });
 
 app.get('/product', (req, res) => {
@@ -74,7 +82,8 @@ app.get('/product', (req, res) => {
 
 app.get('/*', (req, res) => {
   res.redirect('/');
-})
+});
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
