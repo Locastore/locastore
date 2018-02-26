@@ -17,26 +17,28 @@ app.post('/location', (req, res) => {
   locationRetainer = location.slice();
   util.yelpSearch(location)
     .then((results) => {
-      const promiseArr = [];
+      const businessArr = [];
       results.businesses.forEach((store) => {
         const storeData = {
           name: store.name,
           place_id: store.id,
           address: store.location.display_address.join(' '),
           phone: store.display_phone,
-          website: store.url.split('?')[0]
+          website: store.url.split('?')[0],
+          photos: store.image_url
         };
-        promiseArr.push(util.yelpSearchDetails(storeData));
+        businessArr.push(storeData);
       });
-      Promise.all(promiseArr)
-        .then((yelpData) => {
-          console.log('Successfully finished all yelp API queries');
-          res.status(200).send(yelpData);
-        })
-        .catch((err) => {
-          console.log(`Failed to complete yelp API queries: ${err}`);
-          res.status(500).send(`Failed to complete yelp API queries: ${err}`);
-        });
+      res.status(200).send(businessArr);
+      // Promise.all(promiseArr)
+      //   .then((yelpData) => {
+      //     console.log('Successfully finished all yelp API queries');
+      //     res.status(200).send(yelpData);
+      //   })
+      //   .catch((err) => {
+      //     console.log(`Failed to complete yelp API queries: ${err}`);
+      //     res.status(500).send(`Failed to complete yelp API queries: ${err}`);
+      //   });
     })
     .catch((err) => {
       console.log(err);
@@ -49,26 +51,28 @@ app.post('/product', (req, res) => {
   const prodLocation = locationRetainer.slice();
   util.yelpSearch(prodLocation, product)
     .then((results) => {
-      const promiseArr = [];
+      const businessArr = [];
       results.businesses.forEach((store) => {
         const storeData = {
           name: store.name,
           place_id: store.id,
           address: store.location.display_address.join(' '),
           phone: store.display_phone,
-          website: store.url.split('?')[0]
+          website: store.url.split('?')[0],
+          photos: store.image_url
         };
-        promiseArr.push(util.yelpSearchDetails(storeData));
+        businessArr.push(storeData);
       });
-      Promise.all(promiseArr)
-        .then((yelpData) => {
-          console.log('Successfully finished all yelp API queries');
-          res.status(200).send(yelpData);
-        })
-        .catch((err) => {
-          console.log(`Failed to complete yelp API queries: ${err}`);
-          res.status(500).send(`Failed to complete yelp API queries: ${err}`);
-        });
+      res.status(200).send(businessArr);
+      // Promise.all(promiseArr)
+      //   .then((yelpData) => {
+      //     console.log('Successfully finished all yelp API queries');
+      //     res.status(200).send(yelpData);
+      //   })
+      //   .catch((err) => {
+      //     console.log(`Failed to complete yelp API queries: ${err}`);
+      //     res.status(500).send(`Failed to complete yelp API queries: ${err}`);
+      //   });
     })
     .catch((err) => {
       console.log(err);
