@@ -1,9 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
-
 var comp_dir = path.join(__dirname, '/client/components');
 var dist_dir = path.join(__dirname, '/client/dist');
-
 module.exports = {
   devtool: 'inline-source-map',
   entry: `${comp_dir}/Index.jsx`,
@@ -22,19 +20,15 @@ module.exports = {
         loader: 'style-loader!css-loader'
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        use: [{
-          loader: 'url-loader'
-        }],
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        loader: 'url-loader',
         options: {
           limit: 10000
         }
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: [{
-          loader: 'file-loader'
-        }],
+        loader: 'file-loader',
         options: {}
       },
       {
