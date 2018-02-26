@@ -84,43 +84,7 @@ const getPlaceDetails = (storeData) => {
   });
 };
 
-const nameIsInUse = (newUser, cb) => {
-  console.log(newUser, '<-- that is the newUser passed in from the Post request in the nameIsInUse helper');
-  User.find({'username': newUser}, function(err, user) {
-    if (err) {
-      console.log('User.find resulted in an error');
-    } else {
-      // console.log(user, "<--that is the user passed from the User.find operation");
-      if (user.length < 1 ) {
-        cb(false);
-      } else {
-        cb(true);
-      }
-      // if (user[0].username === newUser) {
-      //         console.log(user[0].username, ' equals ', newUser, ' in nameIsInUse helper.');
-      //         cb(true);
-      //       } else {
-      //         console.log(user[0].username, ' does not equal ', newUser, ' in nameIsInUse helper.');
-      //         cb(false);
-      //       }
-    }
-  });
-}
-
-const addUser = function (body, name, cb) {
-  let saveUser = new User(body);
-  console.log(saveUser, "<-- saveUser in the addUser fn");
-  saveUser.save(function (err) {
-    if (err) {
-      console.log('.save error');
-    } else {
-    console.log(`${name} has been added to db <-- node console log.`);
-    cb(name);}
-  });
-}
 
 exports.getCoordinateData = getCoordinateData;
 exports.getLocationData = getLocationData;
 exports.getPlaceDetails = getPlaceDetails;
-exports.nameIsInUse = nameIsInUse;
-exports.addUser = addUser;

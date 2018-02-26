@@ -13,8 +13,6 @@ class Signup extends React.Component {
   onChangeUsername (event) {
     this.setState({
       username: event.target.value
-    }, () => {
-    console.log(this.state.username);
     })
   }
 
@@ -30,9 +28,9 @@ class Signup extends React.Component {
     })
   }
 
-  onFormSubmit() {
+  onFormSubmit(event) {
     // console.log(this.state,'<-- this.state from the react onFormSubmit to be sent via singupSubmit');
-    this.props.signupSubmit(this.state);
+    this.props.signupSubmit(this.state, event);
   }
 
 

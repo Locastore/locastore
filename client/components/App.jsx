@@ -53,7 +53,7 @@ class App extends React.Component {
     })
   }
 
-  signupSubmit(signup) {
+  signupSubmit(signup, event) {
     let username = signup.username;
     let email = signup.email;
     let password = signup.password;
@@ -63,7 +63,8 @@ class App extends React.Component {
       password: `${password}`
     })
     .then(res => {
-      console.log(res.data, '<-- res.data in the axios post request from the server');
+      event.preventDefault();
+      alert(res.data);
       axios.get('/')
     })
     .catch((err) => {

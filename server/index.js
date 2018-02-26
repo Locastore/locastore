@@ -74,15 +74,15 @@ app.post('/product', (req, res) => {
 
 app.post('/signup', function (req, res, next) {
   let newUser = req.body.username;
-  util.nameIsInUse(newUser, function (found) {
+  User.nameIsInUse(newUser, function (found) {
     if (found) {
       res.send(`${newUser} is already in use, choose another username`)
     } else {
       console.log(`about to add ${newUser} to db`);
       let successResponse = function (data) {
-      res.send(`${data} has been added to the database, <--sent to client.`);
+      res.send(`${data} has been added to the database`);
       }
-      util.addUser(req.body, newUser, successResponse);
+      User.addUser(req.body, newUser, successResponse);
       }
   })
 })
