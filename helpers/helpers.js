@@ -1,6 +1,5 @@
 const request = require('request');
 const config = require('../config.js');
-const User = require('../database/index.js');
 
 /*
 

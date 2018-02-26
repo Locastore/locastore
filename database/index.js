@@ -36,11 +36,10 @@ const addUser = function (body, name, cb) {
     if (err) {
       console.log('.save error');
     } else {
-    console.log(`${name} has been added to db <-- node console log.`);
+    // console.log(`${name} has been added to db <-- node console log.`);
     cb(name);}
   });
 }
 
-module.exports = User;
-module.exports.nameIsInUse = nameIsInUse;
-module.exports.addUser = addUser;
+exports.nameIsInUse = nameIsInUse;
+exports.addUser = addUser;

@@ -80,7 +80,7 @@ app.post('/signup', function (req, res, next) {
     } else {
       console.log(`about to add ${newUser} to db`);
       let successResponse = function (data) {
-      res.send(`${data} has been added to the database`);
+        res.send(`${data} has been added to the database`);
       }
       User.addUser(req.body, newUser, successResponse);
       }

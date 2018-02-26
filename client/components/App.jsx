@@ -63,7 +63,6 @@ class App extends React.Component {
       password: `${password}`
     })
     .then(res => {
-      event.preventDefault();
       alert(res.data);
       axios.get('/')
     })
