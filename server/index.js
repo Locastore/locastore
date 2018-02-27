@@ -74,17 +74,17 @@ app.post('/product', (req, res) => {
 
 app.post('/signup', function (req, res, next) {
   let newUser = req.body.username;
-  User.nameIsInUse(newUser, function (found) {
-    if (found) {
-      res.send(`${newUser} is already in use, choose another username`)
-    } else {
-      console.log(`about to add ${newUser} to db`);
-      let successResponse = function (data) {
-        res.send(`${data} has been added to the database`);
+  // User.nameIsInUse(newUser, function (found) {
+  //   if (found) {
+  //     res.send(`${newUser} is already in use, choose another username`)
+  //   } else {
+  //     console.log(`about to add ${newUser} to db`);
+      let successResponse = function (data, string) {
+        res.send(`${data}${string}`);
       }
       User.addUser(req.body, newUser, successResponse);
-      }
-  })
+      // }
+  // })
 })
 
 app.get('/product', (req, res) => {
