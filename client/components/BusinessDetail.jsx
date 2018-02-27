@@ -11,7 +11,7 @@ const BusinessDetail = (props) => {
       {props.business.hours.map((openTime) =>
         <h4>{openTime}</h4>
       )}
-      <h4><a href={props.business.website}>{props.business.website}</a></h4>
+      <h4><a href={`http://${props.business.website}`}>{props.business.website}</a></h4>
     </div>
   );
 }

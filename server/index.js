@@ -63,13 +63,17 @@ app.post('/product', (req, res) => {
 });
 
 app.get('/business', (req, res) => {
-  console.log(req.query.id);
   util.yelpSearchDetails(req.query.id)
     .then((detailedData) => {
-      res.status(200).send(detailedData);
+      detailedData.id = req.query.id;
+      return util.parseWebsiteUrl(detailedData);
+    })
+    .then((data) => {
+      console.log(data);
+      res.status(200).send(data);
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err);
       res.status(500).send(`Failed to retrieve detailed business data from Yelp: ${err}`);
     });
 });

@@ -1,5 +1,6 @@
 const request = require('request');
 const config = require('../config.js');
+const cheerio = require('cheerio');
 
 // Yelp API option
 const yelpSearch = (loc, keyword) => {
@@ -79,5 +80,25 @@ const yelpSearchDetails = (id) => {
   });
 };
 
+// Used to attempt to parse website URL from Yelp's website, their API only
+// returns the yelp link to their business
+const parseWebsiteUrl = (data) => {
+  const url = `https://www.yelp.com/biz/${data.id}`;
+  return new Promise((resolve, reject) => {
+    request(url, (err, res, body) => {
+      if (err) {
+        console.log(`Unable to retrieve website from yelp ${err}`);
+        reject(err);
+      } else {
+        const $ = cheerio.load(body);
+        const parsedUrl = $('.biz-website > a').text();
+        data.website = parsedUrl;
+        resolve(data);
+      }
+    });
+  });
+};
+
 exports.yelpSearch = yelpSearch;
 exports.yelpSearchDetails = yelpSearchDetails;
+exports.parseWebsiteUrl = parseWebsiteUrl;
