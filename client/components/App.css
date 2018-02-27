@@ -1,3 +1,5 @@
+/*****************************  Landing Page / Location Search  ********************************/
+
 .home {
   font-family: "arial";
   background-image: url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a4deb7be2c7c79941884cdf35c1cee8e&auto=format&fit=crop&w=1050&q=80');
@@ -15,7 +17,47 @@
 
 .search {
   text-align: center;
-  margin-top: 25%;
+  margin-top: 30%;
+  margin-left: 20%;
+}
+
+button {
+ height: 41px;
+ border-top-left-radius: 10%;
+ border-bottom-left-radius: 10%;
+}
+
+.searchImg {
+  height: 30px;
+}
+
+.input {
+  width: 400px;
+  background: transparent;
+  background-clip: padding-box;
+}
+
+.inputLayer {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-top: none;
+  width: 250px;
+  height: 40px;
+  box-shadow:         inset 0 0 5px rgba(0, 0, 0, 0.1),
+                      0 1px 0 rgba(255, 255, 255, 0.5),
+                      inset 0 1px 2px rgba(0, 0, 0, 0.3),
+                      0 0 40px rgba(255, 255, 255, 0.3);
+  -moz-box-shadow:    inset 0 0 5px rgba(0, 0, 0, 0.1),
+                      0 1px 0 rgba(255, 255, 255, 0.5),
+                      inset 0 1px 2px rgba(0, 0, 0, 0.3),
+                      0 0 40px rgba(255, 255, 255, 0.3);
+  -o-box-shadow:      inset 0 0 5px rgba(0, 0, 0, 0.1),
+                      0 1px 0 rgba(255, 255, 255, 0.5),
+                      inset 0 1px 2px rgba(0, 0, 0, 0.3),
+                      0 0 40px rgba(255, 255, 255, 0.3);
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1),
+                      0 1px 0 rgba(255, 255, 255, 0.5),
+                      inset 0 1px 2px rgba(0, 0, 0, 0.3),
+                      0 0 40px rgba(255, 255, 255, 0.3);
 }
 
 .nav {
@@ -29,14 +71,14 @@
   color: black;
 }
 
-a {
+.navItem {
   text-decoration: none;
   letter-spacing: 0.2em;
   color: #273c75;
   opacity: 0%;
 }
 
-a:hover {
+.navItem:hover {
   text-decoration: none;
   letter-spacing: 0.5em;
   color: black;
@@ -73,6 +115,20 @@ a:hover {
   font-size: 40px;
   color: white;
 }
+
+/*****************************  Random Business Render  ****************************************/
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

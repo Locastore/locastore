@@ -23,9 +23,9 @@ class Search extends React.Component {
     return (
       <div className="search">
         <Link to="/location">
-          <button type="button" onClick={this.search.bind(this)}>Go Local!</button>
+         <button type="button" onClick={this.search.bind(this)}><img className="searchImg" src='https://d30y9cdsu7xlg0.cloudfront.net/png/5592-200.png'/></button>
         </Link>
-        <input type="text" onChange={this.onChange.bind(this)}></input>
+        <input className="input" className="inputLayer" type="text" placeholder="Go Local" onChange={this.onChange.bind(this)}></input>
       </div>
     )
   }
