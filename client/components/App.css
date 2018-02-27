@@ -74,7 +74,7 @@ button {
 .navItem {
   text-decoration: none;
   letter-spacing: 0.2em;
-  color: #273c75;
+  color: #273C75;
   opacity: 0%;
 }
 
@@ -116,25 +116,33 @@ button {
   color: white;
 }
 
-/*****************************  Random Business Render  ****************************************/
+/*****************************  Business Render  ***********************************************/
+
+.randomRender {
+  color: #273C75;
+}
 
 .cardColumn {
   display: inline-block;
-  margin-bottom: 7px;
+  margin-bottom: 10px;
 }
 
-.cardStyle {
-  height: 200px;
+.cardImg {
+  height: 25vw;
+  object-fit: cover;
 }
 
+.cardBody {
+  padding: 5%;
+  height: 160px;
+}
 
-
-
-
-
-
-
-
+.cardTitle {
+  color: #273C75;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
 
 
