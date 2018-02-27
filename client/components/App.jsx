@@ -84,6 +84,7 @@ class App extends React.Component {
         if (store.place_id === placeId) {
           store.hours = res.data.hours;
           store.extra_photos = res.data.photos;
+          store.website = res.data.website;
           history.push(`/location/${placeId}`);
         }
       }
