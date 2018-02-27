@@ -1,6 +1,7 @@
 const request = require('request');
 const config = require('../config.js');
 const cheerio = require('cheerio');
+const { createApolloFetch } = require('apollo-fetch');
 
 // Yelp API option
 const yelpSearch = (loc, keyword) => {
@@ -42,40 +43,56 @@ const yelpSearch = (loc, keyword) => {
 
 const yelpSearchDetails = (id) => {
   return new Promise((resolve, reject) => {
-    const options = {
-      url: `https://api.yelp.com/v3/businesses/${id}`,
-      headers: {
-        Authorization: `Bearer ${config.yelpKey}`
+    // GraphQL query string
+    const queryString = `{
+      business(id: "${id}") {
+        photos
+        hours {
+          open {
+            end
+            start
+            day
+          }
+        }
       }
-    };
+    }`;
 
-    request(options, (err, res, body) => {
-      if (err) {
-        console.log(`Unable to get yelp detailed business data: ${err}`);
-        reject(err);
-      } else {
-        // Used to format yelp API's hour result to human readable format
-        const NUM_DAY_TO_ACTUAL = {
-          0: 'Monday',
-          1: 'Tuesday',
-          2: 'Wednesday',
-          3: 'Thursday',
-          4: 'Friday',
-          5: 'Saturday',
-          6: 'Sunday'
-        };
+    const fetch = createApolloFetch({
+      uri: 'https://api.yelp.com/v3/graphql'
+    });
 
-        const data = JSON.parse(body);
-        const storeData = {};
-        const allHours = data.hours[0].open;
-        storeData.hours = [];
-        allHours.forEach((storeHour) => {
-          const day = NUM_DAY_TO_ACTUAL[storeHour.day];
-          storeData.hours.push(`${day}: ${storeHour.start} - ${storeHour.end}`);
-        });
-        storeData.photos = data.photos;
-        resolve(storeData);
+    fetch.use(({ options }, next) => {
+      if (!options.headers) {
+        options.headers = {};
       }
+      options.headers['Authorization'] = `Bearer ${config.yelpKey}`;
+      next();
+    });
+
+    fetch({
+      query: `query ${queryString}`
+    }).then((res) => {
+      const NUM_DAY_TO_ACTUAL = {
+        0: 'Monday',
+        1: 'Tuesday',
+        2: 'Wednesday',
+        3: 'Thursday',
+        4: 'Friday',
+        5: 'Saturday',
+        6: 'Sunday'
+      };
+      const storeData = {};
+      const allHours = res.data.business.hours[0].open;
+      storeData.hours = [];
+      allHours.forEach((storeHour) => {
+        const day = NUM_DAY_TO_ACTUAL[storeHour.day];
+        storeData.hours.push(`${day}: ${storeHour.start} - ${storeHour.end}`);
+      });
+      storeData.photos = res.data.business.photos;
+      resolve(storeData);
+    }).catch((err) => {
+      console.log(`Failed to query yelp details API ${err}`);
+      reject(err);
     });
   });
 };
