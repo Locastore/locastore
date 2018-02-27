@@ -18,13 +18,13 @@ class Business extends React.Component {
       <div>
         <Switch>
           <Route path="/location/:place" render={ (props) =>
-            this.props.businesses.map((business) => {
+            this.props.businesses.map((business, index) => {
               if (business.place_id === props.match.params.place) {
-                return (<BusinessDetail match={props.match} business={business} />)
+                return (<BusinessDetail key={index} match={props.match} business={business} />)
               }
             })
           } />
-          <Route path="/location" render={ () =>
+          <Route path="/location" render={ (props) =>
             <BusinessList handleDetail={this.props.handleDetail} businesses={this.props.businesses} />
           } />
         </Switch>

@@ -13,4 +13,5 @@ return (
   </div>
 );
 }
+
 export default BusinessList;
