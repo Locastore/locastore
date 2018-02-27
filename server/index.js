@@ -17,7 +17,7 @@ app.post('/location', (req, res) => {
   locationRetainer = location.slice();
   util.yelpSearch(location)
     .then((results) => {
-      const businessArr = [];
+      let businessArr = [];
       results.businesses.forEach((store) => {
         const storeData = {
           name: store.name,
@@ -29,7 +29,8 @@ app.post('/location', (req, res) => {
         };
         businessArr.push(storeData);
       });
-      res.status(200).send(businessArr);
+      let finalArr = businessArr.slice(0, 18);
+      res.status(200).send(finalArr);
     })
     .catch((err) => {
       console.log(err);

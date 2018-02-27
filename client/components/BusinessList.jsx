@@ -1,17 +1,22 @@
 import React from 'react';
 import BusinessListEntry from './BusinessListEntry.jsx';
 
-const BusinessList = (props) => {
+class BusinessList extends React.Component {
+  constructor (props) {
+    super(props);
+  }
 
-return (
-  <div>
-      {props.businesses.map((business, index) => {
+  render() {
+    return (
+      <div>
+        {this.props.businesses.map((business, index) => {
         return (
-          <BusinessListEntry handleDetail={props.handleDetail} key={index} business={business} />
+          <BusinessListEntry handleDetail={this.props.handleDetail} key={index} business={business} />
         )
       })}
-  </div>
-);
+    </div>
+  );
+  }
 }
 
 export default BusinessList;
