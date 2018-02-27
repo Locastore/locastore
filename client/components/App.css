@@ -61,7 +61,7 @@ button {
 }
 
 .nav {
-  display: block;
+  display: inline-block !important;
   text-align: right;
   width: 320px;
   margin-top: 190px;
@@ -118,8 +118,14 @@ button {
 
 /*****************************  Random Business Render  ****************************************/
 
+.cardColumn {
+  display: inline-block;
+  margin-bottom: 7px;
+}
 
-
+.cardStyle {
+  height: 200px;
+}
 
 
 
