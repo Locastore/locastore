@@ -7,7 +7,7 @@ return (
   <div>
       {props.businesses.map((business, index) => {
         return (
-          <BusinessListEntry key={index} business={business} />
+          <BusinessListEntry handleDetail={props.handleDetail} key={index} business={business} />
         )
       })}
   </div>

@@ -71,6 +71,28 @@ class App extends React.Component {
     })
   }
 
+  retrieveDetail(placeId, history) {
+    axios.get('/business', {
+      params: {
+        id: placeId
+      }
+    })
+    .then((res) => {
+      console.log(res.data);
+      for (let i = 0; i < this.state.stores.length; i++) {
+        let store = this.state.stores[i];
+        if (store.place_id === placeId) {
+          store.hours = res.data.hours;
+          store.extra_photos = res.data.photos;
+          history.push(`/location/${placeId}`);
+        }
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
 render() {
     return (
       <Router>
@@ -91,7 +113,8 @@ render() {
           <ProductSearch onSearch={this.prodsearch.bind(this)}/>
         } />
 
-        <Business businesses={this.state.stores} />
+        <Business handleDetail={this.retrieveDetail.bind(this)}
+                  businesses={this.state.stores} />
 
       </div>
       </Router>

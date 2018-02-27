@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import BusinessList from './BusinessList.jsx';
 import BusinessDetail from './BusinessDetail.jsx';
 import {
@@ -12,7 +13,6 @@ class Business extends React.Component {
     super(props);
   }
 
-  // Need to render business search view as well
   render () {
     return (
       <div>
@@ -25,7 +25,7 @@ class Business extends React.Component {
             })
           } />
           <Route path="/location" render={ () =>
-            <BusinessList businesses={this.props.businesses} />
+            <BusinessList handleDetail={this.props.handleDetail} businesses={this.props.businesses} />
           } />
         </Switch>
       </div>
