@@ -2,17 +2,11 @@ const request = require('request');
 const config = require('../config.js');
 const cheerio = require('cheerio');
 const { createApolloFetch } = require('apollo-fetch');
+const YELP_CATEGORIES = require('./yelpcategories.js');
 
 // Yelp API option
-const yelpSearch = (loc, keyword) => {
-  // categories based on https://www.yelp.com/developers/documentation/v3/all_category_list
-  // Find non food related businesses
+const yelpSearch = (loc, keyword, resultLimit) => {
   return new Promise((resolve, reject) => {
-    const YELP_CATEGORIES = `active,arts,auto,beautysvc,bicycles,education,
-                        health,homeservices,hotelstravel,localservices,
-                        nightlife,pets,professional,realestate,religiousorgs,
-                        shopping`;
-
     const options = {
       url: 'https://api.yelp.com/v3/businesses/search',
       headers: {
@@ -25,8 +19,16 @@ const yelpSearch = (loc, keyword) => {
       }
     };
 
-    if (keyword !== '') {
+    if (keyword === undefined) {
+      options.qs.term = 'local';
+    } else {
       options.qs.term = keyword;
+    }
+
+    if (resultLimit === undefined) {
+      options.qs.limit = 18;
+    } else {
+      options.qs.limit = resultLimit;
     }
 
     request(options, (err, res, body) => {

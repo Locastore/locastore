@@ -17,20 +17,29 @@ app.post('/location', (req, res) => {
   locationRetainer = location.slice();
   util.yelpSearch(location)
     .then((results) => {
-      let businessArr = [];
-      results.businesses.forEach((store) => {
-        const storeData = {
-          name: store.name,
-          place_id: store.id,
-          address: store.location.display_address.join(' '),
-          phone: store.display_phone,
-          website: store.url.split('?')[0],
-          photos: store.image_url
-        };
-        businessArr.push(storeData);
-      });
-      let finalArr = businessArr.slice(0, 18);
-      res.status(200).send(finalArr);
+      const businessArr = [];
+      if (results.error) {
+        if (results.error.code === 'LOCATION_NOT_FOUND') {
+          console.log(`No businesses found at location: ${location}`);
+          res.status(204).send(businessArr);
+        } else {
+          console.log(`Yelp API return an error: ${results.error}`);
+          res.status(500).send('Server error');
+        }
+      } else {
+        results.businesses.forEach((store) => {
+          const storeData = {
+            name: store.name,
+            place_id: store.id,
+            address: store.location.display_address.join(' '),
+            phone: store.display_phone,
+            website: store.url.split('?')[0],
+            photos: store.image_url
+          };
+          businessArr.push(storeData);
+        });
+        res.status(200).send(businessArr);
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -41,21 +50,29 @@ app.post('/location', (req, res) => {
 app.post('/product', (req, res) => {
   const product = req.body.text;
   const prodLocation = locationRetainer.slice();
-  util.yelpSearch(prodLocation, product)
+  util.yelpSearch(prodLocation, product, 50)
     .then((results) => {
       const businessArr = [];
-      results.businesses.forEach((store) => {
-        const storeData = {
-          name: store.name,
-          place_id: store.id,
-          address: store.location.display_address.join(' '),
-          phone: store.display_phone,
-          website: store.url.split('?')[0],
-          photos: store.image_url
-        };
-        businessArr.push(storeData);
-      });
-      res.status(200).send(businessArr);
+      if (results.error) {
+        console.log(`Yelp API return an error: ${results.error}`);
+        res.status(500).send('Server error');
+      } else if (results.total === 0) {
+        console.log(`No results found for: ${product}`);
+        res.status(204).send(businessArr);
+      } else {
+        results.businesses.forEach((store) => {
+          const storeData = {
+            name: store.name,
+            place_id: store.id,
+            address: store.location.display_address.join(' '),
+            phone: store.display_phone,
+            website: store.url.split('?')[0],
+            photos: store.image_url
+          };
+          businessArr.push(storeData);
+        });
+        res.status(200).send(businessArr);
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -70,7 +87,6 @@ app.get('/business', (req, res) => {
       return util.parseWebsiteUrl(detailedData);
     })
     .then((data) => {
-      console.log(data);
       res.status(200).send(data);
     })
     .catch((err) => {

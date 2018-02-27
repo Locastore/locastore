@@ -25,14 +25,20 @@ class App extends React.Component {
     // this.userFormSubmit=this.userFormSubmit.bind(this);
   }
 
-  search(location) {
+  search(location, history) {
     axios.post('/location', {
       text: `${location}`
     })
     .then(res => {
-      const stores = res.data;
-      console.log(stores);
-      this.setState({stores});
+      if (res.status === 204) {
+        // TODO: Figure out how to display this to user
+        console.log(`No results found for: ${location}`);
+      } else {
+        const stores = res.data;
+        console.log(stores);
+        this.setState({stores});
+        history.push('/location');
+      }
     })
     .catch(err => {
       console.log(err);
@@ -44,9 +50,14 @@ class App extends React.Component {
       text: `${product}`
     })
     .then(res => {
-      const stores = res.data;
-      console.log(stores);
-      this.setState({stores})
+      if (res.status === 204) {
+        // TODO: Figure out how to display this to user
+        console.log(`No results found for: ${product}`);
+      } else {
+        const stores = res.data;
+        console.log(stores);
+        this.setState({stores})
+      }
     })
     .catch(err => {
       console.log(err);
