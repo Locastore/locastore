@@ -30,15 +30,6 @@ app.post('/location', (req, res) => {
         businessArr.push(storeData);
       });
       res.status(200).send(businessArr);
-      // Promise.all(promiseArr)
-      //   .then((yelpData) => {
-      //     console.log('Successfully finished all yelp API queries');
-      //     res.status(200).send(yelpData);
-      //   })
-      //   .catch((err) => {
-      //     console.log(`Failed to complete yelp API queries: ${err}`);
-      //     res.status(500).send(`Failed to complete yelp API queries: ${err}`);
-      //   });
     })
     .catch((err) => {
       console.log(err);
@@ -64,15 +55,6 @@ app.post('/product', (req, res) => {
         businessArr.push(storeData);
       });
       res.status(200).send(businessArr);
-      // Promise.all(promiseArr)
-      //   .then((yelpData) => {
-      //     console.log('Successfully finished all yelp API queries');
-      //     res.status(200).send(yelpData);
-      //   })
-      //   .catch((err) => {
-      //     console.log(`Failed to complete yelp API queries: ${err}`);
-      //     res.status(500).send(`Failed to complete yelp API queries: ${err}`);
-      //   });
     })
     .catch((err) => {
       console.log(err);
@@ -80,8 +62,16 @@ app.post('/product', (req, res) => {
     });
 });
 
-app.get('/product', (req, res) => {
-  res.send('success');
+app.get('/business', (req, res) => {
+  console.log(req.query.id);
+  util.yelpSearchDetails(req.query.id)
+    .then((detailedData) => {
+      res.status(200).send(detailedData);
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).send(`Failed to retrieve detailed business data from Yelp: ${err}`);
+    });
 });
 
 app.get('/*', (req, res) => {
