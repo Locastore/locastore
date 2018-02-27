@@ -11,10 +11,10 @@ class Nav extends React.Component {
       <div className="nav">
         {/*<img src={require('./locastore.png')} />*/}
         <ul className="nav-list">
-          <li><a href="#">Shop</a></li>
-          <li><a href="#">Login</a></li>
-          <li><a href="#">Sign Up</a></li>
-          <li><a href="#">About Us</a></li>
+          <li><a className="navItem" href="#">Shop</a></li>
+          <li><a className="navItem" href="#">Login</a></li>
+          <li><a className="navItem" href="#">Sign Up</a></li>
+          <li><a className="navItem" href="#">About Us</a></li>
         </ul>
       </div>
     )

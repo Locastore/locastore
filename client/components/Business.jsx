@@ -12,7 +12,6 @@ class Business extends React.Component {
     super(props);
   }
 
-  // Need to render business search view as well
   render () {
     return (
       <div>
