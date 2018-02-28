@@ -159,47 +159,41 @@ class App extends React.Component {
 render() {
     return (
       <Router>
-      <div>
-        <Signup
-        signupSubmit={this.signupSubmit.bind(this)}
-        />
-        <Login
-        loginSubmit={this.loginSubmit.bind(this)}
-        />
-
-      <div className="app">
-        {/*<Signup signupSubmit={this.signupSubmit.bind(this)}/> */}
-        <Route exact path="/" render={ () =>
-          <div className="home">
-            <div className="overlay">
-              <Nav />
-              <h1 className="live-well">live well</h1>
-              <h1 className="shop-local">shop local</h1>
-            </div>
-              <div className='col-sm-4 offset-sm-5'>
-                <Alert align='center' color="danger" isOpen={this.state.alertVisible} toggle={this.onDismiss}>
-                  Search term yielded no results
-                </Alert>
+        <div className="app">
+          <Route exact path="/" render={ () =>
+            <div className="home">
+              <div className="overlay">
+                <Nav />
+                <h1 className="live-well">live well</h1>
+                <h1 className="shop-local">shop local</h1>
               </div>
-              <Search onSearch={this.search.bind(this)}/>2
-          </div>
-        } />
+                <div className='col-sm-4 offset-sm-5'>
+                  <Alert align='center' color="danger" isOpen={this.state.alertVisible} toggle={this.onDismiss}>
+                    Search term yielded no results
+                  </Alert>
+                </div>
+                <Search onSearch={this.search.bind(this)}/>
+            </div>
+          } />
 
-        {/*<Route exact path="/signup" render={ () =>
-          <Signup signupSubmit={this.signupSubmit.bind(this)}/>
-        } />*/}
+          <Route exact path="/signup" render={ () =>
+            <Signup signupSubmit={this.signupSubmit.bind(this)}/>
+          } />
 
-        <Route exact path="/location" render={ () =>
-          <ProductSearch onSearch={this.prodsearch.bind(this)}/>
-        } />
+          <Route exact path="/login" render={ () =>
+            <Login loginSubmit={this.loginSubmit.bind(this)} />
+          } />
 
-        <Business handleDetail={this.retrieveDetail.bind(this)}
-                  businesses={this.state.stores}
-                  loading={this.state.loading}
-        />
+          <Route exact path="/location" render={ () =>
+            <ProductSearch onSearch={this.prodsearch.bind(this)}/>
+          } />
 
-      </div>
-      </div>
+          <Business handleDetail={this.retrieveDetail.bind(this)}
+                    businesses={this.state.stores}
+                    loading={this.state.loading}
+          />
+
+        </div>
       </Router>
     );
   }

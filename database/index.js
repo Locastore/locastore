@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const MONGODB_URI = 'mongodb://localhost/locastore';
+mongoose.connect(MONGODB_URI);
+
 const Schema = mongoose.Schema;
 
 let Users = new Schema ({
@@ -7,7 +10,6 @@ let Users = new Schema ({
   password: String,
   isLoggedIn: {},
   favorites: [{name: String, ID: String, url: String}]
-  // session: [username: String, isLoggedIn: Boolean, favorites: [{name: String, ID: String, url: String}]]
 });
 
 let User = mongoose.model('User', Users);
@@ -33,8 +35,6 @@ const checkCredentials = function (credentials, cb1, cb2) {
         cb1(err.errmsg);  // res.send error to client
     } else {
       if(result.length > 0 ) {
-        console.log(result, '<-- successfully found user in checkCredentials');
-        console.log(result[0].username, '<-- username trying to res.send to client');
         cb1(`${result[0].username}`, ` authenticated`);
       } else {
         cb1('No such user found, please try again. Check spelling and remember that username and password are case-sensitive.')

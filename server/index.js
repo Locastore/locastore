@@ -4,12 +4,8 @@ const cors = require('cors');
 const util = require('../helpers/helpers.js');
 const path = require('path');
 const User = require('../database/index.js');
-// const nameIsInUse = require('../helpers/helpers.js');
-const app = express();
-const mongoose = require('mongoose');
-const MONGODB_URI = 'mongodb://localhost/locastoreTest';
-mongoose.connect(MONGODB_URI, { useMongoClient: true });
 const blacklist = require('../helpers/blacklist.js');
+const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -87,22 +83,22 @@ app.post('/product', (req, res) => {
 
 app.post('/signup', function (req, res, next) {
   let newUser = req.body;
-      let successResponse = function (data, string) {
-        res.send(`${data}${string}`);
-      }
-      User.addUser(newUser, successResponse);
-})
+  let successResponse = function (data, string) {
+    res.send(`${data}${string}`);
+  }
+  User.addUser(newUser, successResponse);
+});
 
 app.post('/login', function (req, res, next) {
   let credentials = req.body;
   let sendResponse = function (data, string) {
     res.send(`${data}${string}`);
   }
-  let redirect = function (endpoint) {
+  let redirect = function(endpoint) {
     res.redirect(endpoint);
   }
   User.checkCredentials(credentials, sendResponse, redirect);
-})
+});
 
 app.get('/business', (req, res) => {
   util.yelpSearchDetails(req.query.id)
