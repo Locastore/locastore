@@ -99,7 +99,6 @@ render() {
     return (
       <Router>
       <div>
-
         <Signup
         signupSubmit={this.signupSubmit.bind(this)}
         />
