@@ -24,15 +24,11 @@ const convertTime = (time) => {
   return timeValue;
 };
 
-const yelpSearch = (loc, keyword, resultLimit) => {
+const yelpSearch = (loc, keyword, resultLimit, offset) => {
   return new Promise((resolve, reject) => {
-    if (keyword === undefined) {
-      keyword = 'local';
-    }
-
-    if (resultLimit === undefined) {
-      resultLimit = 18;
-    }
+    keyword = keyword || 'local';
+    resultLimit = resultLimit || 18;
+    offset = offset || 0;
 
     YELP_CATEGORIES = YELP_CATEGORIES.split('\n').join('');
     const queryString = `
@@ -40,7 +36,8 @@ const yelpSearch = (loc, keyword, resultLimit) => {
       search(term: "${keyword}"
              location: "${loc}"
              limit: ${resultLimit}
-             categories: "${YELP_CATEGORIES}") {
+             categories: "${YELP_CATEGORIES}"
+             offset: ${offset}) {
         total
         business {
           name
