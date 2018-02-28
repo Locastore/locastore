@@ -3,6 +3,8 @@ import axios from 'axios';
 import BusinessList from './BusinessList.jsx';
 import BusinessDetail from './BusinessDetail.jsx';
 import { Alert, Button } from 'reactstrap';
+import './Business.css';
+
 import {
   Route,
   Link,

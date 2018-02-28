@@ -1,0 +1,62 @@
+.cardColumn {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.cardImg {
+  height: 25vw;
+  object-fit: cover;
+}
+
+.cardBody {
+  padding: 5%;
+  height: 160px;
+}
+
+.cardTitle {
+  color: #273C75;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.bizBackground {
+  background-color: #212529;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  opacity: 0.85;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.details {
+  margin: 20px;
+}
+
+.bizTitle {
+  text-align: right;
+  text-transform: uppercase;
+  letter-spacing: .5em;
+  position: absolute;
+  top: 5%;
+  width: 100%;
+  color: white;
+  opacity: 70%;
+}
+
+.bizBody {
+  width: 85%;
+  background-color: black;
+  color: white;
+  padding: 15px;
+}
+
+
+
+
+

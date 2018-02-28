@@ -1,5 +1,3 @@
-/*****************************  Landing Page / Location Search  ********************************/
-
 .home {
   font-family: "arial";
   background-image: url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a4deb7be2c7c79941884cdf35c1cee8e&auto=format&fit=crop&w=1050&q=80');
@@ -13,51 +11,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-}
-
-.search {
-  text-align: center;
-  margin-top: 30%;
-  margin-left: 15%;
-}
-
-button {
- height: 41px;
- border-top-left-radius: 10%;
- border-bottom-left-radius: 10%;
-}
-
-.searchImg {
-  height: 30px;
-}
-
-.input {
-  width: 400px;
-  background: transparent;
-  background-clip: padding-box;
-}
-
-.inputLayer {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-top: none;
-  width: 250px;
-  height: 40px;
-  box-shadow:         inset 0 0 5px rgba(0, 0, 0, 0.1),
-                      0 1px 0 rgba(255, 255, 255, 0.5),
-                      inset 0 1px 2px rgba(0, 0, 0, 0.3),
-                      0 0 40px rgba(255, 255, 255, 0.3);
-  -moz-box-shadow:    inset 0 0 5px rgba(0, 0, 0, 0.1),
-                      0 1px 0 rgba(255, 255, 255, 0.5),
-                      inset 0 1px 2px rgba(0, 0, 0, 0.3),
-                      0 0 40px rgba(255, 255, 255, 0.3);
-  -o-box-shadow:      inset 0 0 5px rgba(0, 0, 0, 0.1),
-                      0 1px 0 rgba(255, 255, 255, 0.5),
-                      inset 0 1px 2px rgba(0, 0, 0, 0.3),
-                      0 0 40px rgba(255, 255, 255, 0.3);
-  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1),
-                      0 1px 0 rgba(255, 255, 255, 0.5),
-                      inset 0 1px 2px rgba(0, 0, 0, 0.3),
-                      0 0 40px rgba(255, 255, 255, 0.3);
 }
 
 .nav {
@@ -116,34 +69,6 @@ button {
   color: white;
 }
 
-/*****************************  Business Render  ***********************************************/
-
-.randomRender {
-  color: #273C75;
-}
-
-.cardColumn {
-  display: inline-block;
-  margin-bottom: 10px;
-}
-
-.cardImg {
-  height: 25vw;
-  object-fit: cover;
-}
-
-.cardBody {
-  padding: 5%;
-  height: 160px;
-}
-
-.cardTitle {
-  color: #273C75;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
 .loader {
     border: 15px solid #f3f3f3; /* Light grey */
     border-top: 15px solid #3498db; /* Blue */
@@ -163,7 +88,3 @@ button {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
-
-
-

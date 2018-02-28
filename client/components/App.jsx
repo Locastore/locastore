@@ -97,7 +97,7 @@ class App extends React.Component {
       axios.get('/')
     })
     .catch((err) => {
-      alert(err);  // <-- needs to be refined dep on situation.  Is it that the username/email already exists in db?
+      alert(err);
     })
   }
 
@@ -156,7 +156,7 @@ render() {
         <Route exact path="/location" render={ () =>
           <ProductSearch onSearch={this.prodsearch.bind(this)}/>
         } />
-
+        
         <Business handleDetail={this.retrieveDetail.bind(this)}
                   businesses={this.state.stores}
                   loading={this.state.loading}
