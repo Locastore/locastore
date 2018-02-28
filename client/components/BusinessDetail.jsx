@@ -1,6 +1,5 @@
 import React from 'react';
-// import Slider from './Slider.jsx';
-// <Slider photos={this.props.business.photos}/>
+import Slider from './Slider.jsx';
 
 class BusinessDetail extends React.Component {
   constructor (props) {
@@ -9,13 +8,11 @@ class BusinessDetail extends React.Component {
 
   render() {
     return (
-      <div className="bizBackground">
-        <div className="details">
+      <div>
+        <div>
           <h2 className="bizTitle">{this.props.business.name}</h2>
         </div>
-        <div>
-          <img src={this.props.business.photos}/>
-        </div>
+        <Slider photos={this.props.business.photos}/>
         <div className="bizBody">
           <h4>{this.props.business.phone}</h4>
           <h4>{this.props.business.address}</h4>
