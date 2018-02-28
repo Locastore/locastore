@@ -41,14 +41,29 @@
   display: inline-block;
 }
 
-.bizPic {
-  height: 25vw;
-  object-fit: cover;
-  margin: 60%;
+.bodyText {
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 
+.hoursText {
+  font-size: 20px;
+}
 
+.slider {
+  margin-top: 150px;
+  margin-left: 45%;
+  width: 600px;
+  height: 500px;
+  text-align: right;
+  position: absolute;
+}
 
+.carouselItem {
+  height: 500px;
+  width: auto;
+  max-width: 600px;
+}
 
 
 

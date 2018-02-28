@@ -24,7 +24,6 @@ const convertTime = (time) => {
   return timeValue;
 };
 
-// Yelp API option
 const yelpSearch = (loc, keyword, resultLimit) => {
   return new Promise((resolve, reject) => {
     if (keyword === undefined) {
