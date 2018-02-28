@@ -68,9 +68,9 @@ class Slider extends React.Component {
         <CarouselItem
           onExiting={this.onExiting}
           onExited={this.onExited}
-          key={item.src}
+          key={item}
         >
-          <img src={item.src} />
+          <img src={item} />
         </CarouselItem>
       );
     });

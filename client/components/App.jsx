@@ -156,7 +156,7 @@ render() {
         <Route exact path="/location" render={ () =>
           <ProductSearch onSearch={this.prodsearch.bind(this)}/>
         } />
-        
+
         <Business handleDetail={this.retrieveDetail.bind(this)}
                   businesses={this.state.stores}
                   loading={this.state.loading}

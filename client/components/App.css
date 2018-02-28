@@ -70,21 +70,21 @@
 }
 
 .loader {
-    border: 15px solid #f3f3f3; /* Light grey */
-    border-top: 15px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    animation: spin 1.5s linear infinite;
+  border: 15px solid #f3f3f3; /* Light grey */
+  border-top: 15px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  animation: spin 1.5s linear infinite;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
