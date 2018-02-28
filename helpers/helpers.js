@@ -4,7 +4,6 @@ const cheerio = require('cheerio');
 const { createApolloFetch } = require('apollo-fetch');
 const YELP_CATEGORIES = require('./yelpcategories.js');
 
-// Yelp API option
 const yelpSearch = (loc, keyword, resultLimit) => {
   return new Promise((resolve, reject) => {
     const options = {
