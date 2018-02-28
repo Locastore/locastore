@@ -16,26 +16,21 @@ app.post('/location', (req, res) => {
   const location = req.body.text;
   locationRetainer = location.slice();
   util.yelpSearch(location)
-    .then((results) => {
+    .then((result) => {
       const businessArr = [];
-      if (results.error) {
-        if (results.error.code === 'LOCATION_NOT_FOUND') {
-          console.log(`No businesses found at location: ${location}`);
-          res.status(204).send(businessArr);
-        } else {
-          console.log(results.error);
-          console.log(`Yelp API return an error: ${results.error}`);
-          res.status(500).send('Server error');
-        }
+      const results = result.data.search;
+      if (result.errors || results.total === 0) {
+        console.log(`No businesses found at location: ${location}`);
+        res.status(204).send(businessArr);
       } else {
-        results.businesses.forEach((store) => {
+        results.business.forEach((store) => {
           const storeData = {
             name: store.name,
             place_id: store.id,
-            address: store.location.display_address.join(' '),
+            address: store.location.formatted_address.split('\n').join(', '),
             phone: store.display_phone,
             website: store.url.split('?')[0],
-            photos: store.image_url
+            photos: store.photos[0]
           };
           businessArr.push(storeData);
         });
@@ -52,23 +47,24 @@ app.post('/product', (req, res) => {
   const product = req.body.text;
   const prodLocation = locationRetainer.slice();
   util.yelpSearch(prodLocation, product, 50)
-    .then((results) => {
+    .then((result) => {
       const businessArr = [];
-      if (results.error) {
+      const results = result.data.search;
+      if (result.errors) {
         console.log(`Yelp API return an error: ${results.error}`);
         res.status(500).send('Server error');
       } else if (results.total === 0) {
         console.log(`No results found for: ${product}`);
         res.status(204).send(businessArr);
       } else {
-        results.businesses.forEach((store) => {
+        results.business.forEach((store) => {
           const storeData = {
             name: store.name,
             place_id: store.id,
-            address: store.location.display_address.join(' '),
+            address: store.location.formatted_address.split('\n').join(', '),
             phone: store.display_phone,
             website: store.url.split('?')[0],
-            photos: store.image_url
+            photos: store.photos[0]
           };
           businessArr.push(storeData);
         });
