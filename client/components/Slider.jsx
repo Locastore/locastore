@@ -17,24 +17,37 @@ class Slider extends React.Component {
     this.onExited = this.onExited.bind(this);
   }
 
+  imageFallback(event) {
+    event.target.src = 'https://images.unsplash.com/photo-1496389395181-e5fdd5c0315e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=49bd31ab070ce144fe11d9df225d1d4c&auto=format&fit=crop&w=746&q=80';
+  }
+
   createItems() {
-    const items = [
-      {
-        src: `${this.props.photos[0]}`,
-        altText: 'Slide 1',
-        caption: 'Slide 1'
-      },
-      {
-        src: `${this.props.photos[1]}`,
-        altText: 'Slide 2',
-        caption: 'Slide 2'
-      },
-      {
-        src: `${this.props.photos[2]}`,
-        altText: 'Slide 3',
-        caption: 'Slide 3'
-      }
-    ];
+    var items;
+    if (this.props.photos ===  undefined) {
+      items = [
+        {
+        src: 'https://images.unsplash.com/photo-1496389395181-e5fdd5c0315e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=49bd31ab070ce144fe11d9df225d1d4c&auto=format&fit=crop&w=746&q=80',
+        },
+        {
+        src: 'https://images.unsplash.com/photo-1510629326852-3f0946701bc6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d67a874d7c2b83e05cf5154b352324d6&auto=format&fit=crop&w=968&q=80',
+        },
+        {
+        src: 'https://images.unsplash.com/photo-1493259606967-571afaef3d81?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5fc97aabffb67934abcf17750357afd4&auto=format&fit=crop&w=1050&q=80',
+        }
+      ]
+    } else {
+      items = [
+        {
+          src: `${this.props.photos[0]}`,
+        },
+        {
+          src: `${this.props.photos[1]}`,
+        },
+        {
+          src: `${this.props.photos[2]}`
+        }
+      ];
+    }
     return items;
   }
 
@@ -73,7 +86,7 @@ class Slider extends React.Component {
           onExited={this.onExited}
           key={item.src}>
 
-          <img className="carouselItem" src={item.src} />
+          <img className="carouselItem" src={item.src} onError={this.imageFallback}/>
         </CarouselItem>
       );
     });

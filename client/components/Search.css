@@ -1,13 +1,14 @@
 .search {
   text-align: center;
   margin-top: 30%;
-  margin-left: 15%;
+  margin-left: 45%;
+  position: absolute;
 }
 
 .locationButton {
  height: 41px;
- border-top-left-radius: 10%;
- border-bottom-left-radius: 10%;
+ border-top-left-radius: 5%;
+ border-bottom-left-radius: 5%;
 }
 
 .searchImg {
