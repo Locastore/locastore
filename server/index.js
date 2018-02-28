@@ -9,10 +9,7 @@ const app = express();
 const mongoose = require('mongoose');
 const MONGODB_URI = 'mongodb://localhost/locastoreTest';
 mongoose.connect(MONGODB_URI, { useMongoClient: true });
-let blacklist = require('../helpers/blacklist.js');
-
-blacklist = new Set(blacklist.split('\n'));
-
+const blacklist = require('../helpers/blacklist.js');
 
 app.use(bodyParser.json());
 app.use(cors());
