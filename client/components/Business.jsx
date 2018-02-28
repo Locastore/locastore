@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import BusinessList from './BusinessList.jsx';
 import BusinessDetail from './BusinessDetail.jsx';
+import './Business.css';
+
 import {
   Route,
   Link,

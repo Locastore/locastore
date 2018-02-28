@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import './Search.css';
 
 class Search extends React.Component {
   constructor (props) {
@@ -24,7 +25,7 @@ class Search extends React.Component {
     return (
       <div className="search">
         <Route render={({history}) => (
-          <button type="button" onClick={() => { this.search(history) }}>
+          <button className="locationButton" type="button" onClick={() => { this.search(history) }}>
             <img className="searchImg" src='https://d30y9cdsu7xlg0.cloudfront.net/png/5592-200.png'/>
           </button>
         )}>
