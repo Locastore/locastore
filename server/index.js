@@ -23,6 +23,7 @@ app.post('/location', (req, res) => {
           console.log(`No businesses found at location: ${location}`);
           res.status(204).send(businessArr);
         } else {
+          console.log(results.error);
           console.log(`Yelp API return an error: ${results.error}`);
           res.status(500).send('Server error');
         }

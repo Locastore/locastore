@@ -7,16 +7,35 @@ class BusinessList extends React.Component {
   }
 
   render() {
+    let businesses = null;
+
+    if (this.props.businesses.length === 0) {
+      businesses = <NoBusinesses />;
+    } else {
+      businesses = (
+        <div>
+          {this.props.businesses.map((business, index) => {
+          return (
+              <BusinessListEntry handleDetail={this.props.handleDetail} key={index} business={business} />
+            )
+          })}
+        </div>
+      )
+    }
+
     return (
       <div>
-        {this.props.businesses.map((business, index) => {
-        return (
-          <BusinessListEntry handleDetail={this.props.handleDetail} key={index} business={business} />
-        )
-      })}
-    </div>
+        {businesses}
+      </div>
   );
   }
+}
+
+// Barebones 0 results component, will add styling at a later point
+function NoBusinesses(props) {
+  return (
+    <h4>Search term yielded 0 results</h4>
+  )
 }
 
 export default BusinessList;
