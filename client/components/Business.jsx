@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import BusinessList from './BusinessList.jsx';
 import BusinessDetail from './BusinessDetail.jsx';
+import { Alert, Button } from 'reactstrap';
 import './Business.css';
 
 import {
@@ -16,6 +17,14 @@ class Business extends React.Component {
   }
 
   render () {
+
+    let businessList = null;
+    if (this.props.loading === true) {
+      businessList = <Loading />;
+    } else {
+      businessList = <BusinessList handleDetail={this.props.handleDetail} businesses={this.props.businesses} />;
+    }
+
     return (
       <div>
         <Switch>
@@ -27,12 +36,20 @@ class Business extends React.Component {
             })
           } />
           <Route path="/location" render={ (props) =>
-            <BusinessList handleDetail={this.props.handleDetail} businesses={this.props.businesses} />
+            <div>
+              {businessList}
+            </div>
           } />
         </Switch>
       </div>
     )
   }
+}
+
+function Loading() {
+  return (
+    <div className="loader"></div>
+  )
 }
 
 export default Business;
