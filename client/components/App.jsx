@@ -63,7 +63,6 @@ class App extends React.Component {
     })
     .then(res => {
       if (res.status === 204) {
-        // TODO: Figure out how to display this to user
         console.log(`No results found for: ${product}`);
         this.setState({
           stores: [],

@@ -5,6 +5,9 @@ const util = require('../helpers/helpers.js');
 const path = require('path');
 // const db = require('../database/index.js');
 const app = express();
+let blacklist = require('../helpers/blacklist.js');
+
+blacklist = new Set(blacklist.split('\n'));
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -51,22 +54,25 @@ app.post('/product', (req, res) => {
       const businessArr = [];
       const results = result.data.search;
       if (result.errors) {
-        console.log(`Yelp API return an error: ${results.error}`);
-        res.status(500).send('Server error');
+        console.log('Yelp API returned an error');
+        console.log(result.errors);
+        res.status(204).send(businessArr);
       } else if (results.total === 0) {
         console.log(`No results found for: ${product}`);
         res.status(204).send(businessArr);
       } else {
         results.business.forEach((store) => {
-          const storeData = {
-            name: store.name,
-            place_id: store.id,
-            address: store.location.formatted_address.split('\n').join(', '),
-            phone: store.display_phone,
-            website: store.url.split('?')[0],
-            photos: store.photos[0]
-          };
-          businessArr.push(storeData);
+          if (!blacklist.has(store.name.toLowerCase())) {
+            const storeData = {
+              name: store.name,
+              place_id: store.id,
+              address: store.location.formatted_address.split('\n').join(', '),
+              phone: store.display_phone,
+              website: store.url.split('?')[0],
+              photos: store.photos[0]
+            };
+            businessArr.push(storeData);
+          }
         });
         res.status(200).send(businessArr);
       }
