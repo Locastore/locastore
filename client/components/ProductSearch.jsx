@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Alert } from 'reactstrap';
-import './ProductSearch.css';
+import '../styles/ProductSearch.css';
 
 class ProductSearch extends React.Component {
   constructor(props) {
