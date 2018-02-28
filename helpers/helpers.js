@@ -2,43 +2,78 @@ const request = require('request');
 const config = require('../config.js');
 const cheerio = require('cheerio');
 const { createApolloFetch } = require('apollo-fetch');
-const YELP_CATEGORIES = require('./yelpcategories.js');
+let YELP_CATEGORIES = require('./yelpcategories.js');
+
+// Convert military time to standard format
+const convertTime = (time) => {
+  const hours = Number(time[0] + time[1]);
+  const minutes = Number(time[2] + time[3]);
+  let timeValue;
+
+  if (hours > 0 && hours <= 12) {
+    timeValue = String(hours);
+  } else if (hours > 12) {
+    timeValue = String(hours - 12);
+  } else if (hours === 0) {
+    timeValue = '12';
+  }
+
+  timeValue += (minutes < 10) ? ':0' + minutes : ':' + minutes;
+  timeValue += (hours >= 12) ? ' PM' : ' AM';
+
+  return timeValue;
+};
 
 // Yelp API option
 const yelpSearch = (loc, keyword, resultLimit) => {
   return new Promise((resolve, reject) => {
-    const options = {
-      url: 'https://api.yelp.com/v3/businesses/search',
-      headers: {
-        Authorization: `Bearer ${config.yelpKey}`
-      },
-      qs: {
-        location: loc,
-        radius: 24000, // in meters, about 15 miles
-        categories: YELP_CATEGORIES
-      }
-    };
-
     if (keyword === undefined) {
-      options.qs.term = 'local';
-    } else {
-      options.qs.term = keyword;
+      keyword = 'local';
     }
 
     if (resultLimit === undefined) {
-      options.qs.limit = 18;
-    } else {
-      options.qs.limit = resultLimit;
+      resultLimit = 18;
     }
 
-    request(options, (err, res, body) => {
-      if (err) {
-        console.log(`Unable to get yelp API data: ${err}`);
-        reject(err);
-      } else {
-        console.log('Successfully queried Yelp API');
-        resolve(JSON.parse(body));
+    YELP_CATEGORIES = YELP_CATEGORIES.split('\n').join('');
+    const queryString = `
+    {
+      search(term: "${keyword}"
+             location: "${loc}"
+             limit: ${resultLimit}
+             categories: "${YELP_CATEGORIES}") {
+        total
+        business {
+          name
+          id
+          location {
+            formatted_address
+          }
+          display_phone
+          photos
+          url
+        }
       }
+    }`;
+
+    const fetch = createApolloFetch({
+      uri: 'https://api.yelp.com/v3/graphql'
+    });
+
+    fetch.use(({ options }, next) => {
+      if (!options.headers) {
+        options.headers = {};
+      }
+      options.headers['Authorization'] = `Bearer ${config.yelpKey}`;
+      next();
+    });
+
+    fetch({
+      query: `query ${queryString}`
+    }).then((res) => {
+      resolve(res);
+    }).catch((err) => {
+      reject(err);
     });
   });
 };
@@ -70,18 +105,24 @@ const yelpSearchDetails = (id) => {
 
         const data = JSON.parse(body);
         const storeData = {};
-        const allHours = data.hours[0].open;
-        storeData.hours = [];
-        allHours.forEach((storeHour) => {
-          const day = NUM_DAY_TO_ACTUAL[storeHour.day];
-          storeData.hours.push(`${day}: ${storeHour.start} - ${storeHour.end}`);
-        });
+        if (data.hours && data.hours[0].open) {
+          const allHours = data.hours[0].open;
+          storeData.hours = [];
+          allHours.forEach((storeHour) => {
+            const day = NUM_DAY_TO_ACTUAL[storeHour.day];
+            const start = convertTime(storeHour.start);
+            const end = convertTime(storeHour.end);
+            storeData.hours.push(`${day}: ${start} - ${end}`);
+          });
+        } else {
+          storeData.hours = ['Hours Forthcoming'];
+        }
         storeData.photos = data.photos;
         resolve(storeData);
       }
     });
   });
-}
+};
 
 // Used to attempt to parse website URL from Yelp's website, their API only
 // returns the yelp link to their business
@@ -101,6 +142,7 @@ const parseWebsiteUrl = (data) => {
     });
   });
 };
+
 
 exports.yelpSearch = yelpSearch;
 exports.yelpSearchDetails = yelpSearchDetails;
