@@ -7,69 +7,85 @@ const User = require('../database/index.js');
 // const nameIsInUse = require('../helpers/helpers.js');
 const app = express();
 const mongoose = require('mongoose');
-const MONGODB_URI = 'mongodb://localhost/locastoreTest'
+const MONGODB_URI = 'mongodb://localhost/locastoreTest';
 mongoose.connect(MONGODB_URI, { useMongoClient: true });
+let blacklist = require('../helpers/blacklist.js');
+
+blacklist = new Set(blacklist.split('\n'));
+
 
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.static(__dirname + '/../client/dist'));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 let locationRetainer = '';
 
 app.post('/location', (req, res) => {
-  let location = req.body.text;
+  const location = req.body.text;
   locationRetainer = location.slice();
-  console.log(locationRetainer);
-  util.getCoordinateData(location, (data) => {
-    const { lng, lat } = data.results[0].geometry.location;
-    util.getLocationData(lat, lng, '', (locData) => {
-      const promiseArr = [];
-      locData.results.forEach((store) => {
-        let storeData = {
-          name: store.name,
-          place_id: store.place_id,
-        };
-        promiseArr.push(util.getPlaceDetails(storeData));
-      });
-      Promise.all(promiseArr)
-        .then((results) => {
-          console.log('Successfully finished all google API queries!');
-          res.send(results);
-        })
-        .catch((err) => {
-          console.log(`Failed to complete google API queries: ${err}`);
-          res.send(`Failed to complete google API queries: ${err}`);
+  util.yelpSearch(location)
+    .then((result) => {
+      const businessArr = [];
+      const results = result.data.search;
+      if (result.errors || results.total === 0) {
+        console.log(`No businesses found at location: ${location}`);
+        res.status(204).send(businessArr);
+      } else {
+        results.business.forEach((store) => {
+          const storeData = {
+            name: store.name,
+            place_id: store.id,
+            address: store.location.formatted_address.split('\n').join(', '),
+            phone: store.display_phone,
+            website: store.url.split('?')[0],
+            photos: store.photos[0]
+          };
+          businessArr.push(storeData);
         });
+        res.status(200).send(businessArr);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send('Failed to retrieve business data from Yelp API');
     });
-  });
 });
 
 app.post('/product', (req, res) => {
-  let product = req.body.text;
-  let prodLocation = locationRetainer.slice();
-  console.log(prodLocation);
-  util.getCoordinateData(prodLocation, (data) => {
-    const { lng, lat } = data.results[0].geometry.location;
-    util.getLocationData(lat, lng, product, (locData) => {
-      const promiseArr = [];
-      locData.results.forEach((store) => {
-        let storeData = {
-          name: store.name,
-          place_id: store.place_id,
-        };
-        promiseArr.push(util.getPlaceDetails(storeData));
-      });
-      Promise.all(promiseArr)
-        .then((results) => {
-          console.log('Successfully finished all google API queries!');
-          res.send(results);
-        })
-        .catch((err) => {
-          console.log(`Failed to complete google API queries: ${err}`);
-          res.send(`Failed to complete google API queries: ${err}`);
+  const product = req.body.text;
+  const prodLocation = locationRetainer.slice();
+  util.yelpSearch(prodLocation, product, 50)
+    .then((result) => {
+      const businessArr = [];
+      const results = result.data.search;
+      if (result.errors) {
+        console.log('Yelp API returned an error');
+        console.log(result.errors);
+        res.status(204).send(businessArr);
+      } else if (results.total === 0) {
+        console.log(`No results found for: ${product}`);
+        res.status(204).send(businessArr);
+      } else {
+        results.business.forEach((store) => {
+          if (!blacklist.has(store.name.toLowerCase())) {
+            const storeData = {
+              name: store.name,
+              place_id: store.id,
+              address: store.location.formatted_address.split('\n').join(', '),
+              phone: store.display_phone,
+              website: store.url.split('?')[0],
+              photos: store.photos[0]
+            };
+            businessArr.push(storeData);
+          }
         });
+        res.status(200).send(businessArr);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send('Failed to retrieve business data from Yelp API');
     });
-  });
 });
 
 app.post('/signup', function (req, res, next) {
@@ -91,14 +107,25 @@ app.post('/login', function (req, res, next) {
   User.checkCredentials(credentials, sendResponse, redirect);
 })
 
-
-app.get('/product', (req, res) => {
-  res.send('success');
+app.get('/business', (req, res) => {
+  util.yelpSearchDetails(req.query.id)
+    .then((detailedData) => {
+      detailedData.id = req.query.id;
+      return util.parseWebsiteUrl(detailedData);
+    })
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(`Failed to retrieve detailed business data from Yelp: ${err}`);
+    });
 });
 
 app.get('/*', (req, res) => {
   res.redirect('/');
-})
+});
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {

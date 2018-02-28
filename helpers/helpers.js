@@ -1,89 +1,144 @@
 const request = require('request');
 const config = require('../config.js');
+const cheerio = require('cheerio');
+const { createApolloFetch } = require('apollo-fetch');
+let YELP_CATEGORIES = require('./yelpcategories.js');
 
-/*
+// Convert military time to standard format
+const convertTime = (time) => {
+  const hours = Number(time[0] + time[1]);
+  const minutes = Number(time[2] + time[3]);
+  let timeValue;
 
-OPTIONAL 0): autocomplete at some point
-1) Use user search input to query google geocode API and retrieve
-coordinates. https://maps.googleapis.com/maps/api/geocode/json?address='95051'&key={KEY}
-2) Take coordinates from #1, then search google place API and grab nearby businesses.
-https://maps.googleapis.com/maps/api/place/nearbysearch/json?type=store&location=37.3598283,-121.9814354&keyword='flowers'&radius=10000&key={KEY}
-3) Take business ID from #2 and grab more business details from google details API
-https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJqZitiLrMj4ARGTbRPXeLFgE&key={KEY}
+  if (hours > 0 && hours <= 12) {
+    timeValue = String(hours);
+  } else if (hours > 12) {
+    timeValue = String(hours - 12);
+  } else if (hours === 0) {
+    timeValue = '12';
+  }
 
-*/
+  timeValue += (minutes < 10) ? ':0' + minutes : ':' + minutes;
+  timeValue += (hours >= 12) ? ' PM' : ' AM';
 
-const getCoordinateData = (location, callback) => {
-  const options = {
-    url: `https://maps.googleapis.com/maps/api/geocode/json?address='${location}'&key=${config.key}`,
-    method: 'GET'
-  };
-  request(options, (err, res, body) => {
-    if (err) {
-      console.log(`Unable to obtain coordinate data from google API ${err}`);
-    } else {
-      console.log('Successfully obtained coordinate data from google!');
-      callback(JSON.parse(body));
-    }
+  return timeValue;
+};
+
+const yelpSearch = (loc, keyword, resultLimit, offset) => {
+  return new Promise((resolve, reject) => {
+    keyword = keyword || 'local';
+    resultLimit = resultLimit || 18;
+    offset = offset || 0;
+
+    YELP_CATEGORIES = YELP_CATEGORIES.split('\n').join('');
+    const queryString = `
+    {
+      search(term: "${keyword}"
+             location: "${loc}"
+             limit: ${resultLimit}
+             categories: "${YELP_CATEGORIES}"
+             offset: ${offset}) {
+        total
+        business {
+          name
+          id
+          location {
+            formatted_address
+          }
+          display_phone
+          photos
+          url
+        }
+      }
+    }`;
+
+    const fetch = createApolloFetch({
+      uri: 'https://api.yelp.com/v3/graphql'
+    });
+
+    fetch.use(({ options }, next) => {
+      if (!options.headers) {
+        options.headers = {};
+      }
+      options.headers['Authorization'] = `Bearer ${config.yelpKey}`;
+      next();
+    });
+
+    fetch({
+      query: `query ${queryString}`
+    }).then((res) => {
+      resolve(res);
+    }).catch((err) => {
+      reject(err);
+    });
   });
 };
 
-// const getAutoCompleteData = (location, callback) => {
-//   const options = {
-//     url: `https://maps.googleapis.com/maps/api/place/autocomplete/json?components=country:us&types=(cities)&input=${location}&key=${config.key}`,
-//     method: 'GET',
-//     headers: {
-//       'Accept': 'application/json',
-//       'User-Agent': 'request'
-//     },
-//   };
-//   request(options, (err, res, body) => {
-//     callback(locationData);
-//   });
-// };
-
-const getLocationData = (lat, long, keyword, callback) => {
-  const options = {
-    // Currently hardcoding radius to 15 miles, can make this a dropdown option in future
-    url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?type=store&location=${lat},${long}&keyword=${keyword}&radius=24140&key=${config.key}`,
-    method: 'GET'
-  };
-  request(options, (err, res, body) => {
-    if (err) {
-      console.log(`Unable to get google place API data: ${err}`);
-    } else {
-      console.log('Successfully retrieved google location API data');
-      callback(JSON.parse(body));
-    }
-  });
-};
-
-const getPlaceDetails = (storeData) => {
+const yelpSearchDetails = (id) => {
   return new Promise((resolve, reject) => {
     const options = {
-      url: `https://maps.googleapis.com/maps/api/place/details/json?placeid=${storeData.place_id}&key=${config.key}`,
-      method: 'GET'
+      url: `https://api.yelp.com/v3/businesses/${id}`,
+      headers: {
+        Authorization: `Bearer ${config.yelpKey}`
+      }
     };
+
     request(options, (err, res, body) => {
       if (err) {
-        console.log(`Unable to get google place API data: ${err}`);
+        console.log(`Unable to get yelp detailed business data: ${err}`);
         reject(err);
       } else {
-        console.log('Successfully retrieved google place details API data');
-        let data = JSON.parse(body);
-        data = data.result;
-        storeData.address = data.formatted_address;
-        storeData.phone = data.formatted_phone_number;
-        // storeData.hours = data.opening_hours.weekday_text;
+        // Used to format yelp API's hour result to human readable format
+        const NUM_DAY_TO_ACTUAL = {
+          0: 'Monday',
+          1: 'Tuesday',
+          2: 'Wednesday',
+          3: 'Thursday',
+          4: 'Friday',
+          5: 'Saturday',
+          6: 'Sunday'
+        };
+
+        const data = JSON.parse(body);
+        const storeData = {};
+        if (data.hours && data.hours[0].open) {
+          const allHours = data.hours[0].open;
+          storeData.hours = [];
+          allHours.forEach((storeHour) => {
+            const day = NUM_DAY_TO_ACTUAL[storeHour.day];
+            const start = convertTime(storeHour.start);
+            const end = convertTime(storeHour.end);
+            storeData.hours.push(`${day}: ${start} - ${end}`);
+          });
+        } else {
+          storeData.hours = ['Hours Forthcoming'];
+        }
         storeData.photos = data.photos;
-        storeData.website = data.website;
         resolve(storeData);
       }
     });
   });
 };
 
+// Used to attempt to parse website URL from Yelp's website, their API only
+// returns the yelp link to their business
+const parseWebsiteUrl = (data) => {
+  const url = `https://www.yelp.com/biz/${data.id}`;
+  return new Promise((resolve, reject) => {
+    request(url, (err, res, body) => {
+      if (err) {
+        console.log(`Unable to retrieve website from yelp ${err}`);
+        reject(err);
+      } else {
+        const $ = cheerio.load(body);
+        const parsedUrl = $('.biz-website > a').text();
+        data.website = parsedUrl;
+        resolve(data);
+      }
+    });
+  });
+};
 
-exports.getCoordinateData = getCoordinateData;
-exports.getLocationData = getLocationData;
-exports.getPlaceDetails = getPlaceDetails;
+exports.yelpSearch = yelpSearch;
+exports.yelpSearchDetails = yelpSearchDetails;
+exports.parseWebsiteUrl = parseWebsiteUrl;

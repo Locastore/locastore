@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import './Search.css';
 
 class Search extends React.Component {
   constructor (props) {
@@ -7,6 +8,7 @@ class Search extends React.Component {
     this.state = {
       term: ''
     }
+    this.search = this.search.bind(this);
   }
 
   onChange(event) {
@@ -15,17 +17,20 @@ class Search extends React.Component {
     })
   }
 
-  search() {
-    this.props.onSearch(this.state.term);
+  search(history) {
+    this.props.onSearch(this.state.term, history);
   }
 
   render() {
     return (
       <div className="search">
-        <Link to="/location">
-          <button type="button" onClick={this.search.bind(this)}>Go Local!</button>
-        </Link>
-        <input type="text" onChange={this.onChange.bind(this)}></input>
+        <Route render={({history}) => (
+          <button className="locationButton" type="button" onClick={() => { this.search(history) }}>
+            <img className="searchImg" src='https://d30y9cdsu7xlg0.cloudfront.net/png/5592-200.png'/>
+          </button>
+        )}>
+        </Route>
+        <input className="input" className="inputLayer" type="text" placeholder="Where do you live?" onChange={this.onChange.bind(this)}></input>
       </div>
     )
   }

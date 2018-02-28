@@ -1,6 +1,10 @@
 import React from 'react';
+import axios from 'axios';
 import BusinessList from './BusinessList.jsx';
 import BusinessDetail from './BusinessDetail.jsx';
+import { Alert, Button } from 'reactstrap';
+import './Business.css';
+
 import {
   Route,
   Link,
@@ -12,25 +16,40 @@ class Business extends React.Component {
     super(props);
   }
 
-  // Need to render business search view as well
   render () {
+
+    let businessList = null;
+    if (this.props.loading === true) {
+      businessList = <Loading />;
+    } else {
+      businessList = <BusinessList handleDetail={this.props.handleDetail} businesses={this.props.businesses} />;
+    }
+
     return (
       <div>
         <Switch>
           <Route path="/location/:place" render={ (props) =>
-            this.props.businesses.map((business) => {
+            this.props.businesses.map((business, index) => {
               if (business.place_id === props.match.params.place) {
-                return (<BusinessDetail match={props.match} business={business} />)
+                return (<BusinessDetail key={index} match={props.match} business={business} />)
               }
             })
           } />
-          <Route path="/location" render={ () =>
-            <BusinessList businesses={this.props.businesses} />
+          <Route path="/location" render={ (props) =>
+            <div>
+              {businessList}
+            </div>
           } />
         </Switch>
       </div>
     )
   }
+}
+
+function Loading() {
+  return (
+    <div className="loader"></div>
+  )
 }
 
 export default Business;
