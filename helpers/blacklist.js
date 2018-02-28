@@ -1,4 +1,4 @@
-module.exports = `99 ranch market
+const blacklist = new Set((`99 ranch market
 ace hardware
 acp superstore
 amazon books
@@ -215,4 +215,151 @@ whole foods market
 wss
 yellow sheds
 luxe apparel & gift
-`
+Payless ShoeSource
+Nike Factory Store
+SKECHERS Factory Outlet
+Clarks
+Foot Locker
+Red Wing Shoe Store
+Red Wing Shoes
+Payless Shoe Source
+ECCO
+The North Face
+Aldo Shoes
+Steve Madden
+Sports Basement
+finish line
+finishline
+Banana Republic
+gap
+GAP Factory Store
+American Eagle Outfitters
+American Eagle
+J.Crew
+Scotch & Soda
+journeys
+zumiez
+starbucks
+express
+swatch
+the ups store
+fedex
+cvs
+Hollister Co.
+Abercrombie & Fitch
+Hollister
+pacsun
+topshop
+zara
+forever 21
+Aeropostale
+Barney's
+Bloomingdale's
+Lululemon Yoga
+Athleta
+asos
+J.Crew Factory
+Superdry
+Hollister Outlet
+Abercrombie & Fitch Outlet
+Gap Outlet
+OSH
+Orchard Supply Hardware
+The Home Depot
+Home Depot
+Ace Hardware
+84 Lumber
+A-Boy Plumbing & Electrical Supply
+Ace Hardware
+Aubuchon Hardware
+Beckley Feed and Hardware Company
+Briggs Hardware Building
+Builders Square
+Distribution America
+Do it Best
+Elwood Adams Store
+Handy Andy Home Improvement Center
+Handy Dan
+Handy Hardware
+Hi-School Pharmacy
+The Home Depot
+Kuehn Blacksmith Shop-Hardware Store
+Lehman's Hardware
+Lighting One
+Lowe's
+Meeker's Hardware
+Menards
+N. P. Smith Pioneer Hardware Store
+Newtown Hardware House
+Orchard Supply Hardware
+Parr Lumber
+Pay 'n Pak
+Porter Hardware
+PRO Group
+Scotty's Builders Supply
+Steinman Hardware Store
+True Value
+Tupelo Hardware
+United Hardware Distributing Company
+Val-Test Distributors
+Valu Home Centers
+Vonnegut Hardware Company
+Yardbirds Home Center
+Harbor Freight Tools
+Dunn-Edwards Paints
+Albertsons
+Acme Markets
+Carrs
+Jewel-Osco
+Lucky
+Pavilions
+Randalls and Tom Thumb
+Safeway
+Shaw's and Star Market
+United Supermarkets and Market Street
+Vons
+Aldi
+Costco
+Ahold Delhaize
+Food Lion
+Hannaford
+Giant-Carlisle
+Giant-Landover
+Stop & Shop
+Martin's Food Markets
+Kmart Super Center
+Kroger
+Baker's Supermarkets
+City Market
+Dillons Supermarkets
+Food 4 Less
+Fred Meyer
+Fry's Food & Drug
+Gerbes Super Markets
+Harris Teeter
+Jay C
+King Soopers
+Owen's
+Pay Less Super Markets
+QFC
+Ralphs
+Roundy's
+Ruler Foods
+Scott's
+Smith's
+Schnucks
+SpartanNash
+SuperValu
+Save-A-Lot
+Cub
+Farm Fresh
+Hornbacher's
+Shop 'n Save
+Shoppers
+SuperTarget
+Trader Joe's
+Walmart
+Whole Foods
+`.toLowerCase()).split('\n'));
+
+module.exports = blacklist;
