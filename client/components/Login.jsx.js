@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Signup extends React.Component {
+class Login extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -31,28 +31,23 @@ class Signup extends React.Component {
   onFormSubmit(event) {
     // console.log(this.state,'<-- this.state from the react onFormSubmit to be sent via singupSubmit');
     // let persistedEvent = event.persist();
-    this.props.signupSubmit(this.state, event);
+    this.props.loginSubmit(this.state, event);
   }
 
 
 
   render () {
     return (
-      <div className="signup">
-      <h3>Signup for Locastore</h3>
+      <div className="login">
+      <h3>Login</h3>
       <form >
         <label>
-          Create Username
+          Username
           <input onChange={this.onChangeUsername.bind(this)} type="text" name="username"/>
         </label>
         <br />
         <label>
-          Your Email Address
-          <input onChange={this.onChangeEmail.bind(this)} type="email" name="email"/>
-        </label>
-        <br />
-        <label>
-          Create Password
+          Password
           <input onChange={this.onChangePassword.bind(this)} type="text" name="password"/>
         </label>
         <br />
@@ -62,4 +57,4 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup;
+export default Login;

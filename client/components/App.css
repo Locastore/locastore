@@ -13,6 +13,16 @@
   height: 100%;
 }
 
+.search {
+  text-align: center;
+  margin-top: 25%;
+}
+
+.signup {
+  text-align: center;
+  margin-top: 25%;
+}
+
 .nav {
   display: inline-block !important;
   text-align: right;

@@ -6,6 +6,7 @@ import Search from './Search.jsx';
 import ProductSearch from './ProductSearch.jsx';
 import Business from './Business.jsx';
 import Signup from './Signup.jsx';
+import Login from './Login.jsx';
 import './App.css';
 import $ from 'jquery';
 import { Alert } from 'reactstrap';
@@ -25,7 +26,7 @@ class App extends React.Component {
       alertVisible: false,
       loading: false
     }
-    // this.userFormSubmit=this.userFormSubmit.bind(this);
+
     this.onDismiss = this.onDismiss.bind(this);
   }
 
@@ -82,17 +83,17 @@ class App extends React.Component {
     })
   }
 
-  signupSubmit(signup) {
-    console.log(signup.target, '<-this is the signup.target');
-    let username = signup.target.username;
-    let email = signup.target.email;
-    let password = signup.target.password;
+  signupSubmit(signup, event) {
+    let username = signup.username;
+    let email = signup.email;
+    let password = signup.password;
     axios.post('/signup', {
       username: `${username}`,
       email: `${email}`,
       password: `${password}`
     })
     .then(res => {
+      alert(res.data);
       axios.get('/')
     })
     .catch((err) => {
@@ -131,9 +132,41 @@ class App extends React.Component {
     });
   }
 
+  loginSubmit(login, event) {
+    let username = login.username;
+    let password = login.password;
+    axios.post('/login', {
+      username: `${username}`,
+      password: `${password}`
+    })
+    .then(res => {
+      let firstTenChar = function(string) {
+        return string.substring(0,10);
+      }
+      if (firstTenChar(res.data) === 'No such us') {
+        alert('No such user found, please try again. Check spelling and remember that username and password are case-sensitive.')
+      } else {
+      alert(res.data);
+      axios.get('/')
+      }
+    })
+    .catch((err) => {
+      alert(err);  // <-- needs to be refined dep on situation
+    })
+  }
+
+
 render() {
     return (
       <Router>
+      <div>
+        <Signup
+        signupSubmit={this.signupSubmit.bind(this)}
+        />
+        <Login
+        loginSubmit={this.loginSubmit.bind(this)}
+        />
+
       <div className="app">
         {/*<Signup signupSubmit={this.signupSubmit.bind(this)}/> */}
         <Route exact path="/" render={ () =>
@@ -151,6 +184,10 @@ render() {
               <Search onSearch={this.search.bind(this)}/>2
           </div>
         } />
+        
+        {/*<Route exact path="/signup" render={ () =>
+          <Signup signupSubmit={this.signupSubmit.bind(this)}/>
+        } />*/}
 
         <Route exact path="/location" render={ () =>
           <ProductSearch onSearch={this.prodsearch.bind(this)}/>

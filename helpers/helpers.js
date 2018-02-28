@@ -139,7 +139,6 @@ const parseWebsiteUrl = (data) => {
   });
 };
 
-
 exports.yelpSearch = yelpSearch;
 exports.yelpSearchDetails = yelpSearchDetails;
 exports.parseWebsiteUrl = parseWebsiteUrl;
