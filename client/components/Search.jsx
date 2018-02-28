@@ -22,14 +22,16 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div className="search">
-        <Route render={({history}) => (
-          <button type="button" onClick={() => { this.search(history) }}>
-            <img className="searchImg" src='https://d30y9cdsu7xlg0.cloudfront.net/png/5592-200.png'/>
-          </button>
-        )}>
-        </Route>
-        <input className="input" className="inputLayer" type="text" placeholder="Where do you live?" onChange={this.onChange.bind(this)}></input>
+      <div>
+        <div className="search">
+          <Route render={({history}) => (
+            <button type="button" onClick={() => { this.search(history) }}>
+              <img className="searchImg" src='https://d30y9cdsu7xlg0.cloudfront.net/png/5592-200.png'/>
+            </button>
+          )}>
+          </Route>
+          <input className="input" className="inputLayer" type="text" placeholder="Where do you live?" onChange={this.onChange.bind(this)}></input>
+        </div>
       </div>
     )
   }
