@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router-dom';
 
 class Nav extends React.Component {
   constructor(props) {
@@ -11,9 +12,9 @@ class Nav extends React.Component {
       <div className="nav">
         {/*<img src={require('./locastore.png')} />*/}
         <ul className="nav-list">
-          <li><a className="navItem" href="#">Shop</a></li>
-          <li><a className="navItem" href="#">Login</a></li>
-          <li><a className="navItem" href="#">Sign Up</a></li>
+          <li><a className="navItem" href="#">Profile</a></li>
+          <li className="navItem"><Link to="/login">Login</Link></li>
+          <li className="navItem"><Link to="/signup">Sign Up</Link></li>
           <li><a className="navItem" href="#">About Us</a></li>
         </ul>
       </div>
