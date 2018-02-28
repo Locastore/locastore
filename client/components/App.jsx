@@ -7,7 +7,7 @@ import ProductSearch from './ProductSearch.jsx';
 import Business from './Business.jsx';
 import Signup from './Signup.jsx';
 import Login from './Login.jsx';
-import './App.css';
+import '../styles/App.css';
 import $ from 'jquery';
 import { Alert } from 'reactstrap';
 import {
