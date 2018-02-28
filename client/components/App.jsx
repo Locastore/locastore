@@ -71,6 +71,29 @@ class App extends React.Component {
     })
   }
 
+  loginSubmit(login, event) {
+    let username = login.username;
+    let password = login.password;
+    axios.post('/login', {
+      username: `${username}`,
+      password: `${password}`
+    })
+    .then(res => {
+      let firstTenChar = function(string) {
+        return string.substring(0,10);
+      }
+      if (firstTenChar(res.data) === 'No such us') {
+        alert('No such user found, please try again. Check spelling and remember that username and password are case-sensitive.')
+      } else {
+      alert(res.data);
+      axios.get('/')
+      }
+    })
+    .catch((err) => {
+      alert(err);  // <-- needs to be refined dep on situation
+    })
+  }
+
 
 render() {
     return (
@@ -80,9 +103,9 @@ render() {
         <Signup
         signupSubmit={this.signupSubmit.bind(this)}
         />
-        {/*<Login
+        <Login
         loginSubmit={this.loginSubmit.bind(this)}
-        />*/}
+        />
 
         <Route exact path="/" render={ () =>
           <div className="home">

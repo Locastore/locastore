@@ -5,6 +5,7 @@ class Login extends React.Component {
     super(props);
     this.state = {
       username: '',
+      email: '',
       password: ''
     }
   }
@@ -12,8 +13,12 @@ class Login extends React.Component {
   onChangeUsername (event) {
     this.setState({
       username: event.target.value
-    }, () => {
-    console.log(this.state.username);
+    })
+  }
+
+  onChangeEmail (event) {
+    this.setState({
+      email: event.target.value
     })
   }
 
@@ -23,11 +28,10 @@ class Login extends React.Component {
     })
   }
 
-  onFormSubmit() {
-    // console.log('FORM SUBMITTED!')
-    // console.log(this.props);
-    this.props.loginSubmit(this.state);
-    // this.props.fix();
+  onFormSubmit(event) {
+    // console.log(this.state,'<-- this.state from the react onFormSubmit to be sent via singupSubmit');
+    // let persistedEvent = event.persist();
+    this.props.loginSubmit(this.state, event);
   }
 
 
@@ -38,12 +42,12 @@ class Login extends React.Component {
       <h3>Login</h3>
       <form >
         <label>
-          Enter Username
+          Username
           <input onChange={this.onChangeUsername.bind(this)} type="text" name="username"/>
         </label>
         <br />
         <label>
-          Enter Password
+          Password
           <input onChange={this.onChangePassword.bind(this)} type="text" name="password"/>
         </label>
         <br />

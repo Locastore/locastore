@@ -5,42 +5,40 @@ let Users = new Schema ({
   username: {type: String, unique: true},
   email: String,
   password: String,
+  isLoggedIn: {},
   favorites: [{name: String, ID: String, url: String}]
+  // session: [username: String, isLoggedIn: Boolean, favorites: [{name: String, ID: String, url: String}]]
 });
 
 let User = mongoose.model('User', Users);
 
-// move helpers to db file
-// see if unique:true does the job of nameIsInUse (triggers the err in .save)
-
-// const nameIsInUse = (newUser, cb) => {
-//   console.log(newUser, '<-- that is the newUser passed in from the Post request in the nameIsInUse helper');
-//   User.find({'username': newUser}, function(err, user) {
-//     if (err) {
-//       console.log('User.find resulted in an error');
-//     } else {
-//       // console.log(user, "<--that is the user passed from the User.find operation");
-//       if (user.length < 1 ) {
-//         cb(false);
-//       } else {
-//         cb(true);
-//       }
-//     }
-//   });
-// }
-
-const addUser = function (body, name, cb) {
+const addUser = function (body, cb) {
   let saveUser = new User(body);
-  console.log(saveUser, "<-- saveUser in the addUser fn");
-  saveUser.save(function (err) {
+  saveUser.save(function (err, user) {
     if (err) {
       if (firstSixChar(err.errmsg) === 'E11000') {
-        cb(`We're sorry but the username `, `${name} is already taken. Please choose another.`)
+        cb(`We're sorry but the username `, `${body.username} is already taken. Please choose another.`)
       } else {
         cb('err.errmsg');
       }
     } else {
-    cb(name, ' has been added.');
+      cb(body.username, ' has been set up as a new user profile.');
+    }
+  });
+}
+
+const checkCredentials = function (credentials, cb1, cb2) {
+  User.find(credentials , function (err, result) {
+    if (err) {
+        cb1(err.errmsg);  // res.send error to client
+    } else {
+      if(result.length > 0 ) {
+        console.log(result, '<-- successfully found user in checkCredentials');
+        console.log(result[0].username, '<-- username trying to res.send to client');
+        cb1(`${result[0].username}`, ` authenticated`);
+      } else {
+        cb1('No such user found, please try again. Check spelling and remember that username and password are case-sensitive.')
+      }
     }
   });
 }
@@ -51,3 +49,4 @@ const firstSixChar = function(string) {
 
 // exports.nameIsInUse = nameIsInUse;
 exports.addUser = addUser;
+exports.checkCredentials = checkCredentials;
