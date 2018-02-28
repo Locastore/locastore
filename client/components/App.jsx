@@ -184,7 +184,7 @@ render() {
               <Search onSearch={this.search.bind(this)}/>2
           </div>
         } />
-        
+
         {/*<Route exact path="/signup" render={ () =>
           <Signup signupSubmit={this.signupSubmit.bind(this)}/>
         } />*/}
@@ -198,6 +198,7 @@ render() {
                   loading={this.state.loading}
         />
 
+      </div>
       </div>
       </Router>
     );
