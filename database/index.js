@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
-const MONGODB_URI = 'mongodb://localhost/locastore';
-mongoose.connect(MONGODB_URI);
+const MONGODB_URI = process.env.MONGO_URI || 'localhost/locastore';
+mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${MONGODB_URI}`);
 
 const Schema = mongoose.Schema;
 
