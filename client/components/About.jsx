@@ -24,7 +24,7 @@ class About extends React.Component {
 
         <h3 className="sectionHead">Developer Team</h3>
 
-        <Row>
+        <Row className="aboutRow">
           <Col xs="6" sm="4"><img className="aboutImg" src="https://c1.staticflickr.com/5/4770/39649699085_054a6e330d_q.jpg"/>
             <div className="aboutInfo">
               <h4>Evaline Bai</h4>
@@ -48,7 +48,7 @@ class About extends React.Component {
               <h4>Mike Butak</h4>
               <h5 className="title">Scrum Master</h5>
               <h6 className="haunt">Favorite Local Haunt:</h6>
-              <h6>"Grandma's swap meets"</h6>
+              <h6>"Nancy's Western Antiques"</h6>
             </div>
           </Col>
         </Row>
