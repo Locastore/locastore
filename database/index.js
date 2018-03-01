@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt-nodejs');
 const MONGODB_URI = 'mongodb://localhost/locastore';
 mongoose.connect(MONGODB_URI);
 
@@ -15,6 +16,7 @@ let Users = new Schema ({
 let User = mongoose.model('User', Users);
 
 const addUser = function (body, cb) {
+  body.password = encryptPassword(body.password);
   let saveUser = new User(body);
   saveUser.save(function (err, user) {
     if (err) {
@@ -29,24 +31,51 @@ const addUser = function (body, cb) {
   });
 }
 
+const encryptPassword = function (password) {
+  let salt = bcrypt.genSaltSync(10);
+  let hash = bcrypt.hashSync(password, salt);
+  return hash;
+}
+
 const checkCredentials = function (credentials, cb1, cb2) {
-  User.find(credentials , function (err, result) {
+  // console.log(credentials.username, '<--the credentials.username to be found');;
+  User.find({username: credentials.username} , function (err, result) {
     if (err) {
+        // console.log('user.Find resulted in an err');
         cb1(err.errmsg);  // res.send error to client
     } else {
       if(result.length > 0 ) {
-        cb1(`${result[0].username}`, ` authenticated`);
+        bcrypt.compare(credentials.password, result[0].password, function (err, result) {
+          if (err) {
+            console.log(err);
+          } else {
+            if(result) {
+              console.log('this will be logged by bcrypt.compare if successful pw match');
+              cb1(`${credentials.username}`, ` authenticated`);
+            } else {
+              console.log('this will be logged if wrong password in bcrypt.compare');
+              cb1('Password incorrect, please try again. Check spelling and remember that username and password are case-sensitive.')
+            }
+          }
+        });
       } else {
+        console.log('this will be logged if user not found in db');
         cb1('No such user found, please try again. Check spelling and remember that username and password are case-sensitive.')
       }
     }
-  });
+  })
 }
+
 
 const firstSixChar = function(string) {
   return string.substring(0,6);
 }
 
+const comparePassword = function (attemptedPassword, callback ) {
+  bcrypt.compare()
+}
+
 // exports.nameIsInUse = nameIsInUse;
 exports.addUser = addUser;
 exports.checkCredentials = checkCredentials;
+exports.comparePassword = comparePassword;

@@ -5,11 +5,17 @@ const util = require('../helpers/helpers.js');
 const path = require('path');
 const User = require('../database/index.js');
 const blacklist = require('../helpers/blacklist.js');
+var session = require('express-sessions');
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/dist')));
+// app.use(session({
+//   secret: 'T29HJYjflK',
+//   resave: false,
+//   saveUninitialized: true
+// }))
 
 let locationRetainer = '';
 
@@ -99,6 +105,7 @@ app.post('/login', function (req, res, next) {
   }
   User.checkCredentials(credentials, sendResponse, redirect);
 });
+
 
 app.get('/business', (req, res) => {
   util.yelpSearchDetails(req.query.id)
