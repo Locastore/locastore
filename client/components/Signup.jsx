@@ -39,7 +39,7 @@ class Signup extends React.Component {
   render () {
     return (
       <div className="signup">
-      <h3>Signup for Locastore</h3>
+      <h3>Join the Locastore Movement</h3>
       <form >
         <label>
           Create Username
@@ -56,7 +56,7 @@ class Signup extends React.Component {
           <input onChange={this.onChangePassword.bind(this)} type="text" name="password"/>
         </label>
         <br />
-        <input onClick={this.onFormSubmit.bind(this)} type="submit" value="Submit"/>
+        <input onClick={this.onFormSubmit.bind(this)} type="submit" value="Sign Up"/>
       </form>
     </div>)
   }
