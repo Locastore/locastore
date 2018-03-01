@@ -39,7 +39,7 @@ class Login extends React.Component {
   render () {
     return (
       <div className="login">
-      <h3>Login</h3>
+      <h3>Login, Go Local</h3>
       <form >
         <label>
           Username
