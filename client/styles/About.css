@@ -1,0 +1,34 @@
+.logo {
+  text-align: center;
+  display: block;
+  margin: auto;
+  margin-top: 3%;
+}
+
+.sectionHead {
+  font-family: "Sacramento", cursive;
+  font-size: 45px;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.aboutImg {
+  border-radius: 50%;
+  text-align: center;
+  display: block;
+  margin: auto;
+  margin-bottom: 7%;
+}
+
+.aboutInfo {
+  text-align: center;
+}
+
+.title {
+  color: #273C75;
+  margin-bottom: 5%;
+}
+
+.haunt {
+  font-weight: bold;
+}

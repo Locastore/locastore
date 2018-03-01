@@ -23,6 +23,24 @@
   margin-top: 25%;
 }
 
+.companyName {
+  font-family: "Sacramento", cursive;
+  font-size: 56px;
+  font-weight: bold;
+}
+
+.companyDiv {
+  margin: 60px;
+  position: absolute;
+}
+
+.navHr {
+  border: none;
+  height: 1px;
+  color: gray;
+  background-color: gray;
+}
+
 .nav {
   display: inline-block !important;
   text-align: right;
