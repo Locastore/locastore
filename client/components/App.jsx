@@ -8,8 +8,8 @@ import Business from './Business.jsx';
 import Signup from './Signup.jsx';
 import Login from './Login.jsx';
 import About from './About.jsx';
-import '../styles/App.css';
 import $ from 'jquery';
+import '../styles/App.css';
 import { Alert } from 'reactstrap';
 import {
   BrowserRouter as Router,
