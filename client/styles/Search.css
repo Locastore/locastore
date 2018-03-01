@@ -18,6 +18,19 @@
 .input {
   background: transparent;
   background-clip: padding-box;
+  margin-top: 0 !important;
+}
+
+.autocompleteInput {
+  margin-top: 0 !important;
+  position: absolute;
+}
+
+.autocompleteBox {
+  position: absolute;
+  width: 250px;
+  margin-top: 90%;
+  margin-left: 90%;
 }
 
 .inputLayer {

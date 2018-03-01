@@ -1,20 +1,17 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import '../styles/Search.css';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 
 class Search extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      term: ''
+      term: '',
+      address: ''
     }
     this.search = this.search.bind(this);
-  }
-
-  onChange(event) {
-    this.setState({
-      term: event.target.value
-    })
+    this.onChange = (term) => this.setState({ term })
   }
 
   search(history) {
@@ -22,15 +19,33 @@ class Search extends React.Component {
   }
 
   render() {
+
+    const inputProps = {
+      value: this.state.term,
+      onChange: this.onChange,
+      placeholder: 'Where do you live?',
+    }
+
+    const inputClasses = {
+      input: 'search inputLayer input',
+      autocompleteContainer: 'autocompleteBox'
+    }
+
     return (
       <div className="search">
         <Route render={({history}) => (
-          <button className="locationButton" type="button" onClick={() => { this.search(history) }}>
-            <img className="searchImg" src='https://d30y9cdsu7xlg0.cloudfront.net/png/5592-200.png'/>
-          </button>
+          <div>
+            <PlacesAutocomplete
+              classNames={inputClasses}
+              onEnterKeyDown={() => this.search(history)}
+              inputProps={inputProps}
+            />
+            <button className="locationButton" type="button" onClick={() => { this.search(history) }}>
+              <img className="searchImg" src='https://d30y9cdsu7xlg0.cloudfront.net/png/5592-200.png'/>
+            </button>
+          </div>
         )}>
         </Route>
-        <input className="input" className="inputLayer" type="text" placeholder="Where do you live?" onChange={this.onChange.bind(this)}></input>
       </div>
     )
   }
