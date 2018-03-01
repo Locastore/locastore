@@ -8,6 +8,7 @@ import Business from './Business.jsx';
 import Signup from './Signup.jsx';
 import Login from './Login.jsx';
 import About from './About.jsx';
+import Profile from './Profile.jsx';
 import $ from 'jquery';
 import '../styles/App.css';
 import { Alert } from 'reactstrap';
@@ -191,6 +192,8 @@ render() {
           } />
 
           <Route exact path='/about' component={About} />
+
+          <Route path='/profile' component={Profile} />
 
           <Business handleDetail={this.retrieveDetail.bind(this)}
                     businesses={this.state.stores}

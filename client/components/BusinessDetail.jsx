@@ -1,9 +1,27 @@
 import React from 'react';
 import Slider from './Slider.jsx';
+import axios from 'axios';
 
 class BusinessDetail extends React.Component {
   constructor (props) {
     super(props);
+    this.handleFavorite = this.handleFavorite.bind(this);
+    this.state = {
+      favorited: false
+    };
+  }
+
+  // TODO: display to user that favorite went through, don't allow them to favorite business more than once
+  handleFavorite(business) {
+    axios.post('/favorite', {
+      business: business
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   render() {
@@ -23,6 +41,7 @@ class BusinessDetail extends React.Component {
             <h4 className="hoursText" key={index}>{openTime}</h4>
           )}
           <h4><a href={`http://${this.props.business.website}`}>{this.props.business.website}</a></h4>
+          <button onClick={()=> { this.handleFavorite(this.props.business) } }>Favorite</button>
         </div>
       </div>
     );

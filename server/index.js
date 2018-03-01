@@ -5,7 +5,8 @@ const util = require('../helpers/helpers.js');
 const path = require('path');
 const User = require('../database/index.js');
 const blacklist = require('../helpers/blacklist.js');
-var session = require('express-sessions');
+const session = require('express-sessions');
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -87,22 +88,24 @@ app.post('/product', (req, res) => {
     });
 });
 
-app.post('/signup', function (req, res, next) {
-  let newUser = req.body;
-  let successResponse = function (data, string) {
+app.post('/signup', function (req, res) {
+  const newUser = req.body;
+  const successResponse = function (data, string) {
     res.send(`${data}${string}`);
-  }
+  };
   User.addUser(newUser, successResponse);
 });
 
-app.post('/login', function (req, res, next) {
-  let credentials = req.body;
-  let sendResponse = function (data, string) {
+app.post('/login', function (req, res) {
+  const credentials = req.body;
+  const sendResponse = function (data, string) {
     res.send(`${data}${string}`);
-  }
-  let redirect = function(endpoint) {
+  };
+
+  const redirect = function (endpoint) {
     res.redirect(endpoint);
-  }
+  };
+
   User.checkCredentials(credentials, sendResponse, redirect);
 });
 
@@ -122,6 +125,36 @@ app.get('/business', (req, res) => {
     });
 });
 
+app.post('/favorite', (req, res) => {
+  const business = req.body.business;
+  const user = 'norbie'; // temporary until we get user sessions setup
+  User.saveFavorite(user, business)
+    .then((result) => {
+      console.log(`Successfully saved favorite for ${user}`);
+      res.status(201).send('Successfully saved favorite to database');
+    })
+    .catch((err) => {
+      console.log('Failed to save favorite to database');
+      console.log(err);
+      res.status(500).send('Failed to save favorite to database');
+    });
+});
+
+app.get('/favorite', (req, res) => {
+  const user = 'norbie'; // temporary until we get user sessions setup
+  User.retrieveFavorites(user)
+    .then((result) => {
+      console.log(`Successfully retrieved favorites for ${user}`);
+      console.log(result.favorites);
+      res.status(200).send(result.favorites);
+    })
+    .catch((err) => {
+      console.log(`Failed to retrieve favorites for ${user}`);
+      console.log(err);
+      res.status(500).send('Failed to retrieve favorites');
+    });
+});
+
 app.get('/*', (req, res) => {
   res.redirect('/');
 });
@@ -131,5 +164,3 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Listening for requests on ${port}`);
 });
-
-
