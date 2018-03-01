@@ -9,14 +9,19 @@ class Nav extends React.Component {
 
   render() {
     return (
-      <div className="nav">
-        {/*<img src={require('./locastore.png')} />*/}
-        <ul className="nav-list">
-          <li><a className="navItem" href="#">Profile</a></li>
-          <li><Link className="navItem" to="/login">Login</Link></li>
-          <li><Link className="navItem" to="/signup">Sign Up</Link></li>
-          <li><a className="navItem" href="#">About Us</a></li>
-        </ul>
+      <div>
+        <div className="companyDiv">
+          <h2 className="companyName">Locastore</h2>
+          <hr className="navHr"/>
+        </div>
+        <div className="nav">
+          <ul className="nav-list">
+            <li><a className="navItem" href="#">Profile</a></li>
+            <li><Link className="navItem" to="/login">Login</Link></li>
+            <li><Link className="navItem" to="/signup">Sign Up</Link></li>
+            <li><Link className="navItem" to="/about">About Us</Link></li>
+          </ul>
+        </div>
       </div>
     )
   }

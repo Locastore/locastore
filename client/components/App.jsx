@@ -7,6 +7,7 @@ import ProductSearch from './ProductSearch.jsx';
 import Business from './Business.jsx';
 import Signup from './Signup.jsx';
 import Login from './Login.jsx';
+import About from './About.jsx';
 import '../styles/App.css';
 import $ from 'jquery';
 import { Alert } from 'reactstrap';
@@ -160,6 +161,7 @@ render() {
     return (
       <Router>
         <div className="app">
+
           <Route exact path="/" render={ () =>
             <div className="home">
               <div className="overlay">
@@ -187,6 +189,8 @@ render() {
           <Route exact path="/location" render={ () =>
             <ProductSearch onSearch={this.prodsearch.bind(this)}/>
           } />
+
+          <Route exact path='/about' component={About} />
 
           <Business handleDetail={this.retrieveDetail.bind(this)}
                     businesses={this.state.stores}
