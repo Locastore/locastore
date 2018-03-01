@@ -1,15 +1,13 @@
 .signup {
-/*  background-color: rgba(98,88,124,0.2);*/
   background-image: url("https://s3-media4.fl.yelpcdn.com/bphoto/yjhX50qMuv1JqWVamjmg-Q/o.jpg");
   background-repeat: no-repeat;
-  background-size: 50%;
   position: fixed;
   opacity: 0.85;
   padding: 0;
   margin: 0;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 50%;
   height: 100%;
 }
 
