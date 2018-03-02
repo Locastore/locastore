@@ -29,6 +29,7 @@ class Login extends React.Component {
   }
 
   onFormSubmit(event) {
+    event.preventDefault();
     this.props.loginSubmit(this.state, event);
   }
 

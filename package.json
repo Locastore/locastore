@@ -4,7 +4,7 @@
   "description": "> Connecting locally-minded consumers to the businesses in their community.",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "node server/index.js",
+    "start": "webpack && node server/index.js",
     "server-dev": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "lint": "./node_modules/.bin/eslint"
@@ -30,7 +30,7 @@
     "cheerio": "^1.0.0-rc.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
-    "express-sessions": "^1.0.6",
+    "express-session": "^1.15.6",
     "install": "^0.10.4",
     "jquery": "^3.3.1",
     "mongoose": "^5.0.6",
