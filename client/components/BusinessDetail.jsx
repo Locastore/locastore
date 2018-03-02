@@ -8,9 +8,36 @@ class BusinessDetail extends React.Component {
     super(props);
     this.handleFavorite = this.handleFavorite.bind(this);
     this.state = {
+      userFavorites: [],
       favorited: false,
       buttonText: 'Favorite'
     };
+    this.isFavorited = this.isFavorited.bind(this);
+  }
+
+  componentWillMount() {
+    if (this.props.loginStatus) {
+      axios.get('/favorite')
+      .then((res) => {
+        this.setState({
+          userFavorites: res.data
+        }, this.isFavorited);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
+  }
+
+  isFavorited() {
+    let businessId = this.props.business.place_id;
+    let userFavorites = this.state.userFavorites;
+    for (var i = 0; i < userFavorites.length; i++) {
+      if (businessId === userFavorites[i].place_id) {
+        this.setState({ favorited: true });
+        return;
+      }
+    }
   }
 
   handleFavorite(business) {
@@ -19,19 +46,40 @@ class BusinessDetail extends React.Component {
     })
     .then((res) => {
       console.log(res);
+      this.setState({
+        favorited: true
+      });
     })
     .catch((err) => {
       console.log(err);
-    })
+    });
   }
 
-  changeText() {
-    this.setState({
-      buttonText: 'Added to Favorites'
+  handleUnfavorite(business) {
+    axios.post('/unfavorite', {
+      business: business
     })
+    .then((res) => {
+      console.log(res);
+      this.setState({
+        favorited: false
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
+
 
   render() {
+    let favoriteComponent = null;
+    if (this.props.loginStatus && this.state.favorited) {
+      favoriteComponent = <Button onClick={() => {this.handleUnfavorite(this.props.business) }}>Unfavorite</Button>
+    } else if (this.props.loginStatus) {
+      favoriteComponent = <Button onClick={() => { this.handleFavorite(this.props.business) }}>Favorite</Button>
+    } else {
+      favoriteComponent = <span></span>
+    }
     return (
       <div>
         <div>
@@ -48,10 +96,7 @@ class BusinessDetail extends React.Component {
             <h4 className="hoursText" key={index}>{openTime}</h4>
           )}
           <h4><a href={`http://${this.props.business.website}`}>{this.props.business.website}</a></h4>
-          {this.props.loginStatus &&
-            <Button onClick={() => {this.handleFavorite(this.props.business);
-                                    this.changeText(); } }>{this.state.buttonText}</Button>
-          }
+          {favoriteComponent}
         </div>
       </div>
     );

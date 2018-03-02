@@ -13,15 +13,15 @@ mongoose.connect(`${CONNECT_STRING}`);
 
 const Schema = mongoose.Schema;
 
-let Users = new Schema ({
-  username: {type: String, unique: true},
+const Users = new Schema({
+  username: { type: String, unique: true },
   email: String,
   password: String,
   isLoggedIn: {},
   favorites: [Schema.Types.Mixed]
 });
 
-let User = mongoose.model('User', Users);
+const User = mongoose.model('User', Users);
 
 const addUser = function (body, cb) {
   body.password = encryptPassword(body.password);
@@ -71,9 +71,16 @@ const checkCredentials = function (credentials, cb) {
 
 const saveFavorite = function(user, business) {
   return User.findOneAndUpdate(
-    {username: user},
+    { username: user },
     { $addToSet: {'favorites': business} },
     { new: true }
+  );
+}
+
+const deleteFavorite = function(user, business) {
+  return User.update(
+    { username: user },
+    { $pull: {'favorites': { place_id: business.place_id }}}
   );
 }
 
@@ -95,4 +102,5 @@ exports.addUser = addUser;
 exports.checkCredentials = checkCredentials;
 exports.comparePassword = comparePassword;
 exports.saveFavorite = saveFavorite;
+exports.deleteFavorite = deleteFavorite;
 exports.retrieveFavorites = retrieveFavorites;

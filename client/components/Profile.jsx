@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Route, Switch } from 'react-router-dom';
 import BusinessListEntry from './BusinessListEntry.jsx';
 import BusinessDetail from './BusinessDetail.jsx';
+import { withRouter } from 'react-router';
 import '../styles/Profile.css';
 
 class Profile extends React.Component {
@@ -26,8 +27,8 @@ class Profile extends React.Component {
     })
   }
 
-  renderDetail(placeId, history) {
-    history.push(`/profile/${placeId}`);
+  renderDetail(placeId) {
+    this.props.history.push(`/profile/${placeId}`);
   }
 
   render() {
@@ -41,7 +42,11 @@ class Profile extends React.Component {
           <hr className="favoritesHr" />
           {this.state.favorites.map((business, index) => {
             return (
-              <BusinessListEntry handleDetail={this.renderDetail} key={index} business={business} />
+              <BusinessListEntry
+                handleDetail={this.renderDetail}
+                key={index}
+                business={business}
+              />
             )
           })}
         </div>
@@ -53,7 +58,12 @@ class Profile extends React.Component {
           <Route path="/profile/:place" render={ (props) =>
             this.state.favorites.map((business, index) => {
               if (business.place_id === props.match.params.place) {
-                return (<BusinessDetail key={index} match={props.match} business={business} />)
+                return (<BusinessDetail
+                          key={index}
+                          match={props.match}
+                          business={business}
+                          loginStatus={this.props.loginStatus}
+                        />)
               }
             })
           } />
@@ -74,5 +84,5 @@ function NoFavorites(props) {
     </div>
   )
 }
-
-export default Profile;
+const ProfileWithRouter = withRouter(Profile);
+export default ProfileWithRouter;
