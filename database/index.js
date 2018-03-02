@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
+
 const MONGODB_URI = process.env.MONGO_URI || 'localhost/locastore';
-mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${MONGODB_URI}`);
+const DB_USER = process.env.DB_USER || '';
+const DB_PASSWORD = process.env.DB_PASSWORD || '';
+mongoose.connect(`mongodb://${DB_USER}:${DB_PASSWORD}@${MONGODB_URI}`);
 
 const Schema = mongoose.Schema;
 
@@ -40,7 +43,7 @@ const encryptPassword = function (password) {
 const checkCredentials = function (credentials, cb) {
   User.find({username: credentials.username} , function (err, result) {
     if (err) {
-        cb(err.errmsg);
+      cb(err.errmsg);
     } else {
       if(result.length > 0 ) {
         bcrypt.compare(credentials.password, result[0].password, function (err, result) {
