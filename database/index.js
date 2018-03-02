@@ -37,35 +37,29 @@ const encryptPassword = function (password) {
   return hash;
 }
 
-const checkCredentials = function (credentials, cb1, cb2) {
-  // console.log(credentials.username, '<--the credentials.username to be found');;
+const checkCredentials = function (credentials, cb) {
   User.find({username: credentials.username} , function (err, result) {
     if (err) {
-        // console.log('user.Find resulted in an err');
-        cb1(err.errmsg);  // res.send error to client
+        cb(err.errmsg);
     } else {
       if(result.length > 0 ) {
         bcrypt.compare(credentials.password, result[0].password, function (err, result) {
           if (err) {
-            console.log(err);
+            cb(err);
           } else {
             if(result) {
-              console.log('this will be logged by bcrypt.compare if successful pw match');
-              cb1(`${credentials.username}`, ` authenticated`);
+              cb(true);
             } else {
-              console.log('this will be logged if wrong password in bcrypt.compare');
-              cb1('Password incorrect, please try again. Check spelling and remember that username and password are case-sensitive.')
+              cb(false);
             }
           }
         });
       } else {
-        console.log('this will be logged if user not found in db');
-        cb1('No such user found, please try again. Check spelling and remember that username and password are case-sensitive.')
+        cb('unknown user');
       }
     }
   })
 }
-
 
 const firstSixChar = function(string) {
   return string.substring(0,6);
@@ -75,7 +69,6 @@ const comparePassword = function (attemptedPassword, callback ) {
   bcrypt.compare()
 }
 
-// exports.nameIsInUse = nameIsInUse;
 exports.addUser = addUser;
 exports.checkCredentials = checkCredentials;
 exports.comparePassword = comparePassword;

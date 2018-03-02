@@ -5,17 +5,17 @@ const util = require('../helpers/helpers.js');
 const path = require('path');
 const User = require('../database/index.js');
 const blacklist = require('../helpers/blacklist.js');
-var session = require('express-sessions');
+var session = require('express-session');
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/dist')));
-// app.use(session({
-//   secret: 'T29HJYjflK',
-//   resave: false,
-//   saveUninitialized: true
-// }))
+app.use(session({
+  secret: 'T29HJYjflK',
+  resave: false,
+  saveUninitialized: true
+}))
 
 let locationRetainer = '';
 
@@ -97,13 +97,20 @@ app.post('/signup', function (req, res, next) {
 
 app.post('/login', function (req, res, next) {
   let credentials = req.body;
-  let sendResponse = function (data, string) {
-    res.send(`${data}${string}`);
+  let handleVerify = function (verifyResult) {
+    if (verifyResult === true ) {
+      util.createSession(req, res, credentials);
+      // let body = credentials.username + ' authenticated';
+      // res.status(200).send(body);
+    }  else if ( verifyResult === false) {
+      res.status(400).send('Password incorrect, please try again. Check spelling and remember that username and password are case-sensitive.')
+    } else if ( verifyResult === 'unknown user') {
+      res.status(400).send('No such user found, please try again. Check spelling and remember that username and password are case-sensitive.');
+    } else {
+      res.status(400).send(verifyResult);
+    }
   }
-  let redirect = function(endpoint) {
-    res.redirect(endpoint);
-  }
-  User.checkCredentials(credentials, sendResponse, redirect);
+  User.checkCredentials(credentials, handleVerify);
 });
 
 

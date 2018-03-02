@@ -24,7 +24,8 @@ class App extends React.Component {
     this.state = {
       stores: [],
       alertVisible: false,
-      loading: false
+      loading: false,
+      loggedIn: false
     }
 
     this.onDismiss = this.onDismiss.bind(this);
@@ -140,18 +141,15 @@ class App extends React.Component {
       password: `${password}`
     })
     .then(res => {
-      let firstTenChar = function(string) {
-        return string.substring(0,10);
-      }
-      if (firstTenChar(res.data) === 'No such us') {
-        alert('No such user found, please try again. Check spelling and remember that username and password are case-sensitive.')
-      } else {
-      alert(res.data);
-      axios.get('/')
-      }
+      if (res.status === 200 ) {
+        console.log(this.state, '<this is this.state');
+        this.setState({
+          loggedIn: true
+        }, alert(`You\'re logged in!`));
+      };
     })
     .catch((err) => {
-      alert(err);  // <-- needs to be refined dep on situation
+      alert('The username and/or password do match the records we have on file. Please check your spelling and try again.');
     })
   }
 

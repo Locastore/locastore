@@ -139,6 +139,17 @@ const parseWebsiteUrl = (data) => {
   });
 };
 
+const createSession = function(req, res, newUser) {
+  // console.log(req,` <-- 'req' in createSession`);
+  // console.log(req.session, `<--req.session in createSession`);
+  return req.session.regenerate(function() {
+      req.session.user = newUser;
+      res.status(200).send(newUser);
+      // res.redirect('/');
+    });
+};
+
 exports.yelpSearch = yelpSearch;
 exports.yelpSearchDetails = yelpSearchDetails;
 exports.parseWebsiteUrl = parseWebsiteUrl;
+exports.createSession = createSession;
