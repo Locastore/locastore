@@ -13,7 +13,6 @@ class BusinessDetail extends React.Component {
     };
   }
 
-  // TODO: display to user that favorite went through, don't allow them to favorite business more than once
   handleFavorite(business) {
     axios.post('/favorite', {
       business: business
