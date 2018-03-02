@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Route, Switch } from 'react-router-dom';
 import BusinessListEntry from './BusinessListEntry.jsx';
 import BusinessDetail from './BusinessDetail.jsx';
+import '../styles/Profile.css';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -36,7 +37,8 @@ class Profile extends React.Component {
     } else {
       favorites = (
         <div>
-          <h1>User Favorites</h1>
+          <h3 className="favoritesTitle">Your Favorites</h3>
+          <hr className="favoritesHr" />
           {this.state.favorites.map((business, index) => {
             return (
               <BusinessListEntry handleDetail={this.renderDetail} key={index} business={business} />
@@ -67,7 +69,7 @@ class Profile extends React.Component {
 // Barebones 0 results component, will add styling at a later point
 function NoFavorites(props) {
   return (
-    <h4>User has 0 favorites</h4>
+    <h5>You currently have 0 favorites</h5>
   )
 }
 
