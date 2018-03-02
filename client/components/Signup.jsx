@@ -31,7 +31,7 @@ class Signup extends React.Component {
   }
 
   onFormSubmit(event) {
-    this.props.signupSubmit(this.state, event);
+    this.props.signupSubmit(this.state, this.props.history);
   }
 
   render () {

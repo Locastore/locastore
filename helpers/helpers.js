@@ -146,10 +146,9 @@ const parseWebsiteUrl = (data) => {
 };
 
 const createSession = function (req, res, newUser) {
-  // console.log(req,` <-- 'req' in createSession`);
-  // console.log(req.session, `<--req.session in createSession`);
   return req.session.regenerate(() => {
     req.session.user = newUser.username;
+    res.cookie('loggedIn', 'true', { maxAge: 60 * 60 * 1000 });
     res.status(200).send('Successfully logged in');
   });
 };

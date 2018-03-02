@@ -23,12 +23,17 @@ class Nav extends React.Component {
     if (this.props.loginStatus) {
       loginComponent = (
         <div>
-        <li><Link className="navItem" to="/profile">Profile</Link></li>
-        <a href='/logout' className='navItem'>Logout</a>
+          <li><Link className="navItem" to="/profile">Profile</Link></li>
+          <a href='/logout' className='navItem'>Logout</a>
         </div>
       )
     } else {
-      loginComponent = <li><Link className="navItem" to="/login">Login</Link></li>
+      loginComponent = (
+        <div>
+          <li><Link className="navItem" to="/login">Login</Link></li>
+          <li><Link className="navItem" to="/signup">Sign Up</Link></li>
+        </div>
+      )
     }
     return (
       <div>
@@ -39,7 +44,6 @@ class Nav extends React.Component {
         <div className="nav">
           <ul className="nav-list">
             {loginComponent}
-            <li><Link className="navItem" to="/signup">Sign Up</Link></li>
             <li><Link className="navItem" to="/about">About Us</Link></li>
           </ul>
         </div>

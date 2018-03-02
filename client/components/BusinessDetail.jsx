@@ -48,8 +48,10 @@ class BusinessDetail extends React.Component {
             <h4 className="hoursText" key={index}>{openTime}</h4>
           )}
           <h4><a href={`http://${this.props.business.website}`}>{this.props.business.website}</a></h4>
-          <Button onClick={() => {this.handleFavorite(this.props.business);
-                                  this.changeText(); } }>{this.state.buttonText}</Button>
+          {this.props.loginStatus &&
+            <Button onClick={() => {this.handleFavorite(this.props.business);
+                                    this.changeText(); } }>{this.state.buttonText}</Button>
+          }
         </div>
       </div>
     );

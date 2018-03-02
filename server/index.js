@@ -6,12 +6,14 @@ const path = require('path');
 const User = require('../database/index.js');
 const blacklist = require('../helpers/blacklist.js');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(cookieParser());
 app.use(session({
   secret: 'T29HJYjflK',
   resave: false,
@@ -158,6 +160,7 @@ app.get('/favorite', (req, res) => {
 
 app.get('/logout', (req, res) => {
   req.session.destroy(() => {
+    res.clearCookie('loggedIn');
     res.redirect('/login');
   });
 });
