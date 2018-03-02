@@ -10,7 +10,7 @@ let Users = new Schema ({
   email: String,
   password: String,
   isLoggedIn: {},
-  favorites: [{name: String, ID: String, url: String}]
+  favorites: [Schema.Types.Mixed]
 });
 
 let User = mongoose.model('User', Users);
@@ -61,6 +61,20 @@ const checkCredentials = function (credentials, cb) {
   })
 }
 
+const saveFavorite = function(user, business) {
+  return User.findOneAndUpdate(
+    {username: user},
+    { $push: {'favorites': business} },
+    { new: true }
+  );
+}
+
+const retrieveFavorites = function(user) {
+  return User.findOne({ username: user })
+    .select('favorites')
+    .lean()
+}
+
 const firstSixChar = function(string) {
   return string.substring(0,6);
 }
@@ -72,3 +86,5 @@ const comparePassword = function (attemptedPassword, callback ) {
 exports.addUser = addUser;
 exports.checkCredentials = checkCredentials;
 exports.comparePassword = comparePassword;
+exports.saveFavorite = saveFavorite;
+exports.retrieveFavorites = retrieveFavorites;

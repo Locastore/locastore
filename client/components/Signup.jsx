@@ -1,4 +1,6 @@
 import React from 'react';
+import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import '../styles/Signup.css';
 
 class Signup extends React.Component {
   constructor (props) {
@@ -39,26 +41,33 @@ class Signup extends React.Component {
   render () {
     return (
       <div className="signup">
-      <h3>Signup for Locastore</h3>
-      <form >
-        <label>
-          Create Username
-          <input onChange={this.onChangeUsername.bind(this)} type="text" name="username"/>
-        </label>
-        <br />
-        <label>
-          Your Email Address
-          <input onChange={this.onChangeEmail.bind(this)} type="email" name="email"/>
-        </label>
-        <br />
-        <label>
-          Create Password
-          <input onChange={this.onChangePassword.bind(this)} type="text" name="password"/>
-        </label>
-        <br />
-        <input onClick={this.onFormSubmit.bind(this)} type="submit" value="Submit"/>
-      </form>
-    </div>)
+        <div className="loginLogo">
+          <h2 className="companyName">Locastore</h2>
+        </div>
+        <div className="imgCaption">
+          <h6>Distant Lands Travel Bookstore & Outfitter</h6>
+          <h6>Pasadena, California, USA</h6>
+        </div>
+        <div className="signupForm">
+          <h3 className="joinMovement">Join the Movement</h3>
+          <Form >
+            <FormGroup>
+              <Label>Create Username</Label>
+              <Input type="text" name="username" onChange={this.onChangeUsername.bind(this)}/>
+            </FormGroup>
+            <FormGroup>
+              <Label>Create Password</Label>
+              <Input type="password" name="password" onChange={this.onChangePassword.bind(this)}/>
+            </FormGroup>
+            <FormGroup>
+              <Label>Your Email</Label>
+              <Input type="email" name="email" onChange={this.onChangeEmail.bind(this)}/>
+            </FormGroup>
+            <input onClick={this.onFormSubmit.bind(this)} type="submit" value="Sign Up"/>
+          </Form>
+        </div>
+      </div>
+    )
   }
 }
 

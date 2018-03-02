@@ -8,6 +8,7 @@ anthropologie
 apple
 apple retail
 apple store
+arby's
 aritzia
 army air force exchange service
 ashley furniture
@@ -34,6 +35,7 @@ books-a-million
 borders
 bricoman
 bricorama
+buffalo wild wings
 burlington coat factory
 cabela's
 cabela's
@@ -128,6 +130,7 @@ macy's
 macy's backstage
 marionnaud
 marshalls
+mcDonald's
 meijer
 meijer
 menards
@@ -144,6 +147,7 @@ office 1
 office depot
 officemax
 old navy
+olive garden italian restaurant
 orvis
 petco
 petsmart
@@ -154,6 +158,7 @@ publix
 ralph's grocery
 ralphs
 real
+red lobster
 red sheds
 rei
 rite aid

@@ -29,8 +29,6 @@ class Login extends React.Component {
   }
 
   onFormSubmit(event) {
-    // console.log(this.state,'<-- this.state from the react onFormSubmit to be sent via singupSubmit');
-    // let persistedEvent = event.persist();
     this.props.loginSubmit(this.state, event);
   }
 
@@ -39,7 +37,7 @@ class Login extends React.Component {
   render () {
     return (
       <div className="login">
-      <h3>Login</h3>
+      <h3>Login, Go Local</h3>
       <form >
         <label>
           Username
