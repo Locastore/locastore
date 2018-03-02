@@ -150,7 +150,7 @@ app.get('/favorite', (req, res) => {
   User.retrieveFavorites(user)
     .then((result) => {
       console.log(`Successfully retrieved favorites for ${user}`);
-      console.log(result.favorites);
+      // console.log(result.favorites);
       res.status(200).send(result.favorites);
     })
     .catch((err) => {

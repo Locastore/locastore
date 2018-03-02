@@ -4,9 +4,8 @@
   "description": "> Connecting locally-minded consumers to the businesses in their community.",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "webpack && node server/index.js",
-    "build": "webpack",
-    "server-dev": "nodemon --inspect server/index.js",
+    "start": "node server/index.js",
+    "server-dev": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "lint": "./node_modules/.bin/eslint"
   },
