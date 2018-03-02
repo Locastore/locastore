@@ -8,7 +8,7 @@ import Business from './Business.jsx';
 import Signup from './Signup.jsx';
 import Login from './Login.jsx';
 import About from './About.jsx';
-import Profile from './Profile.jsx';
+import ProfileWithRouter from './Profile.jsx';
 import $ from 'jquery';
 import '../styles/App.css';
 import cookie from 'react-cookie'
@@ -206,7 +206,9 @@ class App extends React.Component {
 
         <Route exact path='/about' component={About} />
 
-        <Route path='/profile' component={Profile} />
+        <Route path='/profile' render={ () =>
+          <ProfileWithRouter loginStatus={this.state.loggedIn} />
+        } />
 
         <Business handleDetail={this.retrieveDetail.bind(this)}
                   businesses={this.state.stores}

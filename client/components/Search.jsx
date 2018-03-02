@@ -43,7 +43,6 @@ class Search extends React.Component {
             <img className="searchImg" src='https://d30y9cdsu7xlg0.cloudfront.net/png/5592-200.png'/>
           </button>
         </div>
-      )}>
       </div>
     )
   }

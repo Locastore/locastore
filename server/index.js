@@ -144,6 +144,21 @@ app.post('/favorite', (req, res) => {
     });
 });
 
+app.post('/unfavorite', (req, res) => {
+  const { business } = req.body;
+  const { user } = req.session;
+  User.deleteFavorite(user, business)
+    .then(() => {
+      console.log(`Successfully deleted favorite for ${user}`);
+      res.status(201).send('Successfully deleted favorite from database');
+    })
+    .catch((err) => {
+      console.log('Failed to delete favorite from database');
+      console.log(err);
+      res.status(500).send('Failed to delete favorite from database');
+    });
+});
+
 app.get('/favorite', (req, res) => {
   const { user } = req.session;
   User.retrieveFavorites(user)
