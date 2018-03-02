@@ -1,5 +1,4 @@
 const request = require('request');
-const config = require('../config.js');
 const cheerio = require('cheerio');
 const { createApolloFetch } = require('apollo-fetch');
 let YELP_CATEGORIES = require('./yelpcategories.js');
@@ -60,7 +59,7 @@ const yelpSearch = (loc, keyword, resultLimit, offset) => {
       if (!options.headers) {
         options.headers = {};
       }
-      options.headers['Authorization'] = `Bearer ${config.yelpKey}`;
+      options.headers['Authorization'] = `Bearer ${process.env.yelpKey}`;
       next();
     });
 
@@ -79,7 +78,7 @@ const yelpSearchDetails = (id) => {
     const options = {
       url: `https://api.yelp.com/v3/businesses/${id}`,
       headers: {
-        Authorization: `Bearer ${config.yelpKey}`
+        Authorization: `Bearer ${process.env.yelpKey}`
       }
     };
 
@@ -139,6 +138,17 @@ const parseWebsiteUrl = (data) => {
   });
 };
 
+const createSession = function(req, res, newUser) {
+  // console.log(req,` <-- 'req' in createSession`);
+  // console.log(req.session, `<--req.session in createSession`);
+  return req.session.regenerate(function() {
+      req.session.user = newUser;
+      res.status(200).send(newUser);
+      // res.redirect('/');
+    });
+};
+
 exports.yelpSearch = yelpSearch;
 exports.yelpSearchDetails = yelpSearchDetails;
 exports.parseWebsiteUrl = parseWebsiteUrl;
+exports.createSession = createSession;
