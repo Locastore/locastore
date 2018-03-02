@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/Login.css';
 
 class Login extends React.Component {
   constructor (props) {
@@ -38,20 +39,29 @@ class Login extends React.Component {
   render () {
     return (
       <div className="login">
-      <h3>Login, Go Local</h3>
-      <form >
-        <label>
-          Username
-          <input onChange={this.onChangeUsername.bind(this)} type="text" name="username"/>
-        </label>
-        <br />
-        <label>
-          Password
-          <input onChange={this.onChangePassword.bind(this)} type="text" name="password"/>
-        </label>
-        <br />
-        <input onClick={this.onFormSubmit.bind(this)} type="submit" value="Submit"/>
-      </form>
+        <div className="loginLogo">
+          <h2 className="companyName">Locastore</h2>
+        </div>
+        <div className="imgCaption">
+          <h6>Distant Lands Travel Bookstore & Outfitter</h6>
+          <h6 className="captionLocation">Pasadena, California, USA</h6>
+        </div>
+          <div className="loginForm">
+            <h3 className="welcomeBack">Welcome Back</h3>
+            <form >
+              <label>
+                Username
+                <input onChange={this.onChangeUsername.bind(this)} type="text" name="username"/>
+              </label>
+              <br />
+              <label>
+                Password
+                <input onChange={this.onChangePassword.bind(this)} type="text" name="password"/>
+              </label>
+              <br />
+              <input onClick={this.onFormSubmit.bind(this)} type="submit" value="Submit"/>
+            </form>
+          </div>
     </div>)
   }
 }
