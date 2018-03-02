@@ -166,7 +166,7 @@ class App extends React.Component {
           <Route exact path="/" render={ () =>
             <div className="home">
               <div className="overlay">
-                <Nav />
+                <Nav loggedIn={this.state.loggedIn}/>
                 <h1 className="live-well">live well</h1>
                 <h1 className="shop-local">shop local</h1>
               </div>
