@@ -104,7 +104,3 @@ From within the root directory:
 
 View the project roadmap [here](https://github.com/Locastore/locastore/issues)
 
-
-## Acknowledgements
-
-Thanks
