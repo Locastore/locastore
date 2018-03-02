@@ -46,7 +46,7 @@ class Signup extends React.Component {
         </div>
         <div className="imgCaption">
           <h6>Distant Lands Travel Bookstore & Outfitter</h6>
-          <h6>Pasadena, California, USA</h6>
+          <h6 className="captionLocation">Pasadena, California, USA</h6>
         </div>
         <div className="signupForm">
           <h3 className="joinMovement">Join the Movement</h3>

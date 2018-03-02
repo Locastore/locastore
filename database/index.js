@@ -67,7 +67,7 @@ const checkCredentials = function (credentials, cb) {
 const saveFavorite = function(user, business) {
   return User.findOneAndUpdate(
     {username: user},
-    { $push: {'favorites': business} },
+    { $addToSet: {'favorites': business} },
     { new: true }
   );
 }
