@@ -16,13 +16,12 @@ app.use(session({
   secret: 'T29HJYjflK',
   resave: false,
   saveUninitialized: true
-}))
+}));
 
-let locationRetainer = '';
 
 app.post('/location', (req, res) => {
   const location = req.body.text;
-  locationRetainer = location.slice();
+  req.session.location = location;
   util.yelpSearch(location)
     .then((result) => {
       const businessArr = [];
@@ -53,7 +52,7 @@ app.post('/location', (req, res) => {
 
 app.post('/product', (req, res) => {
   const product = req.body.text;
-  const prodLocation = locationRetainer.slice();
+  const prodLocation = req.session.location;
   util.yelpSearch(prodLocation, product, 50)
     .then((result) => {
       const businessArr = [];
@@ -88,7 +87,7 @@ app.post('/product', (req, res) => {
     });
 });
 
-app.post('/signup', function (req, res) {
+app.post('/signup', (req, res) => {
   const newUser = req.body;
   const successResponse = function (data, string) {
     res.send(`${data}${string}`);
@@ -96,21 +95,19 @@ app.post('/signup', function (req, res) {
   User.addUser(newUser, successResponse);
 });
 
-app.post('/login', function (req, res, next) {
-  let credentials = req.body;
-  let handleVerify = function (verifyResult) {
-    if (verifyResult === true ) {
+app.post('/login', (req, res) => {
+  const credentials = req.body;
+  const handleVerify = function (verifyResult) {
+    if (verifyResult === true) {
       util.createSession(req, res, credentials);
-      // let body = credentials.username + ' authenticated';
-      // res.status(200).send(body);
-    }  else if ( verifyResult === false) {
-      res.status(400).send('Password incorrect, please try again. Check spelling and remember that username and password are case-sensitive.')
-    } else if ( verifyResult === 'unknown user') {
+    } else if (verifyResult === false) {
+      res.status(400).send('Password incorrect, please try again. Check spelling and remember that username and password are case-sensitive.');
+    } else if (verifyResult === 'unknown user') {
       res.status(400).send('No such user found, please try again. Check spelling and remember that username and password are case-sensitive.');
     } else {
       res.status(400).send(verifyResult);
     }
-  }
+  };
   User.checkCredentials(credentials, handleVerify);
 });
 
@@ -131,10 +128,10 @@ app.get('/business', (req, res) => {
 });
 
 app.post('/favorite', (req, res) => {
-  const business = req.body.business;
-  const user = 'norbie'; // temporary until we get user sessions setup
+  const { business } = req.body;
+  const { user } = req.session;
   User.saveFavorite(user, business)
-    .then((result) => {
+    .then(() => {
       console.log(`Successfully saved favorite for ${user}`);
       res.status(201).send('Successfully saved favorite to database');
     })
@@ -146,11 +143,10 @@ app.post('/favorite', (req, res) => {
 });
 
 app.get('/favorite', (req, res) => {
-  const user = 'norbie'; // temporary until we get user sessions setup
+  const { user } = req.session;
   User.retrieveFavorites(user)
     .then((result) => {
       console.log(`Successfully retrieved favorites for ${user}`);
-      // console.log(result.favorites);
       res.status(200).send(result.favorites);
     })
     .catch((err) => {
@@ -160,9 +156,17 @@ app.get('/favorite', (req, res) => {
     });
 });
 
+app.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/login');
+  });
+});
+
 app.get('/*', (req, res) => {
+  console.log(req.session);
   res.redirect('/');
 });
+
 
 const port = process.env.PORT || 3000;
 

@@ -6,7 +6,7 @@ import Search from './Search.jsx';
 import ProductSearch from './ProductSearch.jsx';
 import Business from './Business.jsx';
 import Signup from './Signup.jsx';
-import Login from './Login.jsx';
+import LoginWithRouter from './Login.jsx';
 import About from './About.jsx';
 import Profile from './Profile.jsx';
 import $ from 'jquery';
@@ -137,7 +137,7 @@ class App extends React.Component {
     });
   }
 
-  loginSubmit(login, event) {
+  loginSubmit(login, history) {
     let username = login.username;
     let password = login.password;
     axios.post('/login', {
@@ -146,15 +146,20 @@ class App extends React.Component {
     })
     .then(res => {
       if (res.status === 200 ) {
-        console.log(this.state, '<this is this.state');
         this.setState({
           loggedIn: true
-        }, alert(`You\'re logged in!`));
+        });
+        history.push('/');
       };
     })
     .catch((err) => {
+      console.log(err);
       alert('The username and/or password do match the records we have on file. Please check your spelling and try again.');
     })
+  }
+
+  handleLogout() {
+    axios.get('/logout');
   }
 
 
@@ -162,11 +167,10 @@ class App extends React.Component {
     return (
       <Router>
         <div className="app">
-
           <Route exact path="/" render={ () =>
             <div className="home">
               <div className="overlay">
-                <Nav loggedIn={this.state.loggedIn}/>
+                <Nav loginStatus={this.state.loggedIn} />
                 <h1 className="live-well">live well</h1>
                 <h1 className="shop-local">shop local</h1>
               </div>
@@ -184,7 +188,7 @@ class App extends React.Component {
           } />
 
           <Route exact path="/login" render={ () =>
-            <Login loginSubmit={this.loginSubmit.bind(this)} />
+            <LoginWithRouter loginSubmit={this.loginSubmit.bind(this)} />
           } />
 
           <Route exact path="/location" render={ () =>
