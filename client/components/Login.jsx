@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import '../styles/Login.css';
+import { withRouter } from 'react-router';
 
 class Login extends React.Component {
   constructor (props) {
@@ -32,7 +33,7 @@ class Login extends React.Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    this.props.loginSubmit(this.state, event);
+    this.props.loginSubmit(this.state, this.props.history);
   }
 
   render () {
@@ -64,4 +65,6 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const LoginWithRouter = withRouter(Login);
+
+export default LoginWithRouter;
