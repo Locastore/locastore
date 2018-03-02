@@ -4,7 +4,7 @@
   "description": "> Connecting locally-minded consumers to the businesses in their community.",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "webpack && nodemon server/index.js",
+    "start": "webpack && node server/index.js",
     "build": "webpack",
     "server-dev": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
