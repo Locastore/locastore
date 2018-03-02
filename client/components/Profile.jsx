@@ -66,10 +66,12 @@ class Profile extends React.Component {
   }
 }
 
-// Barebones 0 results component, will add styling at a later point
 function NoFavorites(props) {
   return (
-    <h5>You currently have 0 favorites</h5>
+    <div>
+      <h3 className="favoritesTitle">No current favorites - explore your city and add some!</h3>
+      <hr className="favoritesHr" />
+    </div>
   )
 }
 
