@@ -14,9 +14,11 @@
 1. [Requirements](#requirements)
 1. [Development](#development)
 1. [Installing Dependencies](#installing-dependencies)
-1. [Contributing](#contributing)
+1. [Roadmap](#roadmap)
 
 ## Usage
+
+![Locastore Landing Page](https://c1.staticflickr.com/5/4794/38769942270_458d481090.jpg)
 
 - From the landing page, a user enters their location (e.g., 'san francisco', '83642', etc.) in the search bar. The browser will display a results page with local businesses of all types from that geography.
 - To narrow the search results to a specific business type or product, the user may enter a keyword (e.g., 'flowers', 'clothing', etc.) in the 'Search Local Retailers' search bar of this results page. The browser will display local businesses from the user's geography which relate to the keyword search.
@@ -92,7 +94,7 @@ From within the root directory:
 ```sh
 1) npm install
 2) Create config.js file with your yelp API key:
-  - create a token via https://www.yelp.com/fusion
+  - create a key via https://www.yelp.com/fusion
   - exports.yelpKey = "insert key here"
 3) npm run react-dev
 4) npm run server-dev
