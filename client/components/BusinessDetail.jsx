@@ -1,13 +1,15 @@
 import React from 'react';
 import Slider from './Slider.jsx';
 import axios from 'axios';
+import { Button } from 'reactstrap';
 
 class BusinessDetail extends React.Component {
   constructor (props) {
     super(props);
     this.handleFavorite = this.handleFavorite.bind(this);
     this.state = {
-      favorited: false
+      favorited: false,
+      buttonText: 'Favorite'
     };
   }
 
@@ -21,6 +23,12 @@ class BusinessDetail extends React.Component {
     })
     .catch((err) => {
       console.log(err);
+    })
+  }
+
+  changeText() {
+    this.setState({
+      buttonText: 'Added to Favorites'
     })
   }
 
@@ -41,7 +49,8 @@ class BusinessDetail extends React.Component {
             <h4 className="hoursText" key={index}>{openTime}</h4>
           )}
           <h4><a href={`http://${this.props.business.website}`}>{this.props.business.website}</a></h4>
-          <button onClick={()=> { this.handleFavorite(this.props.business) } }>Favorite</button>
+          <Button onClick={() => {this.handleFavorite(this.props.business);
+                                  this.changeText(); } }>{this.state.buttonText}</Button>
         </div>
       </div>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import '../styles/Signup.css';
 
 class Signup extends React.Component {
@@ -63,7 +63,7 @@ class Signup extends React.Component {
               <Label>Your Email</Label>
               <Input type="email" name="email" onChange={this.onChangeEmail.bind(this)}/>
             </FormGroup>
-            <input onClick={this.onFormSubmit.bind(this)} type="submit" value="Sign Up"/>
+            <Button onClick={this.onFormSubmit.bind(this)}>Sign Up</Button>
           </Form>
         </div>
       </div>
