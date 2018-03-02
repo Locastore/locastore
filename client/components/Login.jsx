@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import '../styles/Login.css';
 
 class Login extends React.Component {
@@ -34,8 +35,6 @@ class Login extends React.Component {
     this.props.loginSubmit(this.state, event);
   }
 
-
-
   render () {
     return (
       <div className="login">
@@ -43,26 +42,25 @@ class Login extends React.Component {
           <h2 className="companyName">Locastore</h2>
         </div>
         <div className="imgCaption">
-          <h6>Distant Lands Travel Bookstore & Outfitter</h6>
-          <h6 className="captionLocation">Pasadena, California, USA</h6>
+          <h6>Common Grounds Coffee Shop</h6>
+          <h6 className="captionLocation">Spearfish, South Dakota, USA</h6>
         </div>
-          <div className="loginForm">
-            <h3 className="welcomeBack">Welcome Back</h3>
-            <form >
-              <label>
-                Username
-                <input onChange={this.onChangeUsername.bind(this)} type="text" name="username"/>
-              </label>
-              <br />
-              <label>
-                Password
-                <input onChange={this.onChangePassword.bind(this)} type="text" name="password"/>
-              </label>
-              <br />
-              <input onClick={this.onFormSubmit.bind(this)} type="submit" value="Submit"/>
-            </form>
-          </div>
-    </div>)
+        <div className="loginForm">
+          <h3 className="welcomeBack">Welcome Back</h3>
+          <Form >
+            <FormGroup>
+              <Label>Username</Label>
+              <Input type="text" name="username" onChange={this.onChangeUsername.bind(this)}/>
+            </FormGroup>
+            <FormGroup>
+              <Label>Password</Label>
+              <Input type="password" name="password" onChange={this.onChangePassword.bind(this)}/>
+            </FormGroup>
+              <Button onClick={this.onFormSubmit.bind(this)}>Login</Button>
+          </Form>
+        </div>
+      </div>
+    )
   }
 }
 
