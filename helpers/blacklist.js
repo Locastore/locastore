@@ -1,9 +1,23 @@
-const blacklist = new Set((`99 ranch market
+const blacklist = new Set((`84 Lumber
+99 ranch market
+A-Boy Plumbing & Electrical Supply
+A&W Restaurants
+Abercrombie & Fitch
+Abercrombie & Fitch Outlet
 ace hardware
+Acme Markets
 acp superstore
+Aeropostale
+Ahold Delhaize
+Albertsons
+Aldi
+ALDI Foods
+Aldo Shoes
 amazon books
 amazon bookstore
 amazon.com
+American Eagle
+American Eagle Outfitters
 anthropologie
 apple
 apple retail
@@ -12,21 +26,29 @@ arby's
 aritzia
 army air force exchange service
 ashley furniture
+asos
 at&t
+Athleta
+Aubuchon Hardware
 auchan
+Auntie Anne's
 autozone
 b&q
 babies "r" us
+Baker's Supermarkets
+Banana Republic
 barnes & noble
 barnes & noble booksellers
+Barney's
+Baskin Robbins
 bass pro shops
+Beckley Feed and Hardware Company
 bed bath & beyond
 bed bath and beyond
 best buy
 best buy mobile
 big 5 sporting goods
 big kmart
-big lots
 big lots
 bj's wholesale club
 bloomingdale's
@@ -35,109 +57,191 @@ books-a-million
 borders
 bricoman
 bricorama
+Briggs Hardware Building
+Budget Inn
 buffalo wild wings
+Builders Square
+Burger King
 burlington coat factory
 cabela's
-cabela's
+Carl's Jr.
 carmax
 carrefour
+Carrs
 carter's babies & kids
 castorama
+Chili's
+Church's Chicken
+Cinnabon
 circuit city
+City Market
+Clarks
+Cold Stone Creamery
 compusa
 conforama
 cora
 cost plus world market
 costco
-costco
 cotton on
 crate & barrel
 crossroads trading co.
+Cub
+Culver's
 curacao
+cvs
 cvs caremark
+Dairy Queen
 darty
+Days Inn
 decathlon
 designer shoe warehouse
+Diamond Cellar
 dick's sporting goods
+Dillons Supermarkets
 disney store
+Distribution America
+Do it Best
 dollar general
 dollar tree
+Domino's Pizza
 dressbarn
+Drury Inn & Suites
 dsw
 dsw designer shoe warehouse
+Dunkin' Donuts
+Dunn-Edwards Paints
 e.leclerc
+ECCO
+Elwood Adams Store
+express
 f.y.e.
+Fairfield Inn & Suites by Marriott
 family dollar
 famous footwear
+Farm Fresh
+fedex
 feu vert
+finish line
+finishline
+Five Guys
 fly
 fnac
 food 4 less
 food 4 less & foods co.
+Food Lion
+Foot Locker
 footwear etc
 forever 21
+Francesca's Collections
 frank's nursery and crafts
 fred meyer
 fry's
 fry's electronics
+Fry's Food & Drug
 galeries lafayette
 gamestop
 gander mountain
+gap
+GAP Factory Store
+Gap Outlet
+Gerbes Super Markets
+Giant Eagle
+Giant Eagle Market District
+Giant-Carlisle
+Giant-Landover
 go sport
 goodwill
 grocery outlet bargain market
 guitar center
 h.e. butt grocery company
 h&m
+Hampton Inn
+Handy Andy Home Improvement Center
+Handy Dan
+Handy Hardware
+Hannaford
 happy beds
+Harbor Freight Tools
+Hardee's
+Harley-Davidson
+Harris Teeter
 hhgregg
+Hi-School Pharmacy
+High Desert Harley-Davidson
 hipercor
 hmart
 hobby lobby
+Holiday Inn
+Hollister
+Hollister Co.
+Hollister Outlet
 home depot
 homegoods
+Hornbacher's
 ikea
 j. c. penney
+J.Crew
+J.Crew Factory
+Jay C
 jcpenney
 jcpenney optical
 jcpenney salon
+Jewel-Osco
 jo-ann stores
+Jollibee
+Jos. A. Bank
+journeys
 kate spade new york
 kaufland
+Kay Jewelers
+KFC
 king jouet
+King Soopers
 kmall24
 kmart
-kmart
+Kmart Super Center
 kohl's
-kohl's
+Krispy Kreme
 kroger
+Kroger Food and Pharmacy
+Kuehn Blacksmith Shop-Hardware Store
 l brands
+La Perla Jewelry
 la-z-boy
+Lehman's Hardware
 leroy merlin
 levi's
 levi's outlet store
 liberty interactive corporation
+Lighting One
 linens n' things
+Little Caesars
+Long John Silver's
 louis vuitton
-lowe's
 lowe's
 lucky
 lululemon
 lululemon athletica
-lululemon athletica
-macy's
+Lululemon Yoga
+luxe apparel & gift
 macy's
 macy's backstage
 marionnaud
 marshalls
+Martin's Food Markets
 mcDonald's
-meijer
+Meeker's Hardware
 meijer
 menards
 michaels
 microsoft
 microsoft store
+Motel 6
+N. P. Smith Pioneer Hardware Store
+New Balance
+Newtown Hardware House
 nike
+Nike Factory Store
 norauto
 nordstrom
 nordstrom rack
@@ -148,223 +252,139 @@ office depot
 officemax
 old navy
 olive garden italian restaurant
+Orchard Supply Hardware
 orvis
+OSH
+Owen's
+pacsun
+Panda Express
+Parr Lumber
+Pavilions
+Pay 'n Pak
+Pay Less Super Markets
+Payless Shoe Source
+Payless ShoeSource
 petco
 petsmart
-petsmart
 pier 1 imports
+Pizza Hut
+Popeyes
+Porter Hardware
 pricesmart
+PRO Group
 publix
+QFC
+Quizno's
 ralph's grocery
 ralphs
+Ramada Inn
+Randalls and Tom Thumb
 real
 red lobster
 red sheds
+Red Wing Shoe Store
+Red Wing Shoes
 rei
 rite aid
 ross dress for less
 ross stores
-safeway
+Roundy's
+Ruler Foods
 safeway
 sam's club
 save-a-lot
+Schnucks
+Scotch & Soda
+Scott's
+Scotty's Builders Supply
 sears
 sears essentials
 sears grand
 sears holdings
 sephora
+shake shack
+Shaw's and Star Market
 shiekh shoes
 shoe palace
+Shop 'n Save
+Shoppers
+SKECHERS Factory Outlet
+Smith's
 southeastern grocers
+SpartanNash
 sports authority
+Sports Basement
 sprint
 sprint store
 sprouts farmers market
 staples
 staples inc.
+starbucks
 stein mart
+Steinman Hardware Store
+Steve Madden
+Stop & Shop
+Subway
 suitsupply
+Super 8
 super kmart
+Superdry
 supertarget
+SuperValu
+swatch
 t-mobile
+Taco Bell
 target
 target greatland
 target stores
+TCBY
 tesco
 the container store
 the gap
 the home depot
 the kroger company
 the lego store
+The North Face
+the ups store
 the warehouse group
+Tim Hortons
 tj maxx
+TJ Maxx Home Goods
 tjx
+topshop
 toys 'r us
 toys "r" us
 toys r us
 trader joe's
+True Value
+Tupelo Hardware
 ulta beauty
 uniqlo
+United Hardware Distributing Company
+United Supermarkets and Market Street
 urban outfitters
+Val-Test Distributors
+Valu Home Centers
 verizon
 victoria's secret
+Vonnegut Hardware Company
 vons
 wal-mart
 walgreens
 walgreens boots alliance inc.
 walmart
-walmart
 walmart neighborhood market
 walmart supercenter
-whole foods market
-wss
-yellow sheds
-luxe apparel & gift
-Payless ShoeSource
-Nike Factory Store
-SKECHERS Factory Outlet
-Clarks
-Foot Locker
-Red Wing Shoe Store
-Red Wing Shoes
-Payless Shoe Source
-ECCO
-The North Face
-Aldo Shoes
-Steve Madden
-Sports Basement
-finish line
-finishline
-Banana Republic
-gap
-GAP Factory Store
-American Eagle Outfitters
-American Eagle
-J.Crew
-Scotch & Soda
-journeys
-zumiez
-starbucks
-express
-swatch
-the ups store
-fedex
-cvs
-Hollister Co.
-Abercrombie & Fitch
-Hollister
-pacsun
-topshop
-zara
-forever 21
-Aeropostale
-Barney's
-Bloomingdale's
-Lululemon Yoga
-Athleta
-asos
-J.Crew Factory
-Superdry
-Hollister Outlet
-Abercrombie & Fitch Outlet
-Gap Outlet
-OSH
-Orchard Supply Hardware
-The Home Depot
-Home Depot
-Ace Hardware
-84 Lumber
-A-Boy Plumbing & Electrical Supply
-Ace Hardware
-Aubuchon Hardware
-Beckley Feed and Hardware Company
-Briggs Hardware Building
-Builders Square
-Distribution America
-Do it Best
-Elwood Adams Store
-Handy Andy Home Improvement Center
-Handy Dan
-Handy Hardware
-Hi-School Pharmacy
-The Home Depot
-Kuehn Blacksmith Shop-Hardware Store
-Lehman's Hardware
-Lighting One
-Lowe's
-Meeker's Hardware
-Menards
-N. P. Smith Pioneer Hardware Store
-Newtown Hardware House
-Orchard Supply Hardware
-Parr Lumber
-Pay 'n Pak
-Porter Hardware
-PRO Group
-Scotty's Builders Supply
-Steinman Hardware Store
-True Value
-Tupelo Hardware
-United Hardware Distributing Company
-Val-Test Distributors
-Valu Home Centers
-Vonnegut Hardware Company
-Yardbirds Home Center
-Harbor Freight Tools
-Dunn-Edwards Paints
-Albertsons
-Acme Markets
-Carrs
-Jewel-Osco
-Lucky
-Pavilions
-Randalls and Tom Thumb
-Safeway
-Shaw's and Star Market
-United Supermarkets and Market Street
-Vons
-Aldi
-Costco
-Ahold Delhaize
-Food Lion
-Hannaford
-Giant-Carlisle
-Giant-Landover
-Stop & Shop
-Martin's Food Markets
-Kmart Super Center
-Kroger
-Baker's Supermarkets
-City Market
-Dillons Supermarkets
-Food 4 Less
-Fred Meyer
-Fry's Food & Drug
-Gerbes Super Markets
-Harris Teeter
-Jay C
-King Soopers
-Owen's
-Pay Less Super Markets
-QFC
-Ralphs
-Roundy's
-Ruler Foods
-Scott's
-Smith's
-Schnucks
-SpartanNash
-SuperValu
-Save-A-Lot
-Cub
-Farm Fresh
-Hornbacher's
-Shop 'n Save
-Shoppers
-SuperTarget
-Trader Joe's
-Walmart
+Wendy's
 Whole Foods
+whole foods market
+Wingstop
+WingStreet
+wss
+Yardbirds Home Center
+yellow sheds
+zara
+zumiez
 `.toLowerCase()).split('\n'));
 
 module.exports = blacklist;
