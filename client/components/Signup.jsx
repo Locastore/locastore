@@ -31,12 +31,8 @@ class Signup extends React.Component {
   }
 
   onFormSubmit(event) {
-    // console.log(this.state,'<-- this.state from the react onFormSubmit to be sent via singupSubmit');
-    // let persistedEvent = event.persist();
     this.props.signupSubmit(this.state, event);
   }
-
-
 
   render () {
     return (
