@@ -149,8 +149,7 @@ const createSession = function(req, res, newUser) {
   // console.log(req.session, `<--req.session in createSession`);
   return req.session.regenerate(function() {
       req.session.user = newUser;
-      res.status(200).send(newUser);
-      // res.redirect('/');
+      res.status(200).send('Session created');
     });
 };
 

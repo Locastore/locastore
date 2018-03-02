@@ -116,6 +116,8 @@ class App extends React.Component {
     })
     .then((res) => {
       console.log(res.data);
+      // TODO: Refactor this to use the index property of businesses instead
+      // of this for loop
       for (let i = 0; i < this.state.stores.length; i++) {
         let store = this.state.stores[i];
         if (store.place_id === placeId) {
