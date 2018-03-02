@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import '../styles/Login.css';
-import { withRouter } from 'react-router';
 
 class Login extends React.Component {
   constructor (props) {
@@ -65,6 +64,4 @@ class Login extends React.Component {
   }
 }
 
-const LoginWithRouter = withRouter(Login);
-
-export default LoginWithRouter;
+export default Login;

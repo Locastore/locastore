@@ -31,7 +31,12 @@ class Business extends React.Component {
           <Route path="/location/:place" render={ (props) =>
             this.props.businesses.map((business, index) => {
               if (business.place_id === props.match.params.place) {
-                return (<BusinessDetail key={index} match={props.match} business={business} />)
+                return (<BusinessDetail
+                          key={index}
+                          match={props.match}
+                          business={business}
+                          loginStatus={this.props.loginStatus}
+                        />)
               }
             })
           } />
