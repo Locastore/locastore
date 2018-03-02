@@ -4,7 +4,12 @@ const bcrypt = require('bcrypt-nodejs');
 const MONGODB_URI = process.env.MONGO_URI || 'localhost/locastore';
 const DB_USER = process.env.DB_USER || '';
 const DB_PASSWORD = process.env.DB_PASSWORD || '';
-mongoose.connect(`mongodb://${DB_USER}:${DB_PASSWORD}@${MONGODB_URI}`);
+if (DB_USER === '' && DB_PASSWORD === '') {
+  var CONNECT_STRING = `mongodb://${MONGODB_URI}`;
+} else {
+  var CONNECT_STRING = `mongodb://${DB_USER}:${DB_PASSWORD}@${MONGODB_URI}`;
+}
+mongoose.connect(`${CONNECT_STRING}`);
 
 const Schema = mongoose.Schema;
 
