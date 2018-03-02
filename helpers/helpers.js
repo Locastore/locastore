@@ -2,6 +2,12 @@ const request = require('request');
 const cheerio = require('cheerio');
 const { createApolloFetch } = require('apollo-fetch');
 let YELP_CATEGORIES = require('./yelpcategories.js');
+try {
+  const config = require('../config.js');
+  var yelpKey = config.yelpKey;
+} catch(ex) {
+  var yelpKey = process.env.yelpKey;
+}
 
 // Convert military time to standard format
 const convertTime = (time) => {
@@ -59,7 +65,7 @@ const yelpSearch = (loc, keyword, resultLimit, offset) => {
       if (!options.headers) {
         options.headers = {};
       }
-      options.headers['Authorization'] = `Bearer ${process.env.yelpKey}`;
+      options.headers['Authorization'] = `Bearer ${yelpKey}`;
       next();
     });
 
@@ -78,7 +84,7 @@ const yelpSearchDetails = (id) => {
     const options = {
       url: `https://api.yelp.com/v3/businesses/${id}`,
       headers: {
-        Authorization: `Bearer ${process.env.yelpKey}`
+        Authorization: `Bearer ${yelpKey}`
       }
     };
 
