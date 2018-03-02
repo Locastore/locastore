@@ -13,40 +13,98 @@
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
-1. [Team](#team)
+1. [Installing Dependencies](#installing-dependencies)
 1. [Contributing](#contributing)
 
 ## Usage
 
-> Some usage instructions
+- From the landing page, a user enters their location (e.g., 'san francisco', '83642', etc.) in the search bar. The browser will display a results page with local businesses of all types from that geography.
+- To narrow the search results to a specific business type or product, the user may enter a keyword (e.g., 'flowers', 'clothing', etc.) in the 'Search Local Retailers' search bar of this results page. The browser will display local businesses from the user's geography which relate to the keyword search.
+- The user may click on a business that interests them to view details (hours, website, and photos).
+- If the user has set up a profile and logged in, the user may click on a 'Favorite' button to add a business to their list of favorite businesses, which can be viewed from the home page under 'Profile'.
+- When a user is done browsing, they can logout.
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+In addition to the dependencies listed in package.json, you will need recent versions of node and mongoDB installed on your computer.
+
+Dependencies
+
+```
+  "apollo-fetch": "^0.7.0",
+  "axios": "^0.18.0",
+  "bcrypt-nodejs": "0.0.3",
+  "bcryptjs": "^2.4.3",
+  "body-parser": "^1.18.2",
+  "boostrap": "^2.0.0",
+  "bootstrap": "^4.0.0-alpha.6",
+  "cheerio": "^1.0.0-rc.2",
+  "cors": "^2.8.4",
+  "express": "^4.16.2",
+  "express-session": "^1.15.6",
+  "install": "^0.10.4",
+  "jquery": "^3.3.1",
+  "mongoose": "^5.0.6",
+  "npm": "^5.6.0",
+  "react": "^16.2.0",
+  "react-dom": "^16.2.0",
+  "react-places-autocomplete": "^6.1.2",
+  "react-router": "^4.2.0",
+  "react-router-dom": "^4.2.2",
+  "react-transition-group": "^2.2.1",
+  "reactstrap": "^5.0.0-beta",
+  "request": "^2.83.0"
+```
 
 ## Development
+
+Dev Dependencies
+
+```
+  "babel-cli": "^6.26.0",
+  "babel-core": "^6.26.0",
+  "babel-loader": "^7.1.2",
+  "babel-plugin-transform-object-rest-spread": "^6.26.0",
+  "babel-preset-env": "^1.6.1",
+  "babel-preset-es2015": "^6.24.1",
+  "babel-preset-react": "^6.24.1",
+  "babel-preset-stage-0": "^6.24.1",
+  "babel-register": "^6.26.0",
+  "css-loader": "^0.28.9",
+  "eslint": "^4.18.1",
+  "eslint-config-airbnb": "^16.1.0",
+  "eslint-plugin-import": "^2.8.0",
+  "eslint-plugin-jsx-a11y": "^6.0.3",
+  "eslint-plugin-react": "^7.7.0",
+  "file-loader": "^1.1.9",
+  "less": "^2.7.3",
+  "less-loader": "^4.0.5",
+  "style-loader": "^0.20.2",
+  "url-loader": "^0.6.2",
+  "webpack": "^3.11.0",
+  "webpack-dev-server": "^2.11.1"
+```
 
 ### Installing Dependencies
 
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
-npm install
-bower install
+1) npm install
+2) Create config.js file with your yelp API key:
+  - create a token via https://www.yelp.com/fusion
+  - exports.yelpKey = "insert key here"
+3) npm run react-dev
+4) npm run server-dev
+5) sudo mongod
+6) mongo 127.0.0.1 --port 27017
 ```
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the project roadmap [here](https://github.com/Locastore/locastore/issues)
 
 
-## Contributing
+## Acknowledgements
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+Thanks
