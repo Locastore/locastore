@@ -7,6 +7,12 @@ const User = require('../database/index.js');
 const blacklist = require('../helpers/blacklist.js');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').load();
+}
 
 const app = express();
 
@@ -19,7 +25,59 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+app.use(passport.initialize());
 
+passport.use(new GoogleStrategy(
+  {
+    clientID: process.env.googleClientID,
+    clientSecret: process.env.googleClientSecret,
+    callbackURL: 'http://127.0.0.1:3000/auth/google/callback'
+  },
+  (token, tokenSecret, profile, done) => {
+    User.Model.findOne({ username: profile.id }, (err, user) => {
+      if (err) {
+        console.log(err);
+        return done(err);
+      }
+      if (user) {
+        return done(null, user);
+      }
+      const newUser = new User.Model();
+      newUser.username = profile.id;
+      newUser.email = profile.emails[0].value;
+      newUser.save((error) => {
+        if (err) {
+          console.log('Failed to create user with google oauth');
+          console.log(error);
+        }
+        return done(null, newUser);
+      });
+    });
+  }
+));
+
+passport.serializeUser((user, done) => {
+  done(null, user.username);
+});
+
+
+passport.deserializeUser((id, done) => {
+  User.Model.findById(id, (err, user) => {
+    done(err, user);
+  });
+});
+
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
+  (req, res) => {
+    req.session.user = req.session.passport.user;
+    res.cookie('loggedIn', 'true', { maxAge: 60 * 60 * 1000 });
+    res.redirect('/');
+  }
+);
 
 app.post('/location', (req, res) => {
   const location = req.body.text;
@@ -176,6 +234,7 @@ app.get('/favorite', (req, res) => {
 app.get('/logout', (req, res) => {
   req.session.destroy(() => {
     res.clearCookie('loggedIn');
+    req.logout();
     res.redirect('/login');
   });
 });

@@ -41,12 +41,15 @@ Dependencies
   "cheerio": "^1.0.0-rc.2",
   "cookie-parser": "^1.4.3",
   "cors": "^2.8.4",
+  "dotenv": "^5.0.1",
   "express": "^4.16.2",
   "express-session": "^1.15.6",
   "install": "^0.10.4",
   "jquery": "^3.3.1",
   "mongoose": "^5.0.6",
   "npm": "^5.6.0",
+  "passport": "^0.4.0",
+  "passport-google-oauth": "^1.0.0",
   "react": "^16.2.0",
   "react-cookie": "^1.0.5",
   "react-dom": "^16.2.0",
@@ -93,9 +96,12 @@ From within the root directory:
 
 ```sh
 1) npm install
-2) Create config.js file with your yelp API key:
-  - create a key via https://www.yelp.com/fusion
-  - exports.yelpKey = "insert key here"
+2) Create .env file with your yelp API key and google OAuth keys:
+  - create a yelp API key via https://www.yelp.com/fusion
+  - create google OAuth clientID/secret via https://console.developers.google.com/apis/dashboard -> credentials -> create credentials -> OAuth client ID
+  - yelpKey="<yelp API key>"
+  - googleClientID="<google client ID>"
+  - googleClientSecret="<google client secret>"
 3) npm run react-dev
 4) npm run server-dev
 5) sudo mongod
