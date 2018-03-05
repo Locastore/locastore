@@ -57,6 +57,10 @@ class Login extends React.Component {
               <Input type="password" name="password" onChange={this.onChangePassword.bind(this)}/>
             </FormGroup>
               <Button onClick={this.onFormSubmit.bind(this)}>Login</Button>
+              <Button href='/auth/google' className='googleButton'>
+                <img src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg' className='icon'/>
+                <span className='buttonText'>Sign in With Google</span>
+              </Button>
           </Form>
         </div>
       </div>

@@ -60,6 +60,10 @@ class Signup extends React.Component {
               <Input type="email" name="email" onChange={this.onChangeEmail.bind(this)}/>
             </FormGroup>
             <Button onClick={this.onFormSubmit.bind(this)}>Sign Up</Button>
+            <Button href='/auth/google' className='googleButton'>
+              <img src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg' className='icon'/>
+              <span className='buttonText'>Sign up With Google</span>
+            </Button>
           </Form>
         </div>
       </div>

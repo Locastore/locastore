@@ -98,6 +98,7 @@ const comparePassword = function (attemptedPassword, callback ) {
   bcrypt.compare()
 }
 
+exports.Model = User;
 exports.addUser = addUser;
 exports.checkCredentials = checkCredentials;
 exports.comparePassword = comparePassword;
