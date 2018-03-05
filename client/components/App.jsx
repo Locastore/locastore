@@ -14,6 +14,7 @@ import '../styles/App.css';
 import cookie from 'react-cookie'
 import { Alert } from 'reactstrap';
 import { withRouter } from 'react-router';
+import SmallNav from './SmallNav.jsx';
 import {
   BrowserRouter as Router,
   Route,

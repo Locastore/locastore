@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import BusinessListEntry from './BusinessListEntry.jsx';
 import BusinessDetail from './BusinessDetail.jsx';
 import { withRouter } from 'react-router';
+import SmallNav from './SmallNav.jsx';
 import '../styles/Profile.css';
 
 class Profile extends React.Component {
@@ -54,6 +55,7 @@ class Profile extends React.Component {
     }
     return (
       <div>
+        <SmallNav />
         <Switch>
           <Route path="/profile/:place" render={ (props) =>
             this.state.favorites.map((business, index) => {
