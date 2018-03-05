@@ -102,6 +102,7 @@ From within the root directory:
   - yelpKey="<yelp API key>"
   - googleClientID="<google client ID>"
   - googleClientSecret="<google client secret>"
+  - googleCallbackURL="http://127.0.0.1:3000/auth/google/callback"
 3) npm run react-dev
 4) npm run server-dev
 5) sudo mongod
