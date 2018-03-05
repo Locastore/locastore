@@ -55,7 +55,6 @@ class Profile extends React.Component {
     }
     return (
       <div>
-        <SmallNav />
         <Switch>
           <Route path="/profile/:place" render={ (props) =>
             this.state.favorites.map((business, index) => {
@@ -70,7 +69,10 @@ class Profile extends React.Component {
             })
           } />
           <Route path="/profile" render={ () =>
-            <div>{favorites}</div>
+            <div>
+              <SmallNav />
+              <div>{favorites}</div>
+            </div>
           } />
         </Switch>
       </div>
