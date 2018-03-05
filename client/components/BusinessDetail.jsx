@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from './Slider.jsx';
 import axios from 'axios';
+import SmallNav from './SmallNav.jsx';
 import { Button } from 'reactstrap';
 
 class BusinessDetail extends React.Component {
@@ -82,6 +83,7 @@ class BusinessDetail extends React.Component {
     }
     return (
       <div>
+        <SmallNav />
         <div>
           <h2 className="bizTitle">{this.props.business.name}</h2>
         </div>
