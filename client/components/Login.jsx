@@ -11,6 +11,10 @@ class Login extends React.Component {
       email: '',
       password: ''
     }
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onchangeEmail = this.onChangeEmail.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   onChangeUsername (event) {
@@ -51,13 +55,21 @@ class Login extends React.Component {
           <Form >
             <FormGroup>
               <Label>Username</Label>
-              <Input type="text" name="username" onChange={this.onChangeUsername.bind(this)}/>
+              <Input
+                type="text"
+                name="username"
+                onChange={this.onChangeUsername}
+              />
             </FormGroup>
             <FormGroup>
               <Label>Password</Label>
-              <Input type="password" name="password" onChange={this.onChangePassword.bind(this)}/>
+              <Input
+                type="password"
+                name="password"
+                onChange={this.onChangePassword}
+              />
             </FormGroup>
-              <Button onClick={this.onFormSubmit.bind(this)}>Login</Button>
+              <Button onClick={this.onFormSubmit}>Login</Button>
           </Form>
         </div>
       </div>
