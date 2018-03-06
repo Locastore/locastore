@@ -47,7 +47,6 @@ class Nav extends React.Component {
         <div className="nav">
           <ul className="nav-list">
             {loginComponent}
-            <li><Link className="navItem" to="/signup">Sign Up</Link></li>
             <li><Link className="navItem" to="/about">About Us</Link></li>
           </ul>
         </div>
