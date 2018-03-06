@@ -24,26 +24,17 @@ class Nav extends React.Component {
       loginComponent = (
         <div>
         <li>
-          <Link
-            className="navItem"
-            to="/profile"
-          >
-            Profile
-          </Link>
+          <Link className="navItem" to="/profile">Profile</Link>
         </li>
         <a href='/logout' className='navItem'>Logout</a>
         </div>
       )
     } else {
-      loginComponent =
+      loginComponent = (
         <li>
-          <Link
-            className="navItem"
-            to="/login"
-          >
-            Login
-          </Link>
+          <Link className="navItem" to="/login">Login</Link>
         </li>
+      )
     }
     return (
       <div>
@@ -55,20 +46,10 @@ class Nav extends React.Component {
           <ul className="nav-list">
             {loginComponent}
             <li>
-              <Link
-                className="navItem"
-                to="/signup"
-              >
-                Sign Up
-              </Link>
+              <Link className="navItem" to="/signup">Sign Up</Link>
             </li>
             <li>
-              <Link
-                className="navItem"
-                to="/about"
-              >
-                About Us
-              </Link>
+              <Link className="navItem" to="/about">About Us</Link>
             </li>
           </ul>
         </div>
