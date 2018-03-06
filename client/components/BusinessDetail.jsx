@@ -75,9 +75,17 @@ class BusinessDetail extends React.Component {
   render() {
     let favoriteComponent = null;
     if (this.props.loginStatus && this.state.favorited) {
-      favoriteComponent = <Button onClick={() => {this.handleUnfavorite(this.props.business) }}>Unfavorite</Button>
+      favoriteComponent =
+        <Button
+          onClick={() => {this.handleUnfavorite(this.props.business)}}>
+          Unfavorite
+        </Button>
     } else if (this.props.loginStatus) {
-      favoriteComponent = <Button onClick={() => { this.handleFavorite(this.props.business) }}>Favorite</Button>
+      favoriteComponent =
+        <Button
+          onClick={() => {this.handleFavorite(this.props.business)}}>
+          Favorite
+        </Button>
     } else {
       favoriteComponent = <span></span>
     }
@@ -94,9 +102,14 @@ class BusinessDetail extends React.Component {
           <h4 className="bodyText">{this.props.business.address}</h4>
           <h4 className="bodyText">Phone: {this.props.business.phone}</h4>
           <h4 className="bodyText">Business Hours:</h4>
+
           {this.props.business.hours.map((openTime, index) =>
-            <h4 className="hoursText" key={index}>{openTime}</h4>
+            <h4 className="hoursText"
+                key={index}>
+                {openTime}
+            </h4>
           )}
+
           <h4><a href={`http://${this.props.business.website}`}>{this.props.business.website}</a></h4>
           {favoriteComponent}
         </div>
