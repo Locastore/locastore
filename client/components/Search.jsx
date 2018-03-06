@@ -11,11 +11,15 @@ class Search extends React.Component {
       address: ''
     }
     this.search = this.search.bind(this);
-    this.onChange = (term) => this.setState({ term })
+    this.onChange = this.onChange.bind(this);
   }
 
   search() {
     this.props.onSearch(this.state.term);
+  }
+
+  onChange(term) {
+    this.setState({ term });
   }
 
   render() {

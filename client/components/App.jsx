@@ -9,12 +9,12 @@ import Signup from './Signup.jsx';
 import Login from './Login.jsx';
 import About from './About.jsx';
 import ProfileWithRouter from './Profile.jsx';
+import SmallNav from './SmallNav.jsx';
 import $ from 'jquery';
 import '../styles/App.css';
 import cookie from 'react-cookie'
 import { Alert } from 'reactstrap';
 import { withRouter } from 'react-router';
-import SmallNav from './SmallNav.jsx';
 import {
   BrowserRouter as Router,
   Route,
@@ -34,6 +34,11 @@ class App extends React.Component {
     }
 
     this.onDismiss = this.onDismiss.bind(this);
+    this.search = this.search.bind(this);
+    this.signupSubmit = this.signupSubmit.bind(this);
+    this.loginSubmit = this.loginSubmit.bind(this);
+    this.prodsearch = this.prodsearch.bind(this);
+    this.retrieveDetail = this.retrieveDetail.bind(this);
   }
 
   componentDidMount() {
@@ -58,7 +63,6 @@ class App extends React.Component {
         this.setState({ alertVisible: true });
       } else {
         const stores = res.data;
-        console.log(stores);
         this.setState({stores});
         this.props.history.push('/location');
       }
@@ -85,7 +89,6 @@ class App extends React.Component {
         });
       } else {
         const stores = res.data;
-        console.log(stores);
         this.setState({
           stores: stores,
           loading: false
@@ -126,9 +129,6 @@ class App extends React.Component {
       }
     })
     .then((res) => {
-      console.log(res.data);
-      // TODO: Refactor this to use the index property of businesses instead
-      // of this for loop
       for (let i = 0; i < this.state.stores.length; i++) {
         let store = this.state.stores[i];
         if (store.place_id === placeId) {
@@ -177,44 +177,68 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <Route exact path="/" render={ () =>
-          <div className="home">
-            <div className="overlay">
-              <Nav loginStatus={this.state.loggedIn} />
-              <h1 className="live-well">live well</h1>
-              <h1 className="shop-local">shop local</h1>
-            </div>
-              <div className='col-sm-4 offset-sm-5'>
-                <Alert align='center' color="danger" isOpen={this.state.alertVisible} toggle={this.onDismiss}>
-                  Search term yielded no results
-                </Alert>
+        <Route
+          exact path="/"
+          render={ () =>
+            <div className="home">
+              <div className="overlay">
+                <Nav loginStatus={this.state.loggedIn} />
+                <h1 className="live-well">live well</h1>
+                <h1 className="shop-local">shop local</h1>
               </div>
-              <Search onSearch={this.search.bind(this)}/>
-          </div>
-        } />
+                <div className="col-sm-4 offset-sm-5">
+                  <Alert
+                    align="center"
+                    color="danger"
+                    isOpen={this.state.alertVisible}
+                    toggle={this.onDismiss}
+                  >
+                    Search term yielded no results
+                  </Alert>
+                </div>
+                <Search onSearch={this.search}/>
+            </div>
+          }
+        />
 
-        <Route exact path="/signup" render={ () =>
-          <Signup signupSubmit={this.signupSubmit.bind(this)}/>
-        } />
+        <Route
+          exact path="/signup"
+          render={ () =>
+            <Signup signupSubmit={this.signupSubmit}/>
+          }
+        />
 
-        <Route exact path="/login" render={ () =>
-          <Login loginSubmit={this.loginSubmit.bind(this)} />
-        } />
+        <Route
+          exact path="/login"
+          render={ () =>
+            <Login loginSubmit={this.loginSubmit} />
+          }
+        />
 
-        <Route exact path="/location" render={ () =>
-          <ProductSearch onSearch={this.prodsearch.bind(this)}/>
-        } />
+        <Route
+          exact path="/location"
+          render={ () =>
+            <ProductSearch onSearch={this.prodsearch}/>
+          }
+        />
 
-        <Route exact path='/about' component={About} />
+        <Route
+          exact path='/about'
+          component={About}
+        />
 
-        <Route path='/profile' render={ () =>
-          <ProfileWithRouter loginStatus={this.state.loggedIn} />
-        } />
+        <Route
+          path='/profile'
+          render={ () =>
+            <ProfileWithRouter loginStatus={this.state.loggedIn} />
+          }
+        />
 
-        <Business handleDetail={this.retrieveDetail.bind(this)}
-                  businesses={this.state.stores}
-                  loading={this.state.loading}
-                  loginStatus={this.state.loggedIn}
+        <Business
+          handleDetail={this.retrieveDetail}
+          businesses={this.state.stores}
+          loading={this.state.loading}
+          loginStatus={this.state.loggedIn}
         />
 
       </div>
