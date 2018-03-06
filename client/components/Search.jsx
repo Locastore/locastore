@@ -14,8 +14,8 @@ class Search extends React.Component {
     this.onChange = (term) => this.setState({ term })
   }
 
-  search(history) {
-    this.props.onSearch(this.state.term, history);
+  search() {
+    this.props.onSearch(this.state.term);
   }
 
   render() {
@@ -33,19 +33,16 @@ class Search extends React.Component {
 
     return (
       <div className="search">
-        <Route render={({history}) => (
-          <div>
-            <PlacesAutocomplete
-              classNames={inputClasses}
-              onEnterKeyDown={() => this.search(history)}
-              inputProps={inputProps}
-            />
-            <button className="locationButton" type="button" onClick={() => { this.search(history) }}>
-              <img className="searchImg" src='https://d30y9cdsu7xlg0.cloudfront.net/png/5592-200.png'/>
-            </button>
-          </div>
-        )}>
-        </Route>
+        <div>
+          <PlacesAutocomplete
+            classNames={inputClasses}
+            onEnterKeyDown={this.search}
+            inputProps={inputProps}
+          />
+          <button className="locationButton" type="button" onClick={this.search}>
+            <img className="searchImg" src='https://d30y9cdsu7xlg0.cloudfront.net/png/5592-200.png'/>
+          </button>
+        </div>
       </div>
     )
   }

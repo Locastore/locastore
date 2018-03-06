@@ -3,13 +3,6 @@ const cheerio = require('cheerio');
 const { createApolloFetch } = require('apollo-fetch');
 let YELP_CATEGORIES = require('./yelpcategories.js');
 
-try {
-  const config = require('../config.js');
-  var yelpKey = config.yelpKey;
-} catch (ex) {
-  var yelpKey = process.env.yelpKey;
-}
-
 // Convert military time to standard format
 const convertTime = (time) => {
   const hours = Number(time[0] + time[1]);
@@ -66,7 +59,7 @@ const yelpSearch = (loc, keyword, resultLimit, offset) => {
       if (!options.headers) {
         options.headers = {};
       }
-      options.headers['Authorization'] = `Bearer ${yelpKey}`;
+      options.headers['Authorization'] = `Bearer ${process.env.yelpKey}`;
       next();
     });
 
@@ -85,7 +78,7 @@ const yelpSearchDetails = (id) => {
     const options = {
       url: `https://api.yelp.com/v3/businesses/${id}`,
       headers: {
-        Authorization: `Bearer ${yelpKey}`
+        Authorization: `Bearer ${process.env.yelpKey}`
       }
     };
 
@@ -145,11 +138,10 @@ const parseWebsiteUrl = (data) => {
   });
 };
 
-const createSession = function (req, res, newUser) {
-  // console.log(req,` <-- 'req' in createSession`);
-  // console.log(req.session, `<--req.session in createSession`);
+const createSession = (req, res, newUser) => {
   return req.session.regenerate(() => {
     req.session.user = newUser.username;
+    res.cookie('loggedIn', 'true', { maxAge: 60 * 60 * 1000 });
     res.status(200).send('Successfully logged in');
   });
 };

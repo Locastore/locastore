@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import '../styles/Login.css';
-import { withRouter } from 'react-router';
 
 class Login extends React.Component {
   constructor (props) {
@@ -70,6 +69,10 @@ class Login extends React.Component {
               />
             </FormGroup>
               <Button onClick={this.onFormSubmit}>Login</Button>
+              <Button href='/auth/google' className='googleButton'>
+                <img src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg' className='icon'/>
+                <span className='buttonText'>Sign in With Google</span>
+              </Button>
           </Form>
         </div>
       </div>
@@ -77,6 +80,4 @@ class Login extends React.Component {
   }
 }
 
-const LoginWithRouter = withRouter(Login);
-
-export default LoginWithRouter;
+export default Login;

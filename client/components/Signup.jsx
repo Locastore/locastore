@@ -35,7 +35,7 @@ class Signup extends React.Component {
   }
 
   onFormSubmit(event) {
-    this.props.signupSubmit(this.state, event);
+    this.props.signupSubmit(this.state, this.props.history);
   }
 
   render () {
@@ -76,6 +76,10 @@ class Signup extends React.Component {
               />
             </FormGroup>
             <Button onClick={this.onFormSubmit}>Sign Up</Button>
+            <Button href='/auth/google' className='googleButton'>
+              <img src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg' className='icon'/>
+              <span className='buttonText'>Sign up With Google</span>
+            </Button>
           </Form>
         </div>
       </div>

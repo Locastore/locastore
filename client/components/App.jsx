@@ -6,12 +6,15 @@ import Search from './Search.jsx';
 import ProductSearch from './ProductSearch.jsx';
 import Business from './Business.jsx';
 import Signup from './Signup.jsx';
-import LoginWithRouter from './Login.jsx';
+import Login from './Login.jsx';
 import About from './About.jsx';
-import Profile from './Profile.jsx';
+import ProfileWithRouter from './Profile.jsx';
 import $ from 'jquery';
 import '../styles/App.css';
+import cookie from 'react-cookie'
 import { Alert } from 'reactstrap';
+import { withRouter } from 'react-router';
+import SmallNav from './SmallNav.jsx';
 import {
   BrowserRouter as Router,
   Route,
@@ -33,11 +36,19 @@ class App extends React.Component {
     this.onDismiss = this.onDismiss.bind(this);
   }
 
+  componentDidMount() {
+    if (cookie.load('loggedIn') === 'true' && this.state.loggedIn === false) {
+      this.setState({
+        loggedIn: true
+      });
+    }
+  }
+
   onDismiss() {
     this.setState({ alertVisible: false });
   }
 
-  search(location, history) {
+  search(location) {
     axios.post('/location', {
       text: `${location}`
     })
@@ -49,7 +60,7 @@ class App extends React.Component {
         const stores = res.data;
         console.log(stores);
         this.setState({stores});
-        history.push('/location');
+        this.props.history.push('/location');
       }
     })
     .catch(err => {
@@ -86,7 +97,7 @@ class App extends React.Component {
     })
   }
 
-  signupSubmit(signup, event) {
+  signupSubmit(signup) {
     let username = signup.username;
     let email = signup.email;
     let password = signup.password;
@@ -96,15 +107,15 @@ class App extends React.Component {
       password: `${password}`
     })
     .then(res => {
-      alert(res.data);
-      axios.get('/')
+      this.props.history.push('/login');
     })
     .catch((err) => {
       alert(err);
     })
   }
 
-  retrieveDetail(placeId, history) {
+
+  retrieveDetail(placeId) {
     this.setState({
       loading: true
     });
@@ -127,7 +138,7 @@ class App extends React.Component {
           this.setState({
             loading: false
           });
-          history.push(`/location/${placeId}`);
+          this.props.history.push(`/location/${placeId}`);
 
         }
       }
@@ -137,7 +148,7 @@ class App extends React.Component {
     });
   }
 
-  loginSubmit(login, history) {
+  loginSubmit(login) {
     let username = login.username;
     let password = login.password;
     axios.post('/login', {
@@ -149,7 +160,7 @@ class App extends React.Component {
         this.setState({
           loggedIn: true
         });
-        history.push('/');
+        this.props.history.push('/');
       };
     })
     .catch((err) => {
@@ -165,49 +176,52 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
-        <div className="app">
-          <Route exact path="/" render={ () =>
-            <div className="home">
-              <div className="overlay">
-                <Nav loginStatus={this.state.loggedIn} />
-                <h1 className="live-well">live well</h1>
-                <h1 className="shop-local">shop local</h1>
-              </div>
-                <div className='col-sm-4 offset-sm-5'>
-                  <Alert align='center' color="danger" isOpen={this.state.alertVisible} toggle={this.onDismiss}>
-                    Search term yielded no results
-                  </Alert>
-                </div>
-                <Search onSearch={this.search.bind(this)}/>
+      <div className="app">
+        <Route exact path="/" render={ () =>
+          <div className="home">
+            <div className="overlay">
+              <Nav loginStatus={this.state.loggedIn} />
+              <h1 className="live-well">live well</h1>
+              <h1 className="shop-local">shop local</h1>
             </div>
-          } />
+              <div className='col-sm-4 offset-sm-5'>
+                <Alert align='center' color="danger" isOpen={this.state.alertVisible} toggle={this.onDismiss}>
+                  Search term yielded no results
+                </Alert>
+              </div>
+              <Search onSearch={this.search.bind(this)}/>
+          </div>
+        } />
 
-          <Route exact path="/signup" render={ () =>
-            <Signup signupSubmit={this.signupSubmit.bind(this)}/>
-          } />
+        <Route exact path="/signup" render={ () =>
+          <Signup signupSubmit={this.signupSubmit.bind(this)}/>
+        } />
 
-          <Route exact path="/login" render={ () =>
-            <LoginWithRouter loginSubmit={this.loginSubmit.bind(this)} />
-          } />
+        <Route exact path="/login" render={ () =>
+          <Login loginSubmit={this.loginSubmit.bind(this)} />
+        } />
 
-          <Route exact path="/location" render={ () =>
-            <ProductSearch onSearch={this.prodsearch.bind(this)}/>
-          } />
+        <Route exact path="/location" render={ () =>
+          <ProductSearch onSearch={this.prodsearch.bind(this)}/>
+        } />
 
-          <Route exact path='/about' component={About} />
+        <Route exact path='/about' component={About} />
 
-          <Route path='/profile' component={Profile} />
+        <Route path='/profile' render={ () =>
+          <ProfileWithRouter loginStatus={this.state.loggedIn} />
+        } />
 
-          <Business handleDetail={this.retrieveDetail.bind(this)}
-                    businesses={this.state.stores}
-                    loading={this.state.loading}
-          />
+        <Business handleDetail={this.retrieveDetail.bind(this)}
+                  businesses={this.state.stores}
+                  loading={this.state.loading}
+                  loginStatus={this.state.loggedIn}
+        />
 
-        </div>
-      </Router>
+      </div>
     );
   }
 }
 
-export default App;
+const AppWithRouter = withRouter(App);
+
+export default AppWithRouter;

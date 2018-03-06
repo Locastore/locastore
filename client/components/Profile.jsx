@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Route, Switch } from 'react-router-dom';
 import BusinessListEntry from './BusinessListEntry.jsx';
 import BusinessDetail from './BusinessDetail.jsx';
+import { withRouter } from 'react-router';
+import SmallNav from './SmallNav.jsx';
 import '../styles/Profile.css';
 
 class Profile extends React.Component {
@@ -26,8 +28,8 @@ class Profile extends React.Component {
     })
   }
 
-  renderDetail(placeId, history) {
-    history.push(`/profile/${placeId}`);
+  renderDetail(placeId) {
+    this.props.history.push(`/profile/${placeId}`);
   }
 
   render() {
@@ -41,7 +43,11 @@ class Profile extends React.Component {
           <hr className="favoritesHr" />
           {this.state.favorites.map((business, index) => {
             return (
-              <BusinessListEntry handleDetail={this.renderDetail} key={index} business={business} />
+              <BusinessListEntry
+                handleDetail={this.renderDetail}
+                key={index}
+                business={business}
+              />
             )
           })}
         </div>
@@ -53,12 +59,20 @@ class Profile extends React.Component {
           <Route path="/profile/:place" render={ (props) =>
             this.state.favorites.map((business, index) => {
               if (business.place_id === props.match.params.place) {
-                return (<BusinessDetail key={index} match={props.match} business={business} />)
+                return (<BusinessDetail
+                          key={index}
+                          match={props.match}
+                          business={business}
+                          loginStatus={this.props.loginStatus}
+                        />)
               }
             })
           } />
           <Route path="/profile" render={ () =>
-            <div>{favorites}</div>
+            <div>
+              <SmallNav />
+              <div>{favorites}</div>
+            </div>
           } />
         </Switch>
       </div>
@@ -66,11 +80,13 @@ class Profile extends React.Component {
   }
 }
 
-// Barebones 0 results component, will add styling at a later point
 function NoFavorites(props) {
   return (
-    <h5>You currently have 0 favorites</h5>
+    <div>
+      <h3 className="favoritesTitle">No current favorites - explore your city and add some!</h3>
+      <hr className="favoritesHr" />
+    </div>
   )
 }
-
-export default Profile;
+const ProfileWithRouter = withRouter(Profile);
+export default ProfileWithRouter;
