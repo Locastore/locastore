@@ -33,24 +33,17 @@ class ProductSearch extends React.Component {
   render() {
     return (
       <div className="productSearch">
-        <h3
-          className="randomRenderTitle"
-        >
+        <h3 className="randomRenderTitle">
           Displaying Local Businesses In Your Neighborhood
         </h3>
         <hr />
-        <Link
-          to="/location"
-        >
+        <Link to="/location">
           <button
             className="productButton"
             type="button"
             onClick={this.prodsearch}
           >
-            <img
-              className="searchImg"
-              src='https://d30y9cdsu7xlg0.cloudfront.net/png/5592-200.png'
-            />
+            <img className="searchImg" src='https://d30y9cdsu7xlg0.cloudfront.net/png/5592-200.png'/>
           </button>
         </Link>
         <input className="prodInputLayer"
