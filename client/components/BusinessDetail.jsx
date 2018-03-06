@@ -76,16 +76,10 @@ class BusinessDetail extends React.Component {
     let favoriteComponent = null;
     if (this.props.loginStatus && this.state.favorited) {
       favoriteComponent =
-        <Button
-          onClick={() => {this.handleUnfavorite(this.props.business)}}>
-          Unfavorite
-        </Button>
+        <Button onClick={() => {this.handleUnfavorite(this.props.business)}}>Unfavorite</Button>
     } else if (this.props.loginStatus) {
       favoriteComponent =
-        <Button
-          onClick={() => {this.handleFavorite(this.props.business)}}>
-          Favorite
-        </Button>
+        <Button onClick={() => {this.handleFavorite(this.props.business)}}>Favorite</Button>
     } else {
       favoriteComponent = <span></span>
     }

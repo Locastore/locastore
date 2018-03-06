@@ -27,10 +27,7 @@ class BusinessListEntry extends React.Component {
             <CardTitle className="cardTitle">{this.props.business.name}</CardTitle>
             <CardText className="cardPhone">{this.props.business.phone}</CardText>
             <hr />
-              <Button
-                onClick={() => { this.props.handleDetail(this.props.business.place_id) } }>
-                More Details
-              </Button>
+              <Button onClick={() => {this.props.handleDetail(this.props.business.place_id)}}>More Details</Button>
           </CardBody>
         </Card>
       </Col>
