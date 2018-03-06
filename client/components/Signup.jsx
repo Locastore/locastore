@@ -10,6 +10,10 @@ class Signup extends React.Component {
       email: '',
       password: ''
     }
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   onChangeUsername (event) {
@@ -49,17 +53,29 @@ class Signup extends React.Component {
           <Form >
             <FormGroup>
               <Label>Create Username</Label>
-              <Input type="text" name="username" onChange={this.onChangeUsername.bind(this)}/>
+              <Input
+                type="text"
+                name="username"
+                onChange={this.onChangeUsername}
+              />
             </FormGroup>
             <FormGroup>
               <Label>Create Password</Label>
-              <Input type="password" name="password" onChange={this.onChangePassword.bind(this)}/>
+              <Input
+                type="password"
+                name="password"
+                onChange={this.onChangePassword}
+              />
             </FormGroup>
             <FormGroup>
               <Label>Your Email</Label>
-              <Input type="email" name="email" onChange={this.onChangeEmail.bind(this)}/>
+              <Input
+                type="email"
+                name="email"
+                onChange={this.onChangeEmail}
+              />
             </FormGroup>
-            <Button onClick={this.onFormSubmit.bind(this)}>Sign Up</Button>
+            <Button onClick={this.onFormSubmit}>Sign Up</Button>
             <Button href='/auth/google' className='googleButton'>
               <img src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg' className='icon'/>
               <span className='buttonText'>Sign up With Google</span>
