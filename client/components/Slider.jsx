@@ -26,13 +26,13 @@ class Slider extends React.Component {
     if (this.props.photos ===  undefined) {
       items = [
         {
-        src: 'https://images.unsplash.com/photo-1496389395181-e5fdd5c0315e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=49bd31ab070ce144fe11d9df225d1d4c&auto=format&fit=crop&w=746&q=80',
+          src: 'https://images.unsplash.com/photo-1496389395181-e5fdd5c0315e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=49bd31ab070ce144fe11d9df225d1d4c&auto=format&fit=crop&w=746&q=80',
         },
         {
-        src: 'https://images.unsplash.com/photo-1510629326852-3f0946701bc6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d67a874d7c2b83e05cf5154b352324d6&auto=format&fit=crop&w=968&q=80',
+          src: 'https://images.unsplash.com/photo-1510629326852-3f0946701bc6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d67a874d7c2b83e05cf5154b352324d6&auto=format&fit=crop&w=968&q=80',
         },
         {
-        src: 'https://images.unsplash.com/photo-1493259606967-571afaef3d81?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5fc97aabffb67934abcf17750357afd4&auto=format&fit=crop&w=1050&q=80',
+          src: 'https://images.unsplash.com/photo-1493259606967-571afaef3d81?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5fc97aabffb67934abcf17750357afd4&auto=format&fit=crop&w=1050&q=80',
         }
       ]
     } else {
@@ -95,11 +95,24 @@ class Slider extends React.Component {
       <Carousel
         activeIndex={activeIndex}
         next={this.next}
-        previous={this.previous}>
-        <CarouselIndicators items={this.createItems()} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
-        {slides}
-        <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-        <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
+        previous={this.previous}
+      >
+        <CarouselIndicators
+          items={this.createItems()}
+          activeIndex={activeIndex}
+          onClickHandler={this.goToIndex}
+        />
+          {slides}
+        <CarouselControl
+          direction="prev"
+          directionText="Previous"
+          onClickHandler={this.previous}
+        />
+        <CarouselControl
+          direction="next"
+          directionText="Next"
+          onClickHandler={this.next}
+        />
       </Carousel>
     );
   }
