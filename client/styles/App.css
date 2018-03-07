@@ -51,14 +51,12 @@
   text-decoration: none;
   letter-spacing: 0.2em;
   color: #273C75;
-  opacity: 0%;
 }
 
 .navItem:hover {
   text-decoration: none;
   letter-spacing: 0.5em;
   color: black;
-  opacity: 0%;
 }
 
 .nav-list {
