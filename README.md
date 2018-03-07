@@ -4,9 +4,9 @@
 
 ## Team
 
-  - __Product Owner__: Evaline Bai
-  - __Scrum Master__: Michael Butak
-  - __Lead Engineer__: Norbie Magno
+  - __Product Owner__: Yufan Wang
+  - __Scrum Master__: Annah Patterson
+  - __Lead Engineers__: Queenie Smith, Michael Shin
 
 ## Table of Contents
 
