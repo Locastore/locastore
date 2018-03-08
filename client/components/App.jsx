@@ -13,7 +13,6 @@ import SmallNav from './SmallNav.jsx';
 import $ from 'jquery';
 import '../styles/App.css';
 import cookie from 'react-cookie'
-import { Alert } from 'reactstrap';
 import { withRouter } from 'react-router';
 import {
   BrowserRouter as Router,
@@ -186,17 +185,7 @@ class App extends React.Component {
                 <h1 className="live-well">live well</h1>
                 <h1 className="shop-local">shop local</h1>
               </div>
-                <div className="col-sm-4 offset-sm-5">
-                  <Alert
-                    align="center"
-                    color="danger"
-                    isOpen={this.state.alertVisible}
-                    toggle={this.onDismiss}
-                  >
-                    Search term yielded no results
-                  </Alert>
-                </div>
-                <Search onSearch={this.search}/>
+                <Search onSearch={this.search} alertVisible={this.state.alertVisible} onDismiss={this.onDismiss}/>
             </div>
           }
         />
