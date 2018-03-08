@@ -12,6 +12,7 @@ class BusinessListEntry extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <Col className="cardColumn" xs="6" sm="4">
         <Card>

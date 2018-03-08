@@ -22,6 +22,7 @@ class Business extends React.Component {
       businessList = <BusinessList
                        handleDetail={this.props.handleDetail}
                        businesses={this.props.businesses}
+                       loginStatus={this.props.loginStatus}
                      />
     }
     return (
