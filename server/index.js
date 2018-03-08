@@ -74,7 +74,9 @@ app.get(
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
     req.session.user = req.session.passport.user;
+    console.log('🤕 where is the', req.session.user);
     res.cookie('loggedIn', 'true', { maxAge: 60 * 60 * 1000 });
+    console.log('🐶 where is the', res);
     res.redirect('/');
   }
 );
