@@ -1,10 +1,74 @@
 import React from 'react';
+import axios from 'axios';
 import { Route } from 'react-router-dom';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardLink, Button, Row, Col } from 'reactstrap';
 
 class BusinessListEntry extends React.Component {
   constructor (props) {
     super(props);
+    this.handleFavorite = this.handleFavorite.bind(this);
+    this.state = {
+      userFavorites: [],
+      favorited: false,
+      buttonText: 'Favorite'
+    };
+    this.isFavorited = this.isFavorited.bind(this);
+
+  }
+
+   componentWillMount() {
+    if (this.props.loginStatus) {
+      axios.get('/favorite')
+      .then((res) => {
+        this.setState({
+          userFavorites: res.data
+        }, this.isFavorited);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
+  }
+
+  isFavorited() {
+    let businessId = this.props.business.place_id;
+    let userFavorites = this.state.userFavorites;
+    for (var i = 0; i < userFavorites.length; i++) {
+      if (businessId === userFavorites[i].place_id) {
+        this.setState({ favorited: true });
+        return;
+      }
+    }
+  }
+
+  handleFavorite(business) {
+    axios.post('/favorite', {
+      business: business
+    })
+    .then((res) => {
+      console.log(res);
+      this.setState({
+        favorited: true
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  handleUnfavorite(business) {
+    axios.post('/unfavorite', {
+      business: business
+    })
+    .then((res) => {
+      console.log(res);
+      this.setState({
+        favorited: false
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   imageFallback(event) {
@@ -12,7 +76,16 @@ class BusinessListEntry extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+    let favoriteComponent = null;
+    if (this.props.loginStatus && this.state.favorited) {
+      favoriteComponent =
+        <Button onClick={() => {this.handleUnfavorite(this.props.business)}}>Unfavorite</Button>
+    } else if (this.props.loginStatus) {
+      favoriteComponent =
+        <Button onClick={() => {this.handleFavorite(this.props.business)}}>Favorite</Button>
+    } else {
+      favoriteComponent = <span></span>
+    }
     return (
       <Col className="cardColumn" xs="6" sm="4">
         <Card>
@@ -29,6 +102,7 @@ class BusinessListEntry extends React.Component {
             <CardText className="cardPhone">{this.props.business.phone}</CardText>
             <hr />
               <Button onClick={() => {this.props.handleDetail(this.props.business.place_id)}}>More Details</Button>
+              {favoriteComponent}
           </CardBody>
         </Card>
       </Col>
