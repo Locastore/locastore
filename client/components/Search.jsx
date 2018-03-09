@@ -17,8 +17,8 @@ class Search extends React.Component {
     this.handleSelect = this.handleSelect.bind(this);
   }
 
-  search() {
-    this.props.onSearch(this.state.term);
+  search(term) {
+    this.props.onSearch(term);
   }
 
   onChange(term) {
@@ -30,7 +30,7 @@ class Search extends React.Component {
       term,
       loading: true
     });
-    this.search();
+    this.search(term);
 
   }
 
