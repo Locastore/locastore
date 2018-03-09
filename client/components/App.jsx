@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Nav from './Nav.jsx';
 import Search from './Search.jsx';
 import ProductSearch from './ProductSearch.jsx';
@@ -29,7 +30,8 @@ class App extends React.Component {
       stores: [],
       alertVisible: false,
       loading: false,
-      loggedIn: false
+      loggedIn: false,
+      location: ''
     }
 
     this.onDismiss = this.onDismiss.bind(this);
@@ -53,6 +55,11 @@ class App extends React.Component {
   }
 
   search(location) {
+    let city = location.split(',').splice(0,2).join(',');
+    this.setState({
+      location: city
+    });
+
     axios.post('/location', {
       text: `${location}`
     })
@@ -72,12 +79,14 @@ class App extends React.Component {
   }
 
   prodsearch(product) {
+    let query = product.join(' ');
+
     this.setState({
       loading: true
     });
 
     axios.post('/product', {
-      text: `${product}`
+      text: `${query}`
     })
     .then(res => {
       if (res.status === 204) {
@@ -175,6 +184,7 @@ class App extends React.Component {
 
   render() {
     return (
+      <MuiThemeProvider>
       <div className="app">
         <Route
           exact path="/"
@@ -207,7 +217,7 @@ class App extends React.Component {
         <Route
           exact path="/location"
           render={ () =>
-            <ProductSearch onSearch={this.prodsearch}/>
+            <ProductSearch onSearch={this.prodsearch} location={this.state.location}/>
           }
         />
 
@@ -231,6 +241,7 @@ class App extends React.Component {
         />
 
       </div>
+      </MuiThemeProvider>
     );
   }
 }
