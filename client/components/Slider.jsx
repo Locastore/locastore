@@ -36,17 +36,10 @@ class Slider extends React.Component {
         }
       ]
     } else {
-      items = [
-        {
-          src: `${this.props.photos[0]}`,
-        },
-        {
-          src: `${this.props.photos[1]}`,
-        },
-        {
-          src: `${this.props.photos[2]}`
-        }
-      ];
+      var photos = this.props.photos
+      items = photos.map((url) => {
+        return {src: `${url}`};
+      });
     }
     return items;
   }
