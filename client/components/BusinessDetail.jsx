@@ -74,6 +74,21 @@ class BusinessDetail extends React.Component {
 
   render() {
     let favoriteComponent = null;
+    let photos = null;
+    let hours = null;
+    let website = null;
+    if (this.props.imgLoading) {
+      hours = <Loading />;
+    } else {
+      photos = <Slider photos={this.props.business.extra_photos}/>;
+      hours = (this.props.business.hours.map((openTime, index) =>
+            <h4 className="hoursText"
+                key={index}>
+                {openTime}
+            </h4>
+          ));
+      website = <h4><a href={`http://${this.props.business.website}`}>{this.props.business.website}</a></h4>;
+    }
     if (this.props.loginStatus && this.state.favorited) {
       favoriteComponent =
         <Button onClick={() => {this.handleUnfavorite(this.props.business)}}>Unfavorite</Button>
@@ -90,26 +105,27 @@ class BusinessDetail extends React.Component {
           <h2 className="bizTitle">{this.props.business.name}</h2>
         </div>
         <div className="slider">
-          <Slider photos={this.props.business.extra_photos}/>
+          { photos }
         </div>
         <div className="bizBody">
           <h4 className="bodyText">{this.props.business.address}</h4>
           <h4 className="bodyText">Phone: {this.props.business.phone}</h4>
           <h4 className="bodyText">Business Hours:</h4>
 
-          {this.props.business.hours.map((openTime, index) =>
-            <h4 className="hoursText"
-                key={index}>
-                {openTime}
-            </h4>
-          )}
+          { hours }
 
-          <h4><a href={`http://${this.props.business.website}`}>{this.props.business.website}</a></h4>
+          { website }
           {favoriteComponent}
         </div>
       </div>
     );
   }
+}
+
+function Loading() {
+  return (
+    <div className="loadersmall"></div>
+  )
 }
 
 export default BusinessDetail;

@@ -30,6 +30,7 @@ class App extends React.Component {
       stores: [],
       alertVisible: false,
       loading: false,
+      imgLoading: false,
       loggedIn: false,
       location: ''
     }
@@ -128,8 +129,9 @@ class App extends React.Component {
 
   retrieveDetail(placeId) {
     this.setState({
-      loading: true
+      imgLoading: true
     });
+    this.props.history.push(`/location/${placeId}`);
 
     axios.get('/business', {
       params: {
@@ -144,9 +146,8 @@ class App extends React.Component {
           store.extra_photos = res.data.photos;
           store.website = res.data.website;
           this.setState({
-            loading: false
+            imgLoading: false
           });
-          this.props.history.push(`/location/${placeId}`);
 
         }
       }
@@ -238,6 +239,7 @@ class App extends React.Component {
           businesses={this.state.stores}
           loading={this.state.loading}
           loginStatus={this.state.loggedIn}
+          imgLoading={this.state.imgLoading}
         />
 
       </div>
