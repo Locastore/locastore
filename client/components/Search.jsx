@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+import { Alert } from 'reactstrap';
 import '../styles/Search.css';
 
 class Search extends React.Component {
@@ -8,10 +9,12 @@ class Search extends React.Component {
     super(props);
     this.state = {
       term: '',
-      address: ''
+      address: '',
+      loading: false
     }
     this.search = this.search.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
   search() {
@@ -22,31 +25,54 @@ class Search extends React.Component {
     this.setState({ term });
   }
 
+  handleSelect(term) {
+    this.setState({
+      term,
+      loading: true
+    });
+    this.search();
+
+  }
+
   render() {
 
     const inputProps = {
       value: this.state.term,
       onChange: this.onChange,
-      placeholder: 'Where do you live?',
+      placeholder: 'Where do you live?'
     }
 
-    const inputClasses = {
-      input: 'search inputLayer input',
-      autocompleteContainer: 'autocompleteBox'
+    const cssClasses = {
+      root: 'form-group',
+      input: 'search-input',
+      autocompleteContainer: 'autocomplete-container'
     }
 
     return (
-      <div className="search">
-        <div>
+      <div className="col-md-9 offset-md-3 searchbar">
           <PlacesAutocomplete
-            classNames={inputClasses}
-            onEnterKeyDown={this.search}
+            classNames={cssClasses}
             inputProps={inputProps}
+            onEnterKeyDown={this.search}
+            onSelect={this.handleSelect}
+
           />
-          <button className="locationButton" type="button" onClick={this.search}>
-            <img className="searchImg" src='https://d30y9cdsu7xlg0.cloudfront.net/png/5592-200.png'/>
-          </button>
-        </div>
+          {this.state.loading && (
+            <div className="spinner-container">
+              <i className="fa fa-spinner fa-pulse fa-3x fa-fw spinner" />
+            </div>
+          )}
+          {this.props.alertVisible && (
+            <Alert
+              align="center"
+              color="danger"
+              className="alert-box"
+              isOpen={this.props.alertVisible}
+              toggle={this.props.onDismiss}
+            >
+              Search term yielded no results
+            </Alert>
+          )}
       </div>
     )
   }
