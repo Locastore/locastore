@@ -20,6 +20,7 @@ class BusinessList extends React.Component {
                 handleDetail={this.props.handleDetail}
                 key={index}
                 business={business}
+                loginStatus={this.props.loginStatus}
               />
             )
           })}

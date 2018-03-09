@@ -220,10 +220,11 @@ app.post('/unfavorite', (req, res) => {
 });
 
 app.get('/favorite', (req, res) => {
+  console.log('server', req);
   const { user } = req.session;
   User.retrieveFavorites(user)
     .then((result) => {
-      console.log(`Successfully retrieved favorites for ${user}`);
+      console.log(`Successfully retrieved favorites get for ${user}`);
       res.status(200).send(result.favorites);
     })
     .catch((err) => {
