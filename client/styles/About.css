@@ -8,8 +8,16 @@
 .sectionHead {
   font-family: "Sacramento", cursive;
   font-size: 45px;
-  margin-top: 2%;
-  margin-bottom: 2%;
+  margin: 2%;
+}
+
+.aboutPage {
+  margin:50px 50px 0px 50px;
+}
+
+.aboutText {
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 .aboutRow {
@@ -17,6 +25,8 @@
 }
 
 .aboutImg {
+  height: 100px;
+  width: 100px;
   border-radius: 50%;
   text-align: center;
   display: block;
@@ -24,8 +34,19 @@
   margin-bottom: 7%;
 }
 
+.aboutImg.sienna {
+  height: 150px;
+  width: 150px;
+}
+
 .aboutInfo {
   text-align: center;
+  font-size: 10px;
+  color: grey;
+}
+
+.aboutInfo.sienna {
+  color: black;
 }
 
 .title {
@@ -36,3 +57,14 @@
 .haunt {
   font-weight: bold;
 }
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
+}
+
+.wrapper.sienna {
+  grid-template-columns: repeat(4, 1fr);
+}
+
