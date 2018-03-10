@@ -102,7 +102,8 @@ class BusinessListEntry extends React.Component {
             <CardTitle className="cardTitle">{this.props.business.name}</CardTitle>
             <CardText className="cardPhone">{this.props.business.phone}</CardText>
             <hr />
-            <div></div>
+            <CardText className="cardPhone">Price: {this.props.business.price}</CardText>
+            <CardText className="cardPhone">Rating: {this.props.business.rating}</CardText>
           </CardBody>
           </div>
           {favoriteComponent}

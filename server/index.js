@@ -92,6 +92,7 @@ app.post('/getlocation', (req, res) => {
         console.log(`No businesses found at location: ${location}`);
         res.status(204).send(businessArr);
       } else {
+        console.log("YELP_LOCATION", result)
         results.business.forEach((store) => {
           const storeData = {
             name: store.name,
@@ -99,7 +100,9 @@ app.post('/getlocation', (req, res) => {
             address: store.location.formatted_address.split('\n').join(', '),
             phone: store.display_phone,
             website: store.url.split('?')[0],
-            photos: store.photos[0]
+            photos: store.photos[0],
+            price: store.price,
+            rating: store.rating
           };
           businessArr.push(storeData);
         });
@@ -127,6 +130,7 @@ app.post('/product', (req, res) => {
         console.log(`No results found for: ${product}`);
         res.status(204).send(businessArr);
       } else {
+        console.log("YELP_PRODUCT", result)
         results.business.forEach((store) => {
           if (!blacklist.has(store.name.toLowerCase())) {
             const storeData = {
@@ -181,6 +185,7 @@ app.get('/business', (req, res) => {
       return util.parseWebsiteUrl(detailedData);
     })
     .then((data) => {
+      console.log("YELP_Details", data)
       res.status(200).send(data);
     })
     .catch((err) => {
