@@ -77,13 +77,6 @@ class ProductSearch extends React.Component {
               Search term yielded no results
             </Alert>
           )}
-          <h3 className="randomRenderTitle">Displaying Businesses in {this.state.location}</h3>
-          <div>
-            <ChipInput onChange={this.onChange} fullWidth={true} fullWidthInput={true} dataSource={this.state.suggestions} />
-            <Link to="/location">
-              <FlatButton label="Search" onClick={this.prodsearch}/>
-            </Link>
-        
           </div>
         </div>
       </div>
