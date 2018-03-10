@@ -75,7 +75,7 @@ class BusinessListEntry extends React.Component {
   }
 
   imageFallback(event) {
-    event.target.src = 'https://images.unsplash.com/photo-1496389395181-e5fdd5c0315e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=49bd31ab070ce144fe11d9df225d1d4c&auto=format&fit=crop&w=746&q=80';
+    event.target.src = 'http://www.karunahealthfoundation.com/wp-content/uploads/2015/05/no-image.jpg';
   }
 
   render() {

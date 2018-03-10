@@ -66,6 +66,24 @@ class ProductSearch extends React.Component {
             //   <FlatButton label="Search" onClick={this.prodsearch}/>
             // </Link>
           }
+          {this.props.alertVisible && (
+            <Alert
+              align="center"
+              color="danger"
+              className="alert-box"
+              isOpen={this.props.alertVisible}
+              toggle={this.props.onDismiss}
+            >
+              Search term yielded no results
+            </Alert>
+          )}
+          <h3 className="randomRenderTitle">Displaying Businesses in {this.state.location}</h3>
+          <div>
+            <ChipInput onChange={this.onChange} fullWidth={true} fullWidthInput={true} dataSource={this.state.suggestions} />
+            <Link to="/location">
+              <FlatButton label="Search" onClick={this.prodsearch}/>
+            </Link>
+        
           </div>
         </div>
       </div>

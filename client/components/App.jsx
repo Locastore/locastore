@@ -105,14 +105,19 @@ class App extends React.Component {
   }
 
   prodsearch(product) {
-    console.log(query)
+     if (!product) {
+      this.setState({
+        alertVisible: true
+      });
+      return;
+    }
     let query;
     if  (product.length > 1) {
       query = product.join(' ');
     } else {
       query = product[0];
     }
-
+    
     this.setState({
       loading: true
     });
@@ -125,13 +130,15 @@ class App extends React.Component {
         console.log(`No results found for: ${product}`);
         this.setState({
           stores: [],
-          loading: false
+          loading: false,
+          alertVisible: false
         });
       } else {
         const stores = res.data;
         this.setState({
           stores: stores,
-          loading: false
+          loading: false,
+          alertVisible: false
         });
       }
     })
@@ -248,7 +255,12 @@ class App extends React.Component {
         <Route
           exact path="/location"
           render={ () =>
-            <ProductSearch onSearch={this.prodsearch} location={this.state.location}/>
+            <ProductSearch
+              onSearch={this.prodsearch}
+              alertVisible={this.state.alertVisible}
+              onDismiss={this.onDismiss}
+              location={this.state.location}
+            />
           }
         />
 
