@@ -17,10 +17,6 @@ class BusinessDetail extends React.Component {
     this.getFavorites = this.getFavorites.bind(this);
   }
 
-  componentWillMount() {
-    this.getFavorites();
-  }
-
   getFavorites() {
     if (this.props.loginStatus) {
       axios.get('/favorite')
@@ -82,6 +78,7 @@ class BusinessDetail extends React.Component {
     let photos = null;
     let hours = null;
     let website = null;
+    this.getFavorites();
     if (this.props.imgLoading) {
       hours = <Loading />;
     } else if (this.props.business.hours) {
