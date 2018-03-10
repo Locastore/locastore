@@ -1,5 +1,8 @@
+body {
+  font-family: "Roboto", Verdana, sans-serif;
+}
+
 .home {
-  font-family: "arial";
   background-image: url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a4deb7be2c7c79941884cdf35c1cee8e&auto=format&fit=crop&w=1050&q=80');
   background-repeat: no-repeat;
   background-size: cover;
@@ -48,15 +51,32 @@
 }
 
 .navItem {
+
+  font-size: 2rem;
+  padding-right: 10px;
   text-decoration: none;
-  letter-spacing: 0.2em;
-  color: #273C75;
+  color: #282828;
 }
 
 .navItem:hover {
   text-decoration: none;
-  letter-spacing: 0.5em;
-  color: black;
+  color: #4b4b4c;
+
+}
+
+.navItemCont {
+  padding: 0;
+}
+
+.navItem i {
+  display: none;
+  padding-right: 3px;
+
+}
+
+.navItem:hover i {
+  display: inline-block;
+  animation: horizontal 1s ease infinite;
 }
 
 .nav-list {
@@ -123,4 +143,10 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+@-webkit-keyframes horizontal {
+    0%   {margin-right:0;}
+    50%  {margin-right:2%;}
+    100% {margin-right:0;}
 }

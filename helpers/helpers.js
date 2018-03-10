@@ -25,7 +25,7 @@ const convertTime = (time) => {
 
 const yelpSearch = (loc, keyword, resultLimit, offset) => {
   return new Promise((resolve, reject) => {
-    keyword = keyword || 'local';
+    keyword = keyword || 'popular';
     resultLimit = resultLimit || 18;
     offset = offset || 0;
 

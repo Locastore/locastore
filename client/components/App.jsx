@@ -105,14 +105,19 @@ class App extends React.Component {
   }
 
   prodsearch(product) {
-    if (!product) {
+     if (!product) {
       this.setState({
         alertVisible: true
       });
       return;
     }
-    let query = product.join(' ');
-
+    let query;
+    if  (product.length > 1) {
+      query = product.join(' ');
+    } else {
+      query = product[0];
+    }
+    
     this.setState({
       loading: true
     });

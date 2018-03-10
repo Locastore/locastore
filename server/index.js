@@ -139,7 +139,9 @@ app.post('/product', (req, res) => {
               address: store.location.formatted_address.split('\n').join(', '),
               phone: store.display_phone,
               website: store.url.split('?')[0],
-              photos: store.photos[0]
+              photos: store.photos[0],
+              price: store.price,
+              rating: store.rating
             };
             businessArr.push(storeData);
           }
