@@ -12,7 +12,7 @@
 }
 
 .aboutPage {
-  margin:50px 50px 0px 50px;
+  margin: 50px 50px 50px 50px;
 }
 
 .aboutText {
@@ -25,18 +25,29 @@
 }
 
 .aboutImg {
-  height: 100px;
-  width: 100px;
+  height: 6rem;
+  width: 6rem;
   border-radius: 50%;
   text-align: center;
   display: block;
   margin: auto;
   margin-bottom: 7%;
+  transform: height 2s;
+  -webkit-transform: width 2s;
+}
+
+.aboutImg:hover {
+  box-shadow: 0px 5px  5px rgba(0,0,0,0.6);
+  -moz-box-shadow: 0px 5px  5px  rgba(0,0,0,0.6);
+  -webkit-box-shadow: 0px 5px 5px  rgba(0,0,0,0.6);
+  -o-box-shadow: 0px 5px 5px  rgba(0,0,0,0.6);
+  transform: translate(0px, -5px);
+
 }
 
 .aboutImg.sienna {
-  height: 150px;
-  width: 150px;
+  height: 10rem;
+  width: 10rem;
 }
 
 .aboutInfo {
@@ -68,3 +79,18 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
+@media (max-width: 700px) {
+  .wrapper.sienna {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .wrapper.sienna {
+    grid-template-columns: 1fr;
+  }
+}
