@@ -25,7 +25,10 @@ class Nav extends React.Component {
         <div>
         <a href='/logout' className='navItem'>Logout</a>
         <li>
-          <Link className="navItem" to="/profile">Profile</Link>
+          <Link className="navItem" to="/profile">
+          <i className="fas fa-angle-double-right"></i>
+            Profile
+          </Link>
         </li>
 
         </div>
@@ -33,8 +36,13 @@ class Nav extends React.Component {
     } else {
       loginComponent = (
         <div>
-          <li><Link className="navItem" to="/login">Login</Link></li>
-          <li><Link className="navItem" to="/signup">Sign Up</Link></li>
+          <li><Link className="navItem" to="/login">
+          <i className="fas fa-angle-double-right"></i>
+          Login</Link></li>
+          <li><Link className="navItem" to="/signup">
+          <i className="fas fa-angle-double-right"></i>
+          Sign Up</Link>
+          </li>
         </div>
       )
     }
@@ -47,7 +55,9 @@ class Nav extends React.Component {
         <div className="nav">
           <ul className="nav-list">
             {loginComponent}
-            <li><Link className="navItem" to="/about">About Us</Link></li>
+            <li><Link className="navItem" to="/about">
+            <i className="fas fa-angle-double-right"></i>
+            About Us</Link></li>
           </ul>
         </div>
       </div>
