@@ -63,6 +63,17 @@ class ProductSearch extends React.Component {
             <Link to="/location">
               <FlatButton label="Search" onClick={this.prodsearch}/>
             </Link>
+            {this.props.alertVisible && (
+            <Alert
+              align="center"
+              color="danger"
+              className="alert-box"
+              isOpen={this.props.alertVisible}
+              toggle={this.props.onDismiss}
+            >
+              Search term yielded no results
+            </Alert>
+          )}
           </div>
         </div>
       </div>
