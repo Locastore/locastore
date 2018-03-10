@@ -13,10 +13,19 @@ class BusinessListEntry extends React.Component {
       buttonText: 'Favorite'
     };
     this.isFavorited = this.isFavorited.bind(this);
+    this.getFavorites = this.getFavorites.bind(this);
 
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    this.getFavorites();
+  }
+
+  componentDidUpdate() {
+    this.getFavorites();
+  }
+
+  getFavorites() {
     if (this.props.loginStatus) {
       axios.get('/favorite')
       .then((res) => {
@@ -87,7 +96,7 @@ class BusinessListEntry extends React.Component {
       favoriteComponent = <span></span>
     }
     return (
-      <Col className="cardColumn" xs="6" sm="4" onClick={() => {this.props.handleDetail(this.props.business.place_id)}}>
+      <Col className="cardColumn" xs="6" sm="4">
         <Card>
 
           <CardImg
@@ -101,6 +110,7 @@ class BusinessListEntry extends React.Component {
             <CardTitle className="cardTitle">{this.props.business.name}</CardTitle>
             <CardText className="cardPhone">{this.props.business.phone}</CardText>
             <hr />
+              <Button onClick={() => {this.props.handleDetail(this.props.business.place_id)}}>More Details</Button>
               {favoriteComponent}
           </CardBody>
         </Card>
