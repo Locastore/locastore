@@ -17,7 +17,7 @@ class BusinessListEntry extends React.Component {
 
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.getFavorites();
   }
 

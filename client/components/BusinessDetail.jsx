@@ -14,6 +14,25 @@ class BusinessDetail extends React.Component {
       buttonText: 'Favorite'
     };
     this.isFavorited = this.isFavorited.bind(this);
+    this.getFavorites = this.getFavorites.bind(this);
+  }
+
+  componentWillMount() {
+    this.getFavorites();
+  }
+
+  getFavorites() {
+    if (this.props.loginStatus) {
+      axios.get('/favorite')
+      .then((res) => {
+        this.setState({
+          userFavorites: res.data
+        }, this.isFavorited);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
   }
 
   isFavorited() {
