@@ -14,8 +14,9 @@ class Business extends React.Component {
   constructor (props) {
     super(props);
   }
+
   render () {
-    // console.log(this.props)
+    let businesses = null;
     let businessList = null;
     if (this.props.loading === true) {
       businessList = <Loading />;
@@ -24,7 +25,7 @@ class Business extends React.Component {
                        handleDetail={this.props.handleDetail}
                        businesses={this.props.businesses}
                        loginStatus={this.props.loginStatus}
-                       imgLoading={this.props.imgLoading}
+                       loading={this.props.loading}
                      />
     }
     return (

@@ -51,17 +51,33 @@ class App extends React.Component {
     }
   }
 
+  componentWillMount() {
+    let businesses = JSON.stringify(this.state.stores);
+    let cached = sessionStorage.getItem('businesses');
+    if (cached && !JSON.parse(businesses).length) {
+      this.setState({
+        stores: JSON.parse(cached),
+      });
+    } else {
+      sessionStorage.setItem('businesses', businesses);
+      this.setState({
+        stores: JSON.parse(businesses),
+      });
+    }
+  }
+
   onDismiss() {
     this.setState({ alertVisible: false });
   }
 
   search(location) {
     let city = location.split(',').splice(0,2).join(',');
+
     this.setState({
       location: city
     });
 
-    axios.post('/location', {
+    axios.post('/getlocation', {
       text: `${location}`
     })
     .then(res => {

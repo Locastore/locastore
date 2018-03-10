@@ -16,7 +16,7 @@ class BusinessListEntry extends React.Component {
 
   }
 
-   componentWillMount() {
+  componentWillMount() {
     if (this.props.loginStatus) {
       axios.get('/favorite')
       .then((res) => {
