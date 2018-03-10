@@ -83,10 +83,10 @@ class BusinessListEntry extends React.Component {
     this.getFavorites();
     if (this.props.loginStatus && this.state.favorited) {
       favoriteComponent =
-        <IconButton iconClassName="fa fa-heart" onClick={() => {this.handleUnfavorite(this.props.business)}} />
+        <IconButton iconStyle={{ color:'#f95b48'}} iconClassName="fa fa-heart" onClick={() => {this.handleUnfavorite(this.props.business)}} />
     } else if (this.props.loginStatus) {
       favoriteComponent =
-        <IconButton iconClassName="far fa-heart" onClick={() => {this.handleFavorite(this.props.business)}}/>
+        <IconButton iconStyle={{ color:'#f95b48'}} iconClassName="far fa-heart" onClick={() => {this.handleFavorite(this.props.business)}}/>
     }
 
     return (
@@ -101,8 +101,8 @@ class BusinessListEntry extends React.Component {
           <CardBody className="cardBody">
             <CardTitle className="cardTitle">{this.props.business.name}</CardTitle>
             <StarRatings rating={this.props.business.rating}/>
-            <CardText>{this.props.business.price}</CardText>
-            {favoriteComponent}
+            <CardText style={{margin: 0}}>{this.props.business.price}</CardText>
+            <CardText className="favorite-btn">{favoriteComponent}</CardText>
           </CardBody>
         </Card>
       </Col>

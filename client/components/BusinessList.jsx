@@ -12,10 +12,9 @@ class BusinessList extends React.Component {
     if (this.props.businesses.length === 0) {
       businesses = <NoBusinesses />;
     } else {
-      businesses = (
-        <div>
-          {this.props.businesses.map((business, index) => {
-          return (
+        businesses =
+          this.props.businesses.map((business, index) => {
+            return (
               <BusinessListEntry
                 handleDetail={this.props.handleDetail}
                 key={index}
@@ -23,13 +22,11 @@ class BusinessList extends React.Component {
                 loginStatus={this.props.loginStatus}
               />
             )
-          })}
-        </div>
-      )
-    }
+          });
+      }
 
     return (
-      <div className="container">
+      <div className="row">
         {businesses}
       </div>
   );
