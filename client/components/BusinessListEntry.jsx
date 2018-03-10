@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardLink, Button, Row, Col } from 'reactstrap';
 import IconButton from 'material-ui/IconButton/';
 import { CardActions, CardHeader, CardMedia } from 'material-ui/Card';
+import StarRatings from './starRatings.jsx';
 
 class BusinessListEntry extends React.Component {
   constructor (props) {
@@ -79,7 +80,7 @@ class BusinessListEntry extends React.Component {
 
   render() {
 
-    const rating = this.props.business.rating * 20;
+
     let favoriteComponent = null;
     this.getFavorites();
     if (this.props.loginStatus && this.state.favorited) {
@@ -88,26 +89,22 @@ class BusinessListEntry extends React.Component {
     } else if (this.props.loginStatus) {
       favoriteComponent =
         <IconButton iconClassName="far fa-heart" onClick={() => {this.handleFavorite(this.props.business)}}/>
-    } else {
-      favoriteComponent = <span></span>
     }
+
     return (
       <Col className="cardColumn" xs="6" sm="4">
-        <Card onClick={() => {this.props.handleDetail(this.props.business.place_id)}} style={{height: '350px', width:'330px', padding: '5px'}}>
+        <Card style={{height: '350px', width:'330px', padding: '5px'}}>
+        <div className="card-img-wrapper" onClick={() => {this.props.handleDetail(this.props.business.place_id)}}>
           <img className="cardImg" src={this.props.business.photos} onError={this.imageFallback} />
+          <div className="card-img-text">
+          <p className="details-text">More Details</p>
+          </div>
+        </div>
           <CardBody className="cardBody">
             <CardTitle className="cardTitle">{this.props.business.name}</CardTitle>
-            <div class="star-ratings-css">
-  <div class="star-ratings-css-top" style={{width: `${rating}%`}}><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-  <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-</div>
-            <CardText >
-            {this.props.business.phone}
-            {this.props.business.price}
-            {this.props.business.rating}
-            <IconButton iconClassName="fa fa-info-circle" onClick={() => {this.props.handleDetail(this.props.business.place_id)}} />
+            <StarRatings rating={this.props.business.rating}/>
+            <CardText>{this.props.business.price}</CardText>
             {favoriteComponent}
-            </CardText>
           </CardBody>
         </Card>
       </Col>
