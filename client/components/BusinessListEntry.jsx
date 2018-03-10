@@ -14,7 +14,6 @@ class BusinessListEntry extends React.Component {
     };
     this.isFavorited = this.isFavorited.bind(this);
     this.getFavorites = this.getFavorites.bind(this);
-
   }
 
   componentWillMount() {
@@ -86,6 +85,7 @@ class BusinessListEntry extends React.Component {
 
   render() {
     let favoriteComponent = null;
+    this.getFavorites();
     if (this.props.loginStatus && this.state.favorited) {
       favoriteComponent =
         <Button onClick={() => {this.handleUnfavorite(this.props.business)}}>Unfavorite</Button>
