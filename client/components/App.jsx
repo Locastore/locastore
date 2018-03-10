@@ -254,7 +254,7 @@ class App extends React.Component {
         <Route
           path='/profile'
           render={ () =>
-            <ProfileWithRouter loginStatus={this.state.loggedIn} />
+            <ProfileWithRouter loginStatus={this.state.loggedIn} handleDetail={this.retrieveDetail} />
           }
         />
 

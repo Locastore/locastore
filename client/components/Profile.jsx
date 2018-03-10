@@ -13,7 +13,6 @@ class Profile extends React.Component {
     this.state = {
       favorites: []
     };
-    this.renderDetail = this.renderDetail.bind(this);
   }
 
   componentWillMount() {
@@ -28,10 +27,6 @@ class Profile extends React.Component {
     })
   }
 
-  renderDetail(placeId) {
-    this.props.history.push(`/profile/${placeId}`);
-  }
-
   render() {
     let favorites = null;
     if (this.state.favorites.length === 0) {
@@ -44,7 +39,7 @@ class Profile extends React.Component {
           {this.state.favorites.map((business, index) => {
             return (
               <BusinessListEntry
-                handleDetail={this.renderDetail}
+                handleDetail={this.props.handleDetail}
                 key={index}
                 business={business}
               />

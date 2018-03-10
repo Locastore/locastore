@@ -16,14 +16,6 @@ class BusinessListEntry extends React.Component {
     this.getFavorites = this.getFavorites.bind(this);
   }
 
-  componentWillMount() {
-    this.getFavorites();
-  }
-
-  componentDidUpdate() {
-    this.getFavorites();
-  }
-
   getFavorites() {
     if (this.props.loginStatus) {
       axios.get('/favorite')
