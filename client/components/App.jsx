@@ -105,7 +105,13 @@ class App extends React.Component {
   }
 
   prodsearch(product) {
-    let query = product.join(' ');
+    console.log(query)
+    let query;
+    if  (product.length > 1) {
+      query = product.join(' ');
+    } else {
+      query = product[0];
+    }
 
     this.setState({
       loading: true

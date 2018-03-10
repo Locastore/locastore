@@ -79,8 +79,6 @@ class BusinessListEntry extends React.Component {
   }
 
   render() {
-
-
     let favoriteComponent = null;
     this.getFavorites();
     if (this.props.loginStatus && this.state.favorited) {

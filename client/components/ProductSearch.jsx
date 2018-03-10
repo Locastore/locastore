@@ -39,6 +39,7 @@ class ProductSearch extends React.Component {
     this.setState({
       term: chips
     })
+    this.props.onSearch(chips);
   }
 
   prodsearch() {
@@ -57,12 +58,14 @@ class ProductSearch extends React.Component {
       <div>
         <SmallNav />
         <div className="productSearch">
-          <h3 className="randomRenderTitle">Displaying Businesses in {this.state.location}</h3>
-          <div>
-            <ChipInput onChange={this.onChange} fullWidth={true} fullWidthInput={true} dataSource={this.state.suggestions} />
-            <Link to="/location">
-              <FlatButton label="Search" onClick={this.prodsearch}/>
-            </Link>
+          <h3 className="randomRenderTitle">{this.state.location}</h3>
+          <div style={{width: '80%', margin: '0 auto'}}>
+            <ChipInput onChange={this.onChange} style={{width: '50%', marginBottom: '20px'}} hintText="Search for local products and services" dataSource={this.state.suggestions} />
+           {
+            // <Link to="/location">
+            //   <FlatButton label="Search" onClick={this.prodsearch}/>
+            // </Link>
+          }
           </div>
         </div>
       </div>
