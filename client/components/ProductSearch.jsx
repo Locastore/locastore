@@ -16,6 +16,22 @@ class ProductSearch extends React.Component {
     this.prodsearch = this.prodsearch.bind(this);
   }
 
+  componentWillMount () {
+    let location = this.props.location;
+    let cached = sessionStorage.getItem('location');
+    if (cached && !location) {
+      this.setState({
+        location: cached
+      });
+    } else {
+      sessionStorage.setItem('location', this.props.location);
+      this.setState({
+        location: this.props.location
+      });
+    }
+  }
+
+
   onChange(chips) {
     this.setState({
       term: chips
@@ -31,7 +47,7 @@ class ProductSearch extends React.Component {
       <div>
         <SmallNav />
         <div className="productSearch">
-          <h3 className="randomRenderTitle">Displaying Businesses in {this.props.location}</h3>
+          <h3 className="randomRenderTitle">Displaying Businesses in {this.state.location}</h3>
           <div>
             <ChipInput  onChange={this.onChange} fullWidth={true} fullWidthInput={true}/>
             <Link to="/location">

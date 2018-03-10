@@ -81,7 +81,7 @@ app.get(
   }
 );
 
-app.post('/location', (req, res) => {
+app.post('/getlocation', (req, res) => {
   const location = req.body.text;
   req.session.location = location;
   util.yelpSearch(location)
@@ -240,6 +240,10 @@ app.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/login');
   });
+});
+
+app.get('/location/*', (req, res) => {
+  res.redirect('/location');
 });
 
 app.get('/*', (req, res) => {

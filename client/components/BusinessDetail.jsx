@@ -16,20 +16,6 @@ class BusinessDetail extends React.Component {
     this.isFavorited = this.isFavorited.bind(this);
   }
 
-  componentWillMount() {
-    if (this.props.loginStatus) {
-      axios.get('/favorite')
-      .then((res) => {
-        this.setState({
-          userFavorites: res.data
-        }, this.isFavorited);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-    }
-  }
-
   isFavorited() {
     let businessId = this.props.business.place_id;
     let userFavorites = this.state.userFavorites;
@@ -79,7 +65,7 @@ class BusinessDetail extends React.Component {
     let website = null;
     if (this.props.imgLoading) {
       hours = <Loading />;
-    } else {
+    } else if (this.props.business.hours) {
       photos = <Slider photos={this.props.business.extra_photos}/>;
       hours = (this.props.business.hours.map((openTime, index) =>
             <h4 className="hoursText"
