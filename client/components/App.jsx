@@ -66,6 +66,21 @@ class App extends React.Component {
     }
   }
 
+  componentWillReceiveProps() {
+    let businesses = JSON.stringify(this.state.stores);
+    let cached = sessionStorage.getItem('businesses');
+    if (cached && !JSON.parse(businesses).length) {
+      this.setState({
+        stores: JSON.parse(cached),
+      });
+    } else {
+      sessionStorage.setItem('businesses', businesses);
+      this.setState({
+        stores: JSON.parse(businesses),
+      });
+    }
+  }
+
   onDismiss() {
     this.setState({ alertVisible: false });
   }
