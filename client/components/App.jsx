@@ -41,6 +41,7 @@ class App extends React.Component {
     this.loginSubmit = this.loginSubmit.bind(this);
     this.prodsearch = this.prodsearch.bind(this);
     this.retrieveDetail = this.retrieveDetail.bind(this);
+    this.cacheBusiness = this.cacheBusiness.bind(this);
   }
 
   componentDidMount() {
@@ -51,34 +52,27 @@ class App extends React.Component {
     }
   }
 
-  componentWillMount() {
+  cacheBusiness() {
     let businesses = JSON.stringify(this.state.stores);
     let cached = sessionStorage.getItem('businesses');
     if (cached && !JSON.parse(businesses).length) {
       this.setState({
-        stores: JSON.parse(cached),
+        stores: JSON.parse(cached)
       });
     } else {
       sessionStorage.setItem('businesses', businesses);
       this.setState({
-        stores: JSON.parse(businesses),
+        stores: JSON.parse(businesses)
       });
     }
   }
 
+  componentWillMount() {
+    this.cacheBusiness();
+  }
+
   componentWillReceiveProps() {
-    let businesses = JSON.stringify(this.state.stores);
-    let cached = sessionStorage.getItem('businesses');
-    if (cached && !JSON.parse(businesses).length) {
-      this.setState({
-        stores: JSON.parse(cached),
-      });
-    } else {
-      sessionStorage.setItem('businesses', businesses);
-      this.setState({
-        stores: JSON.parse(businesses),
-      });
-    }
+    this.cacheBusiness();
   }
 
   onDismiss() {
@@ -156,7 +150,6 @@ class App extends React.Component {
       alert(err);
     })
   }
-
 
   retrieveDetail(placeId) {
     this.setState({
