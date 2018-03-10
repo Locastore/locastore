@@ -87,7 +87,7 @@ class BusinessListEntry extends React.Component {
       favoriteComponent = <span></span>
     }
     return (
-      <Col className="cardColumn" xs="6" sm="4">
+      <Col className="cardColumn" xs="6" sm="4" onClick={() => {this.props.handleDetail(this.props.business.place_id)}}>
         <Card>
 
           <CardImg
@@ -101,7 +101,6 @@ class BusinessListEntry extends React.Component {
             <CardTitle className="cardTitle">{this.props.business.name}</CardTitle>
             <CardText className="cardPhone">{this.props.business.phone}</CardText>
             <hr />
-              <Button onClick={() => {this.props.handleDetail(this.props.business.place_id)}}>More Details</Button>
               {favoriteComponent}
           </CardBody>
         </Card>
