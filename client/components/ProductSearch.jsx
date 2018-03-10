@@ -3,20 +3,24 @@ import { Link } from 'react-router-dom';
 import { Alert } from 'reactstrap';
 import SmallNav from './SmallNav.jsx';
 import '../styles/ProductSearch.css';
-import ChipInput from 'material-ui-chip-input'
+import ChipInput from 'material-ui-chip-input';
+import YelpCategories from '../../helpers/yelpcategories.js';
 import FlatButton from 'material-ui/FlatButton';
 
 class ProductSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      term: ''
+      term: '',
+      suggestions: []
     }
     this.onChange = this.onChange.bind(this);
     this.prodsearch = this.prodsearch.bind(this);
+    this.getSuggestions = this.getSuggestions.bind(this);
   }
 
   componentWillMount () {
+    this.getSuggestions();
     let location = this.props.location;
     let cached = sessionStorage.getItem('location');
     if (cached && !location) {
@@ -31,7 +35,6 @@ class ProductSearch extends React.Component {
     }
   }
 
-
   onChange(chips) {
     this.setState({
       term: chips
@@ -42,6 +45,13 @@ class ProductSearch extends React.Component {
     this.props.onSearch(this.state.term);
   }
 
+ getSuggestions () {
+  const yelpCategories = YelpCategories.split(',\n');
+  this.setState({
+    suggestions: yelpCategories
+  });
+  }
+
   render() {
     return (
       <div>
@@ -49,7 +59,7 @@ class ProductSearch extends React.Component {
         <div className="productSearch">
           <h3 className="randomRenderTitle">Displaying Businesses in {this.state.location}</h3>
           <div>
-            <ChipInput  onChange={this.onChange} fullWidth={true} fullWidthInput={true}/>
+            <ChipInput onChange={this.onChange} fullWidth={true} fullWidthInput={true} dataSource={this.state.suggestions} />
             <Link to="/location">
               <FlatButton label="Search" onClick={this.prodsearch}/>
             </Link>
