@@ -92,7 +92,7 @@ app.post('/getlocation', (req, res) => {
         console.log(`No businesses found at location: ${location}`);
         res.status(204).send(businessArr);
       } else {
-        console.log("YELP_LOCATION", result)
+        // console.log("YELP_LOCATION", result)
         results.business.forEach((store) => {
           const storeData = {
             name: store.name,
@@ -130,7 +130,7 @@ app.post('/product', (req, res) => {
         console.log(`No results found for: ${product}`);
         res.status(204).send(businessArr);
       } else {
-        console.log("YELP_PRODUCT", result)
+        // console.log("YELP_PRODUCT", result)
         results.business.forEach((store) => {
           if (!blacklist.has(store.name.toLowerCase())) {
             const storeData = {
@@ -225,7 +225,6 @@ app.post('/unfavorite', (req, res) => {
 });
 
 app.get('/favorite', (req, res) => {
-  console.log('server', req);
   const { user } = req.session;
   User.retrieveFavorites(user)
     .then((result) => {

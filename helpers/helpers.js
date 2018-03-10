@@ -115,6 +115,8 @@ const yelpSearchDetails = (id) => {
           storeData.hours = ['Hours Forthcoming'];
         }
         storeData.photos = data.photos;
+        storeData.price = data.price;
+        storeData.rating = data.rating;
         resolve(storeData);
       }
     });
