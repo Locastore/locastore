@@ -29,7 +29,7 @@ class BusinessList extends React.Component {
     }
 
     return (
-      <div>
+      <div className="container">
         {businesses}
       </div>
   );
