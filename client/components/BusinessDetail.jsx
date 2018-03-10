@@ -113,11 +113,11 @@ class BusinessDetail extends React.Component {
           <h4 className="bodyText">{this.props.business.address}</h4>
           <h4 className="bodyText">Phone: {this.props.business.phone}</h4>
           <h4 className="bodyText">Business Hours:</h4>
-
           { hours }
-
           { website }
           {favoriteComponent}
+          <h4 className="bodyText">Price: {this.props.business.price}</h4>
+          <h4 className="bodyText">Rating: {this.props.business.rating}</h4>
         </div>
       </div>
     );
