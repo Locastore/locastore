@@ -13,3 +13,8 @@
  border-bottom-left-radius: 10%;
 }
 
+.alert-box {
+  width: 30%;
+  margin: 1.2rem auto;
+}
+
