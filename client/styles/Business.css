@@ -1,24 +1,59 @@
 .cardColumn {
   display: inline-block;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .cardImg {
-  height: 25vw;
+  height: 210px;
   object-fit: cover;
+  object-position: center;
+/*  z-index: 0;*/
 }
 
-.cardBody {
+/*.cardBody {
   padding: 5%;
   height: 160px;
-}
+}*/
 
-.cardTitle {
+
+/*xxxxx.cardTitle {
   color: #273C75;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}*/
+
+.star-ratings-css {
+  unicode-bidi: bidi-override;
+  color: #c5c5c5;
+  font-size: 20px;
+  height: 25px;
+  width: 114px;
+  position: relative;
+  padding: 0;
+  text-shadow: 0px 1px 0 #a2a2a2;
 }
+
+.star-ratings-css-top {
+  color: #e7711b;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: block;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+  .star-ratings-css-bottom {
+    padding: 0;
+    display: block;
+    z-index: 0;
+  }
+
+  span {
+    padding-right: 3px;
+  }
 
 .bizTitle {
   text-align: right;

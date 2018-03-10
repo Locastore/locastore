@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { Route } from 'react-router-dom';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardLink, Button, Row, Col } from 'reactstrap';
+import IconButton from 'material-ui/IconButton/';
+import { CardActions, CardHeader, CardMedia } from 'material-ui/Card';
 
 class BusinessListEntry extends React.Component {
   constructor (props) {
@@ -76,37 +78,37 @@ class BusinessListEntry extends React.Component {
   }
 
   render() {
+
+    const rating = this.props.business.rating * 20;
     let favoriteComponent = null;
     this.getFavorites();
     if (this.props.loginStatus && this.state.favorited) {
       favoriteComponent =
-        <Button onClick={() => {this.handleUnfavorite(this.props.business)}}>Unfavorite</Button>
+        <IconButton iconClassName="fa fa-heart" onClick={() => {this.handleUnfavorite(this.props.business)}} />
     } else if (this.props.loginStatus) {
       favoriteComponent =
-        <Button onClick={() => {this.handleFavorite(this.props.business)}}>Favorite</Button>
+        <IconButton iconClassName="far fa-heart" onClick={() => {this.handleFavorite(this.props.business)}}/>
     } else {
       favoriteComponent = <span></span>
     }
     return (
       <Col className="cardColumn" xs="6" sm="4">
-        <Card>
-        <div onClick={() => {this.props.handleDetail(this.props.business.place_id)}}>
-          <CardImg
-            className="cardImg"
-            top width="100%"
-            src={this.props.business.photos}
-            onError={this.imageFallback}>
-          </CardImg>
-
+        <Card onClick={() => {this.props.handleDetail(this.props.business.place_id)}} style={{height: '350px', width:'330px', padding: '5px'}}>
+          <img className="cardImg" src={this.props.business.photos} onError={this.imageFallback} />
           <CardBody className="cardBody">
             <CardTitle className="cardTitle">{this.props.business.name}</CardTitle>
-            <CardText className="cardPhone">{this.props.business.phone}</CardText>
-            <hr />
-            <CardText className="cardPhone">Price: {this.props.business.price}</CardText>
-            <CardText className="cardPhone">Rating: {this.props.business.rating}</CardText>
+            <div class="star-ratings-css">
+  <div class="star-ratings-css-top" style={{width: `${rating}%`}}><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+  <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+</div>
+            <CardText >
+            {this.props.business.phone}
+            {this.props.business.price}
+            {this.props.business.rating}
+            <IconButton iconClassName="fa fa-info-circle" onClick={() => {this.props.handleDetail(this.props.business.place_id)}} />
+            {favoriteComponent}
+            </CardText>
           </CardBody>
-          </div>
-          {favoriteComponent}
         </Card>
       </Col>
     );
