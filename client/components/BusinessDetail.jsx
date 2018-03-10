@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from './Slider.jsx';
 import axios from 'axios';
 import SmallNav from './SmallNav.jsx';
-import { Button } from 'reactstrap';
+import { Button, Container, Row, Col } from 'reactstrap';
 
 class BusinessDetail extends React.Component {
   constructor (props) {
@@ -90,22 +90,27 @@ class BusinessDetail extends React.Component {
     return (
       <div>
         <SmallNav />
-        <div>
-          <h2 className="bizTitle">{this.props.business.name}</h2>
-        </div>
-        <div className="slider">
-          { photos }
-        </div>
-        <div className="bizBody">
-          <h4 className="bodyText">{this.props.business.address}</h4>
-          <h4 className="bodyText">Phone: {this.props.business.phone}</h4>
-          <h4 className="bodyText">Business Hours:</h4>
-          { hours }
-          { website }
-          {favoriteComponent}
-          <h4 className="bodyText">Price: {this.props.business.price}</h4>
-          <h4 className="bodyText">Rating: {this.props.business.rating}</h4>
-        </div>
+        <Container className="container">
+            <h2 className="bizTitle">{this.props.business.name}</h2>
+            <h5>Reviews</h5>
+            <h5 className="bodyText address">map {this.props.business.address}</h5>
+            <h5 className="bodyText phone">☎ Phone: {this.props.business.phone}</h5>
+          <Row className="mainRow">
+            <Col md={6} className="slider">
+              { photos }
+            </Col>
+            <Col md={6} className="bizBody">
+
+              <h4 className="bodyText">Business Hours:</h4>
+              { hours }
+              { website }
+              {favoriteComponent}
+              <h4 className="bodyText">Price: {this.props.business.price}</h4>
+              <h4 className="bodyText">Rating: {this.props.business.rating}</h4>
+            </Col>
+
+          </Row>
+        </Container>
       </div>
     );
   }

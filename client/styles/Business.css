@@ -91,36 +91,61 @@
   overflow: hidden;
 }
 
-  .star-ratings-css-bottom {
-    padding: 0;
-    display: block;
-    z-index: 0;
-  }
+.star-ratings-css-bottom {
+  padding: 0;
+  display: block;
+  z-index: 0;
+}
 
-  span {
-    padding-right: 3px;
-  }
+span {
+  padding-right: 3px;
+}
 
 
 /*=== BUSINESS DETAIL ===*/
+.container {
+  width: 85%;
+}
+
 .bizTitle {
-  text-align: right;
+  text-align: left;
+  margin-top: 75px;
+  padding-bottom: 7px;
   text-transform: uppercase;
   letter-spacing: .5em;
-  position: absolute;
+  /*position: absolute;*/
   top: 15%;
   width: 100%;
   color: black;
   opacity: 70%;
 }
 
+.mainRow {
+  /*margin-top: 100px;*/
+}
+
+h5 {
+  width: 35%;
+  padding-right: 4%;
+  display: inline;
+}
+
+.address {
+  text-align: center;
+}
+
+.phone {
+  text-align: right;
+}
+
+/*
 .bizBody {
-  width: 85%;
-  background-color: #292B2C;
+  width: 55%;
+  background-color: salmon;
   color: white;
   padding: 15px;
   margin-top: 100px;
-  display: inline-block;
+  display: inline;
 }
 
 .bodyText {
@@ -135,9 +160,10 @@
 
 .slider {
   margin-top: 150px;
+  background-color: pink;
   margin-left: 45%;
-  width: 600px;
-  height: 500px;
+  width: 45%;
+  height: 400px;
   text-align: right;
   position: absolute;
 }
@@ -147,7 +173,7 @@
   width: auto;
   max-width: 600px;
   margin: auto;
-}
+}*/
 
 
 @media (max-width: 767px) {
