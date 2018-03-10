@@ -51,7 +51,7 @@ body {
 }
 
 .navItem {
-
+  display: block;
   font-size: 2rem;
   padding-right: 10px;
   text-decoration: none;

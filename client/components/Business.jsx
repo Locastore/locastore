@@ -50,7 +50,7 @@ class Business extends React.Component {
           <Route
             path="/location"
             render={ (props) =>
-              <div>
+              <div className="container">
                 {businessList}
               </div>
             }

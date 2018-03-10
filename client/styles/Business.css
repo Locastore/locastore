@@ -1,7 +1,6 @@
 /*=== SEARCH CARDS ===*/
 
 .cardColumn {
-  display: inline-block;
   margin-bottom: 20px;
 }
 
@@ -45,6 +44,21 @@
 
 .cardBody {
   padding: 10px;
+}
+
+.card-text {
+  margin: 0;
+}
+
+.favorite-btn {
+  text-align: right;
+  position: relative;
+  bottom: 20px;
+  right: 20px;
+}
+
+.fa-heart, .far .fa-heart {
+  font-size: 24px;
 }
 
 /*=== RATINGS ===*/
@@ -136,7 +150,11 @@
 }
 
 
-
+@media (max-width: 767px) {
+  .container {
+    margin: 0 15px;
+  }
+}
 
 
 

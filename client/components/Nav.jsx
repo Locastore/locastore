@@ -23,26 +23,27 @@ class Nav extends React.Component {
     if (this.props.loginStatus) {
       loginComponent = (
         <div>
-        <a href='/logout' className='navItem'>Logout</a>
-        <li>
+          <Link className="navItem" to="/logout">
+            <i className="fas fa-angle-double-right"></i>
+            Logout
+          </Link>
           <Link className="navItem" to="/profile">
-          <i className="fas fa-angle-double-right"></i>
+            <i className="fas fa-angle-double-right"></i>
             Profile
           </Link>
-        </li>
-
         </div>
       )
     } else {
       loginComponent = (
         <div>
-          <li><Link className="navItem" to="/login">
-          <i className="fas fa-angle-double-right"></i>
-          Login</Link></li>
-          <li><Link className="navItem" to="/signup">
-          <i className="fas fa-angle-double-right"></i>
-          Sign Up</Link>
-          </li>
+          <Link className="navItem" to="/login">
+              <i className="fas fa-angle-double-right"></i>
+              Login
+          </Link>
+          <Link className="navItem" to="/signup">
+              <i className="fas fa-angle-double-right"></i>
+              Sign Up
+          </Link>
         </div>
       )
     }
@@ -53,12 +54,13 @@ class Nav extends React.Component {
           <hr className="navHr"/>
         </div>
         <div className="nav">
-          <ul className="nav-list">
+          <div className="nav-list">
             {loginComponent}
-            <li><Link className="navItem" to="/about">
-            <i className="fas fa-angle-double-right"></i>
-            About Us</Link></li>
-          </ul>
+            <Link className="navItem" to="/about">
+              <i className="fas fa-angle-double-right"></i>
+              About Us
+            </Link>
+          </div>
         </div>
       </div>
     )
