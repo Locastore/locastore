@@ -21,7 +21,9 @@ class About extends React.Component {
         <h3 className="sectionHead">Development Team</h3>
         <div className="wrapper sienna aboutRow">
           <div>
-            <img className="aboutImg sienna" src="https://avatars2.githubusercontent.com/u/31011353?s=400&v=4"/>
+            <a href="https://github.com/yufanw">
+              <img className="aboutImg sienna" src="https://avatars2.githubusercontent.com/u/31011353?s=400&v=4"/>
+            </a>
             <div className="aboutInfo sienna">
               <h4>Yufan Wang</h4>
               <h5 className="title">Product Owner</h5>
@@ -30,7 +32,9 @@ class About extends React.Component {
             </div>
           </div>
           <div>
-            <img className="aboutImg sienna" src="https://avatars0.githubusercontent.com/u/28540710?s=460&v=4"/>
+            <a href="https://github.com/qsmith1">
+              <img className="aboutImg sienna" src="https://avatars0.githubusercontent.com/u/28540710?s=460&v=4"/>
+            </a>
             <div className="aboutInfo sienna">
               <h4>Queenie Smith</h4>
               <h5 className="title">Engineering Lead</h5>
@@ -39,7 +43,9 @@ class About extends React.Component {
             </div>
           </div>
           <div>
-            <img className="aboutImg sienna" src="https://avatars3.githubusercontent.com/u/22921336?s=460&v=4"/>
+            <a href="https://github.com/annahinnyc">
+              <img className="aboutImg sienna" src="https://avatars3.githubusercontent.com/u/22921336?s=460&v=4"/>
+            </a>
             <div className="aboutInfo sienna">
               <h4>Annah Patterson</h4>
               <h5 className="title">Scrum Master</h5>
@@ -48,7 +54,9 @@ class About extends React.Component {
             </div>
           </div>
           <div>
-            <img className="aboutImg sienna" src="https://avatars0.githubusercontent.com/u/35247504?s=460&v=4"/>
+            <a href="https://github.com/connectblocks">
+              <img className="aboutImg sienna" src="https://i.imgur.com/WAxcZ6k.png"/>
+            </a>
             <div className="aboutInfo sienna">
               <h4>Michael Shin</h4>
               <h5 className="title">Engineering Lead</h5>
@@ -61,7 +69,9 @@ class About extends React.Component {
         <h3 className="sectionHead">Greenfield Team</h3>
         <div className="wrapper aboutRow">
           <div>
-            <img className="aboutImg" src="https://c1.staticflickr.com/5/4770/39649699085_054a6e330d_q.jpg"/>
+            <a href="https://github.com/evalineBai">
+              <img className="aboutImg" src="https://c1.staticflickr.com/5/4770/39649699085_054a6e330d_q.jpg"/>
+            </a>
             <div className="aboutInfo">
               <h4>Evaline Bai</h4>
               <h6 className="haunt">Favorite Local Haunt:</h6>
@@ -69,7 +79,9 @@ class About extends React.Component {
             </div>
           </div>
           <div>
-            <img className="aboutImg" src="https://c1.staticflickr.com/5/4750/39834378884_e323733655_q.jpg"/>
+            <a href="https://github.com/Magnoes">
+              <img className="aboutImg" src="https://c1.staticflickr.com/5/4750/39834378884_e323733655_q.jpg"/>
+            </a>
             <div className="aboutInfo">
               <h4>Norbie Magno</h4>
               <h6 className="haunt">Favorite Local Haunt:</h6>
@@ -77,7 +89,9 @@ class About extends React.Component {
             </div>
           </div>
           <div>
-            <img className="aboutImg" src="https://c1.staticflickr.com/5/4721/26673937628_488ed3ebf0_q.jpg"/>
+            <a href="https://github.com/mikebutak">
+              <img className="aboutImg" src="https://c1.staticflickr.com/5/4721/26673937628_488ed3ebf0_q.jpg"/>
+            </a>
             <div className="aboutInfo">
               <h4>Mike Butak</h4>
               <h6 className="haunt">Favorite Local Haunt:</h6>
