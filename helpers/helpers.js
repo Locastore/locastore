@@ -47,6 +47,8 @@ const yelpSearch = (loc, keyword, resultLimit, offset) => {
           display_phone
           photos
           url
+          rating
+          price
         }
       }
     }`;
