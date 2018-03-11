@@ -90,7 +90,7 @@ class App extends React.Component {
       location: city
     });
 
-    axios.post('/getlocation', {
+    axios.post('/postlocation', {
       text: `${location}`
     })
     .then(res => {
@@ -201,7 +201,7 @@ class App extends React.Component {
   loginSubmit(login) {
     let username = login.username;
     let password = login.password;
-    axios.post('/login', {
+    axios.post('/postlogin', {
       username: `${username}`,
       password: `${password}`
     })
@@ -228,61 +228,80 @@ class App extends React.Component {
     return (
       <MuiThemeProvider>
       <div className="app">
-        <Route
-          exact path="/"
-          render={ () =>
-            <div className="home">
-              <div className="overlay">
-                <Nav loginStatus={this.state.loggedIn} />
+        <Switch>
+          <Route
+            exact path="/"
+            render={ () =>
+              <div className="home">
+                <div className="overlay">
+                  <Nav loginStatus={this.state.loggedIn} logout={this.handleLogout}/>
+                </div>
+                <div className="searchcol">
+                  <Search onSearch={this.search} alertVisible={this.state.alertVisible} onDismiss={this.onDismiss}/>
+                </div>
               </div>
-              <div className="searchcol">
-                <Search onSearch={this.search} alertVisible={this.state.alertVisible} onDismiss={this.onDismiss}/>
-              </div>
-            </div>
-          }
-        />
+            }
+          />
 
-        <Route
-          exact path="/signup"
-          render={ () =>
-            <Signup signupSubmit={this.signupSubmit}/>
-          }
-        />
+          <Route
+            path="/signup"
+            render={ () =>
+              <Signup signupSubmit={this.signupSubmit}/>
+            }
+          />
 
-        <Route
-          exact path="/login"
-          render={ () =>
-            <Login loginSubmit={this.loginSubmit} />
-          }
-        />
+          <Route
+            path="/login"
+            render={ () =>
+              <Login loginSubmit={this.loginSubmit} />
+            }
+          />
 
-        <Route
-          exact path="/location"
-          render={ () =>
-            <ProductSearch
-              onSearch={this.prodsearch}
-              alertVisible={this.state.alertVisible}
-              onDismiss={this.onDismiss}
-              location={this.state.location}
-            />
-          }
-        />
+          <Route
+            exact path="/location"
+            render={ () =>
+              <ProductSearch
+                onSearch={this.prodsearch}
+                alertVisible={this.state.alertVisible}
+                onDismiss={this.onDismiss}
+                location={this.state.location}
+              />
+            }
+          />
 
-        <Route
-          exact path='/about'
-          component={About}
-        />
+          <Route path="/location"/>
 
-        <Route
-          path='/profile'
-          render={ () =>
-            <ProfileWithRouter
-              loginStatus={this.state.loggedIn}
-              handleDetail={this.retrieveDetail}
-              loading={this.props.loading}
-            />
-          }
-        />
+          <Route
+            path='/about'
+            component={About}
+          />
+
+          <Route
+            path='/profile'
+            render={ () =>
+              <ProfileWithRouter
+                loginStatus={this.state.loggedIn}
+                handleDetail={this.retrieveDetail}
+                loading={this.state.loading}
+                imgLoading={this.state.imgLoading}
+              />
+            }
+          />
+
+          <Route
+            path="/logout"
+            render={ () => {
+              this.handleLogout();
+              return (
+                <Redirect to="/login"/>
+              )
+            }}
+
+          />
+
+          <Redirect to="/"/>
+
+        </Switch>
 
         <Business
           handleDetail={this.retrieveDetail}

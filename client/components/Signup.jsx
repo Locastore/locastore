@@ -42,7 +42,9 @@ class Signup extends React.Component {
     return (
       <div className="signup">
         <div className="loginLogo">
-          <h2 className="companyName">Locastore</h2>
+          <a className="homeLogo" href="/">
+            <h2 className="companyName">Locastore</h2>
+          </a>
         </div>
         <div className="imgCaption">
           <h6>Distant Lands Travel Bookstore & Outfitter</h6>

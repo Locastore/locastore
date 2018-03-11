@@ -81,7 +81,7 @@ app.get(
   }
 );
 
-app.post('/getlocation', (req, res) => {
+app.post('/postlocation', (req, res) => {
   const location = req.body.text;
   req.session.location = location;
   util.yelpSearch(location)

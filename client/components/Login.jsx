@@ -43,7 +43,9 @@ class Login extends React.Component {
     return (
       <div className="login">
         <div className="loginLogo">
-          <h2 className="companyName">Locastore</h2>
+          <a className="homeLogo" href="/">
+            <h2 className="companyName">Locastore</h2>
+          </a>
         </div>
         <div className="imgCaption">
           <h6>Common Grounds Coffee Shop</h6>
