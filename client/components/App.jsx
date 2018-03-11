@@ -269,7 +269,13 @@ class App extends React.Component {
             }
           />
 
-          <Route path="/location"/>
+          <Route path="/location"
+            handleDetail={this.retrieveDetail}
+            businesses={this.state.stores}
+            loading={this.state.loading}
+            loginStatus={this.state.loggedIn}
+            imgLoading={this.state.imgLoading}
+          />
 
           <Route
             path='/about'
