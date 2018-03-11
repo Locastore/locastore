@@ -28,6 +28,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       stores: [],
+      favorites: [],
       alertVisible: false,
       loading: false,
       imgLoading: false,
@@ -45,15 +46,20 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    if (cookie.load('loggedIn') === 'true' && this.state.loggedIn === false) {
-      this.setState({
-        loggedIn: true
-      });
-    } else {
-      this.setState({
-        loggedIn: false
-      });
-    }
+    this.checkLogin();
+  }
+
+  componentWillMount() {
+    this.cacheBusiness();
+    this.getFavorites();
+  }
+
+  componentWillReceiveProps() {
+    this.cacheBusiness();
+  }
+
+  componentDidUpdate() {
+    this.getFavorites();
   }
 
   cacheBusiness() {
@@ -71,12 +77,30 @@ class App extends React.Component {
     }
   }
 
-  componentWillMount() {
-    this.cacheBusiness();
+  getFavorites() {
+    if(this.state.loggedIn && this.state.favorites.length === 0) {
+      axios.get('/favorite')
+      .then((res) => {
+        this.setState({
+          favorites: res.data
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
   }
 
-  componentWillReceiveProps() {
-    this.cacheBusiness();
+  checkLogin() {
+    if (cookie.load('loggedIn') === 'true' && this.state.loggedIn === false) {
+      this.setState({
+        loggedIn: true
+      });
+    } else {
+      this.setState({
+        loggedIn: false
+      });
+    }
   }
 
   onDismiss() {
@@ -221,6 +245,9 @@ class App extends React.Component {
 
   handleLogout() {
     axios.get('/logout');
+    this.setState({
+      loggedIn: false
+    });
   }
 
 
@@ -288,6 +315,7 @@ class App extends React.Component {
               <ProfileWithRouter
                 loginStatus={this.state.loggedIn}
                 handleDetail={this.retrieveDetail}
+                favorites={this.state.favorites}
                 loading={this.state.loading}
                 imgLoading={this.state.imgLoading}
               />
