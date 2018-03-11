@@ -91,6 +91,7 @@ app.post('/postlocation', (req, res) => {
         res.status(204).send(businessArr);
       } else {
         results.business.forEach((store) => {
+          console.log('Yelp store data', store);
           const storeData = {
             name: store.name,
             place_id: store.id,

@@ -68,6 +68,7 @@ const yelpSearch = (loc, keyword, resultLimit, offset) => {
     fetch({
       query: `query ${queryString}`
     }).then((res) => {
+      console.log('yelp res', res);
       resolve(res);
     }).catch((err) => {
       reject(err);

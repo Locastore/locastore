@@ -103,12 +103,13 @@ span {
 
 
 /*=== BUSINESS DETAIL ===*/
-.container {
-  width: 85%;
+
+.bizContainer {
+  /*width: 85%;*/
+  margin-left: 375px;
 }
 
 .bizTitle {
-  text-align: left;
   margin-top: 75px;
   padding-bottom: 7px;
   text-transform: uppercase;
@@ -120,32 +121,55 @@ span {
   opacity: 70%;
 }
 
-.mainRow {
-  /*margin-top: 100px;*/
+.contact {
+  /*width: 35%;*/
+  margin: 2px;
+  margin-top: 10px;
+  padding-top: 5px;
+  padding-right: 4%;
+  display: block;
+}
+
+.ratings {
+  width: 25%;
+  display: inline;
+  margin-bottom: 10px;
+}
+
+h4 {
+  font-size: 16px;
 }
 
 h5 {
   width: 35%;
-  padding-right: 4%;
   display: inline;
 }
 
 .address {
-  text-align: center;
+  margin-left: 2px;
 }
 
 .phone {
-  text-align: right;
+  margin-left: 2.5rem;
+  margin-right: 2.6rem;
 }
 
-/*
+.mainRow {
+  margin-top: 15px;
+  width: 500px;
+  color: #292B2C;
+  font-size: 1.5rem;
+  display: inline-block;
+}
+
 .bizBody {
-  width: 55%;
-  background-color: salmon;
-  color: white;
+  width: 300px;
+  color: #292B2C;
   padding: 15px;
-  margin-top: 100px;
-  display: inline;
+  margin-top: 20px;
+  margin-left: 20px;
+  display: inline-block;
+  position: absolute;
 }
 
 .bodyText {
@@ -159,22 +183,26 @@ h5 {
 }
 
 .slider {
-  margin-top: 150px;
-  background-color: pink;
-  margin-left: 45%;
-  width: 45%;
-  height: 400px;
-  text-align: right;
-  position: absolute;
+  background-color: salmon;
+  display: inline;
+  width: 500px;
+}
+
+.carousel {
+  width: 500px;
 }
 
 .carouselItem {
   height: 500px;
   width: auto;
   max-width: 600px;
-  margin: auto;
-}*/
+  display: inline;
+}
 
+.googleMap {
+  height: 196px;
+  width: 300px;
+}
 
 @media (max-width: 767px) {
   .container {
