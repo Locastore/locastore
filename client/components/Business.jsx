@@ -26,6 +26,7 @@ class Business extends React.Component {
                        businesses={this.props.businesses}
                        loginStatus={this.props.loginStatus}
                        loading={this.props.loading}
+                       favorites={this.props.favorites}
                      />
     }
     return (
@@ -42,6 +43,7 @@ class Business extends React.Component {
                             business={business}
                             loginStatus={this.props.loginStatus}
                             imgLoading={this.props.imgLoading}
+                            favorites={this.props.favorites}
                           />)
                 }
               })

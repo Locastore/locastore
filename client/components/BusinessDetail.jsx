@@ -9,32 +9,19 @@ class BusinessDetail extends React.Component {
     super(props);
     this.handleFavorite = this.handleFavorite.bind(this);
     this.state = {
-      userFavorites: [],
       favorited: false,
       buttonText: 'Favorite'
     };
     this.isFavorited = this.isFavorited.bind(this);
-    this.getFavorites = this.getFavorites.bind(this);
-    this.throttleget = throttle(this.getFavorites, 3000);
   }
 
-  getFavorites() {
-    if (this.props.loginStatus && this.state.userFavorites.length === 0) {
-      axios.get('/favorite')
-      .then((res) => {
-        this.setState({
-          userFavorites: res.data
-        }, this.isFavorited);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-    }
+  componentDidMount() {
+    this.isFavorited();
   }
 
   isFavorited() {
     let businessId = this.props.business.place_id;
-    let userFavorites = this.state.userFavorites;
+    let userFavorites = this.props.favorites;
     for (var i = 0; i < userFavorites.length; i++) {
       if (businessId === userFavorites[i].place_id) {
         this.setState({ favorited: true });
@@ -79,7 +66,6 @@ class BusinessDetail extends React.Component {
     let photos = null;
     let hours = null;
     let website = null;
-    this.throttleget();
     if (this.props.imgLoading) {
       hours = <Loading />;
     } else if (this.props.business.hours) {
@@ -129,27 +115,6 @@ function Loading() {
   return (
     <div className="loader small"></div>
   )
-}
-
-const throttle = (func, limit) => {
-  let lastFunc
-  let lastRan
-  return function() {
-    const context = this
-    const args = arguments
-    if (!lastRan) {
-      func.apply(context, args)
-      lastRan = Date.now()
-    } else {
-      clearTimeout(lastFunc)
-      lastFunc = setTimeout(function() {
-        if ((Date.now() - lastRan) >= limit) {
-          func.apply(context, args)
-          lastRan = Date.now()
-        }
-      }, limit - (Date.now() - lastRan))
-    }
-  }
 }
 
 export default BusinessDetail;

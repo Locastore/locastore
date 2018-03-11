@@ -74,9 +74,7 @@ app.get(
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
     req.session.user = req.session.passport.user;
-    console.log('🤕 where is the', req.session.user);
     res.cookie('loggedIn', 'true', { maxAge: 60 * 60 * 1000 });
-    console.log('🐶 where is the', res);
     res.redirect('/');
   }
 );
@@ -161,7 +159,7 @@ app.post('/signup', (req, res) => {
   User.addUser(newUser, successResponse);
 });
 
-app.post('/login', (req, res) => {
+app.post('/postlogin', (req, res) => {
   const credentials = req.body;
   const handleVerify = function (verifyResult) {
     if (verifyResult === true) {

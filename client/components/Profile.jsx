@@ -27,6 +27,7 @@ class Profile extends React.Component {
             businesses={this.props.favorites}
             loginStatus={this.props.loginStatus}
             loading={this.props.loading}
+            favorites={this.props.favorites}
           />
         </div>
       )
@@ -43,6 +44,7 @@ class Profile extends React.Component {
                           business={business}
                           loginStatus={this.props.loginStatus}
                           imgLoading={this.state.imgLoading}
+                          favorites={this.props.favorites}
                         />)
               }
             })
