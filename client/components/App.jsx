@@ -30,6 +30,7 @@ class App extends React.Component {
       stores: [],
       favorites: [],
       alertVisible: false,
+      hasNew: true,
       loading: false,
       imgLoading: false,
       loggedIn: false,
@@ -46,27 +47,30 @@ class App extends React.Component {
     this.checkLogin = this.checkLogin.bind(this);
     this.getFavorites = this.getFavorites.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.setNew = this.setNew.bind(this);
+  }
+
+
+  componentWillMount() {
+    console.log('willmount')
+    this.checkLogin();
+    this.cacheBusiness();
   }
 
   componentDidMount() {
-    this.checkLogin();
-  }
-
-  componentWillMount() {
-    this.cacheBusiness();
+    console.log('didmount')
+    this.getFavorites();
   }
 
   componentWillReceiveProps() {
+    console.log('receiveprops')
     this.checkLogin();
+    this.getFavorites();
     this.cacheBusiness();
-    this.getFavorites();
-  }
-
-  componentDidUpdate() {
-    this.getFavorites();
   }
 
   cacheBusiness() {
+    console.log('cache business')
     let businesses = JSON.stringify(this.state.stores);
     let cached = sessionStorage.getItem('businesses');
     if (cached && !JSON.parse(businesses).length) {
@@ -81,27 +85,15 @@ class App extends React.Component {
     }
   }
 
-  cacheFavorites() {
-    let favorites = JSON.stringify(this.state.favorites);
-    let cached = sessionStorage.getItem('favorites');
-    if (cached && !JSON.parse(favorites).length) {
-      this.setState({
-        favorites: JSON.parse(cached)
-      });
-    } else {
-      sessionStorage.setItem('favorites', favorites);
-      this.setState({
-        favorites: JSON.parse(favorites)
-      });
-    }
-  }
-
   getFavorites() {
-    if(this.state.loggedIn && this.state.favorites.length === 0) {
+    console.log('getting favorited called', this.state.loggedIn, this.state.hasNew)
+    if (this.state.loggedIn && this.state.hasNew) {
+      console.log('getting favorites')
       axios.get('/favorite')
       .then((res) => {
         this.setState({
-          favorites: res.data
+          favorites: res.data,
+          hasNew: false
         });
       })
       .catch((err) => {
@@ -112,10 +104,18 @@ class App extends React.Component {
 
   checkLogin() {
     if (cookie.load('loggedIn') === 'true' && this.state.loggedIn === false) {
+      console.log('checking loggin');
       this.setState({
         loggedIn: true
       });
     }
+  }
+
+  setNew() {
+    console.log('favorite update')
+    this.setState({
+      hasNew: true
+    });
   }
 
   onDismiss() {
@@ -261,10 +261,10 @@ class App extends React.Component {
   }
 
   handleLogout() {
-    axios.get('/logout');
     this.setState({
       loggedIn: false
     });
+    axios.get('/logout');
   }
 
 
@@ -332,6 +332,7 @@ class App extends React.Component {
                 loading={this.state.loading}
                 imgLoading={this.state.imgLoading}
                 favorites={this.state.favorites}
+                setNew={this.setNew}
               />
             }
           />
@@ -358,6 +359,7 @@ class App extends React.Component {
           loginStatus={this.state.loggedIn}
           imgLoading={this.state.imgLoading}
           favorites={this.state.favorites}
+          setNew={this.setNew}
         />
 
       </div>

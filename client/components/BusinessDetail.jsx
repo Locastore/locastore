@@ -10,12 +10,13 @@ import SimpleMap from './GoogleMapReact.jsx';
 class BusinessDetail extends React.Component {
   constructor (props) {
     super(props);
-    this.handleFavorite = this.handleFavorite.bind(this);
     this.state = {
       favorited: false,
       buttonText: 'Favorite'
     };
     this.isFavorited = this.isFavorited.bind(this);
+    this.handleFavorite = this.handleFavorite.bind(this);
+    this.handleUnfavorite = this.handleUnfavorite.bind(this);
   }
 
   componentDidMount() {
@@ -23,6 +24,9 @@ class BusinessDetail extends React.Component {
   }
 
   isFavorited() {
+    if (!this.props.favorites.length) {
+      return;
+    }
     let businessId = this.props.business.place_id;
     let userFavorites = this.props.favorites;
     for (var i = 0; i < userFavorites.length; i++) {
@@ -42,6 +46,7 @@ class BusinessDetail extends React.Component {
       this.setState({
         favorited: true
       });
+      this.props.setNew();
     })
     .catch((err) => {
       console.log(err);
@@ -57,6 +62,7 @@ class BusinessDetail extends React.Component {
       this.setState({
         favorited: false
       });
+      this.props.setNew();
     })
     .catch((err) => {
       console.log(err);

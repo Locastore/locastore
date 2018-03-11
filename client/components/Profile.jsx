@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { Route, Switch } from 'react-router-dom';
-import BusinessListEntry from './BusinessListEntry.jsx';
 import BusinessDetail from './BusinessDetail.jsx';
 import BusinessList from './BusinessList.jsx';
 import { withRouter } from 'react-router';
@@ -27,7 +26,8 @@ class Profile extends React.Component {
             businesses={this.props.favorites}
             loginStatus={this.props.loginStatus}
             loading={this.props.loading}
-            favorites={this.props.favorites}
+            favorited={true}
+            setNew={this.props.setNew}
           />
         </div>
       )
@@ -44,7 +44,8 @@ class Profile extends React.Component {
                           business={business}
                           loginStatus={this.props.loginStatus}
                           imgLoading={this.state.imgLoading}
-                          favorites={this.props.favorites}
+                          favorited={true}
+                          setNew={this.props.setNew}
                         />)
               }
             })

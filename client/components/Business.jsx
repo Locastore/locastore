@@ -27,6 +27,7 @@ class Business extends React.Component {
                        loginStatus={this.props.loginStatus}
                        loading={this.props.loading}
                        favorites={this.props.favorites}
+                       setNew={this.props.setNew}
                      />
     }
     return (
@@ -44,6 +45,7 @@ class Business extends React.Component {
                             loginStatus={this.props.loginStatus}
                             imgLoading={this.props.imgLoading}
                             favorites={this.props.favorites}
+                            setNew={this.props.setNew}
                           />)
                 }
               })
