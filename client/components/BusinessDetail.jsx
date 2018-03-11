@@ -15,10 +15,11 @@ class BusinessDetail extends React.Component {
     };
     this.isFavorited = this.isFavorited.bind(this);
     this.getFavorites = this.getFavorites.bind(this);
+    this.throttleget = throttle(this.getFavorites, 3000);
   }
 
   getFavorites() {
-    if (this.props.loginStatus) {
+    if (this.props.loginStatus && this.state.userFavorites.length === 0) {
       axios.get('/favorite')
       .then((res) => {
         this.setState({
@@ -78,7 +79,7 @@ class BusinessDetail extends React.Component {
     let photos = null;
     let hours = null;
     let website = null;
-    this.getFavorites();
+    this.throttleget();
     if (this.props.imgLoading) {
       hours = <Loading />;
     } else if (this.props.business.hours) {
@@ -128,6 +129,27 @@ function Loading() {
   return (
     <div className="loadersmall"></div>
   )
+}
+
+const throttle = (func, limit) => {
+  let lastFunc
+  let lastRan
+  return function() {
+    const context = this
+    const args = arguments
+    if (!lastRan) {
+      func.apply(context, args)
+      lastRan = Date.now()
+    } else {
+      clearTimeout(lastFunc)
+      lastFunc = setTimeout(function() {
+        if ((Date.now() - lastRan) >= limit) {
+          func.apply(context, args)
+          lastRan = Date.now()
+        }
+      }, limit - (Date.now() - lastRan))
+    }
+  }
 }
 
 export default BusinessDetail;

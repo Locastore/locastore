@@ -17,10 +17,11 @@ class BusinessListEntry extends React.Component {
     };
     this.isFavorited = this.isFavorited.bind(this);
     this.getFavorites = this.getFavorites.bind(this);
+    this.throttleget = throttle(this.getFavorites, 3000);
   }
 
   getFavorites() {
-    if (this.props.loginStatus) {
+    if (this.props.loginStatus && this.state.userFavorites.length === 0) {
       axios.get('/favorite')
       .then((res) => {
         this.setState({
@@ -80,7 +81,7 @@ class BusinessListEntry extends React.Component {
 
   render() {
     let favoriteComponent = null;
-    this.getFavorites();
+    this.throttleget();
     if (this.props.loginStatus && this.state.favorited) {
       favoriteComponent =
         <IconButton iconClassName="fa fa-heart" onClick={() => {this.handleUnfavorite(this.props.business)}} />
@@ -107,6 +108,27 @@ class BusinessListEntry extends React.Component {
         </Card>
       </Col>
     );
+  }
+}
+
+const throttle = (func, limit) => {
+  let lastFunc
+  let lastRan
+  return function() {
+    const context = this
+    const args = arguments
+    if (!lastRan) {
+      func.apply(context, args)
+      lastRan = Date.now()
+    } else {
+      clearTimeout(lastFunc)
+      lastFunc = setTimeout(function() {
+        if ((Date.now() - lastRan) >= limit) {
+          func.apply(context, args)
+          lastRan = Date.now()
+        }
+      }, limit - (Date.now() - lastRan))
+    }
   }
 }
 
