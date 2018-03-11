@@ -11,36 +11,11 @@ import '../styles/Profile.css';
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      favorites: []
-    };
-  }
-
-  componentWillMount() {
-    this.getFavorites();
-  }
-
-  componentDidUpdate() {
-    this.getFavorites();
-  }
-
-  getFavorites() {
-    if(this.props.loginStatus && this.state.favorites.length === 0) {
-      axios.get('/favorite')
-      .then((res) => {
-        this.setState({
-          favorites: res.data
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-    }
   }
 
   render() {
     let favorites = null;
-    if (this.state.favorites.length === 0) {
+    if (this.props.favorites.length === 0) {
       favorites = <NoFavorites />
     } else {
       favorites = (
@@ -49,7 +24,7 @@ class Profile extends React.Component {
           <hr className="favoritesHr" />
           <BusinessList
             handleDetail={this.props.handleDetail}
-            businesses={this.state.favorites}
+            businesses={this.props.favorites}
             loginStatus={this.props.loginStatus}
             loading={this.props.loading}
           />
@@ -60,7 +35,7 @@ class Profile extends React.Component {
       <div>
         <Switch>
           <Route path="/location/:place" render={ (props) =>
-            this.state.favorites.map((business, index) => {
+            this.props.favorites.map((business, index) => {
               if (business.place_id === props.match.params.place) {
                 return (<BusinessDetail
                           key={index}
