@@ -1,8 +1,9 @@
 body {
   font-family: "Roboto", Verdana, sans-serif;
-  font-size: 20px;
+  font-size: 18px;
 }
 
+/*== LANDING ===*/
 .home {
   background-image: url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a4deb7be2c7c79941884cdf35c1cee8e&auto=format&fit=crop&w=1050&q=80');
   background-repeat: no-repeat;
@@ -16,9 +17,102 @@ body {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-gap: 15%;
-  grid-template-columns: minmax(200px, auto) 1fr;
+  /*grid-gap: 15%;*/
+  grid-template-columns: minmax(250px, auto) 1fr;
 }
+
+.searchcol {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 10%;
+}
+
+/*=== SIDE NAV ===*/
+
+.overlay {
+  margin: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255,255,255,.5);
+}
+
+.companyDiv {
+  display: block;
+  text-align: center;
+  margin: 1rem;
+  margin-top: 20%;
+}
+
+.companyName {
+  font-family: "Sacramento", cursive;
+  font-size: 3.2rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav {
+  display: inline-block;
+  text-align: right;
+  width: 100%;
+  margin-top: 40%;
+  padding-right: 1rem;
+  line-height: 1.8;
+  font-weight: bold;
+  color: black;
+}
+
+/*SEARCHBAR LANDING*/
+
+.form-group {
+  display: inline-block;
+  margin-top: 30%;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.search-input,
+.search-input:focus,
+.search-input:active {
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.4), 0 0 0 1px rgba(0,0,0,0.08);
+  border: honeydew;
+  width: 100%;
+  padding: 14px;
+  border-radius: 2px;
+  outline: none;
+}
+
+.autocomplete-container {
+  border: honeydew;
+  border-top: 1px solid #e6e6e6;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border-radius: 0 0 2px 2px;
+  text-align: left;
+}
+.spinner-container {
+  display: inline-block;
+  margin: 10px;
+  vertical-align: middle;
+}
+
+.spinner {
+  color: #224b67;
+  font-size: 30px;
+}
+
+
+/*=== ALERTS ===*/
+/*.alert-box {
+  width: 40%;
+  margin: 0 auto;
+}*/
+
+
+
+/*MEDIA QUERIES*/
+
+
 
 .homeLogo {
   color: maroon;
@@ -29,42 +123,15 @@ body {
   text-decoration: none;
 }
 
-.searchcol {
-  position: absolute;
-  top: 100px;
-  left: 300px;
-  width: 50%;
-  min-width: 370px;
-  margin: 0 auto;
-  text-align: center;
-}
 
-.form-group {
-  width: 100%;
-}
 
-.companyName {
-  font-family: "Sacramento", cursive;
-  font-size: 2.5rem;
-  font-weight: bold;
-  text-decoration: none;
-}
 
-.companyDiv {
-  display: block;
-  text-align: center;
-  margin: 1rem;
-}
 
-.nav {
-  display: inline-block !important;
-  text-align: right;
-  width: 100%;
-  margin-top: 10rem;
-  line-height: 1.8;
-  font-weight: bold;
-  color: black;
-}
+
+
+
+
+
 
 .navItem {
   display: block;
@@ -97,15 +164,7 @@ body {
   list-style-type: none;
 }
 
-.overlay {
-  margin: 0;
-  height: 100%;
-  top: 0;
-  left: 0;
-  width: 20%;
-  min-width: 200px;
-  background: rgba(255,255,255,.5);
-}
+
 
 .loader {
   border: 15px solid #f3f3f3; /* Light grey */

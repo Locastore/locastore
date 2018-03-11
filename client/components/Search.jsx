@@ -2,7 +2,6 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import { Alert } from 'reactstrap';
-import '../styles/Search.css';
 
 class Search extends React.Component {
   constructor (props) {
