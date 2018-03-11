@@ -121,7 +121,7 @@ class App extends React.Component {
     } else {
       query = product[0];
     }
-    
+
     this.setState({
       loading: true
     });
@@ -234,10 +234,10 @@ class App extends React.Component {
             <div className="home">
               <div className="overlay">
                 <Nav loginStatus={this.state.loggedIn} />
-                <h1 className="live-well">live well</h1>
-                <h1 className="shop-local">shop local</h1>
               </div>
+              <div className="searchcol">
                 <Search onSearch={this.search} alertVisible={this.state.alertVisible} onDismiss={this.onDismiss}/>
+              </div>
             </div>
           }
         />
@@ -276,9 +276,9 @@ class App extends React.Component {
         <Route
           path='/profile'
           render={ () =>
-            <ProfileWithRouter 
-              loginStatus={this.state.loggedIn} 
-              handleDetail={this.retrieveDetail} 
+            <ProfileWithRouter
+              loginStatus={this.state.loggedIn}
+              handleDetail={this.retrieveDetail}
               loading={this.props.loading}
             />
           }

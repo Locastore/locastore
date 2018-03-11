@@ -70,7 +70,7 @@ class ProductSearch extends React.Component {
             <Alert
               align="center"
               color="danger"
-              className="alert-box"
+              className="alert-box-product"
               isOpen={this.props.alertVisible}
               toggle={this.props.onDismiss}
             >

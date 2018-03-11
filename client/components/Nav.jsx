@@ -48,10 +48,9 @@ class Nav extends React.Component {
       )
     }
     return (
-      <div>
+      <div className="nav-grid">
         <div className="companyDiv">
           <h2 className="companyName">Locastore</h2>
-          <hr className="navHr"/>
         </div>
         <div className="nav">
           <div className="nav-list">
