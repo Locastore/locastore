@@ -10,7 +10,7 @@ class StarRatings extends React.Component {
 
     return (
       <div>
-      <p className="ratings-text">{this.props.rating}</p>
+      <p className="ratings-text ratings">{this.props.rating}</p>
       <div className="star-ratings-css">
 
         <div className="star-ratings-css-top" style={{width: `${rating}%`}}>

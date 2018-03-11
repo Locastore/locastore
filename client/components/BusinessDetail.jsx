@@ -2,7 +2,10 @@ import React from 'react';
 import Slider from './Slider.jsx';
 import axios from 'axios';
 import SmallNav from './SmallNav.jsx';
-import { Button } from 'reactstrap';
+import { Button, Container, Row, Col, CardText } from 'reactstrap';
+import StarRatings from './starRatings.jsx';
+import Grid from 'react-css-grid';
+import SimpleMap from './GoogleMapReact.jsx';
 
 class BusinessDetail extends React.Component {
   constructor (props) {
@@ -90,21 +93,29 @@ class BusinessDetail extends React.Component {
     return (
       <div>
         <SmallNav />
-        <div>
-          <h2 className="bizTitle">{this.props.business.name}</h2>
-        </div>
-        <div className="slider">
-          { photos }
-        </div>
-        <div className="bizBody">
-          <h4 className="bodyText">{this.props.business.address}</h4>
-          <h4 className="bodyText">Phone: {this.props.business.phone}</h4>
-          <h4 className="bodyText">Business Hours:</h4>
-          { hours }
-          { website }
-          {favoriteComponent}
-          <h4 className="bodyText">Price: {this.props.business.price}</h4>
-          <h4 className="bodyText">Rating: {this.props.business.rating}</h4>
+        <div className="bizContainer">
+            <h2 className="bizTitle">{this.props.business.name}</h2>
+            <div className="ratings">
+             <StarRatings rating={this.props.business.rating}/>
+            </div>
+            <div className="contact">
+            <h5 className="bodyText address">📍 {this.props.business.address}</h5>
+            <h5 className="bodyText phone">📞 Phone: {this.props.business.phone}</h5>
+            <h5 className="bodyText">Price: {this.props.business.price}</h5>
+            </div>
+          <div className="mainRow">
+            <div className="slider">
+              { photos }
+            </div>
+          </div>
+          <div className="bizBody">
+
+              <h4 className="bodyText">Business Hours:</h4>
+              { hours }
+              { website }
+              {favoriteComponent}
+              <SimpleMap />
+          </div>
         </div>
       </div>
     );
