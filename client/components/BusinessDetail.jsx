@@ -127,7 +127,7 @@ class BusinessDetail extends React.Component {
 
 function Loading() {
   return (
-    <div className="loadersmall"></div>
+    <div className="loader small"></div>
   )
 }
 

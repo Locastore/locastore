@@ -49,7 +49,7 @@ class Search extends React.Component {
     }
 
     return (
-      <div className="col-md-9 offset-md-3 searchbar">
+      <div>
           <PlacesAutocomplete
             classNames={cssClasses}
             inputProps={inputProps}
