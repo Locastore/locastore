@@ -49,6 +49,10 @@ const yelpSearch = (loc, keyword, resultLimit, offset) => {
           url
           rating
           price
+          coordinates {
+            latitude
+            longitude
+          }
         }
       }
     }`;
@@ -118,6 +122,8 @@ const yelpSearchDetails = (id) => {
         storeData.photos = data.photos;
         storeData.price = data.price;
         storeData.rating = data.rating;
+        storeData.latitude = data.coordinates.latitude;
+        storeData.longitude = data.coordinates.longitude;
         resolve(storeData);
       }
     });

@@ -91,7 +91,7 @@ app.post('/postlocation', (req, res) => {
         res.status(204).send(businessArr);
       } else {
         results.business.forEach((store) => {
-          console.log('Yelp store data', store);
+          console.log('returned store', store);
           const storeData = {
             name: store.name,
             place_id: store.id,
@@ -100,7 +100,9 @@ app.post('/postlocation', (req, res) => {
             website: store.url.split('?')[0],
             photos: store.photos[0],
             price: store.price,
-            rating: store.rating
+            rating: store.rating,
+            latitude: store.coordinates.latitude,
+            longitude: store.coordinates.longitude
           };
           businessArr.push(storeData);
         });

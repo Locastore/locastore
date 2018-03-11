@@ -1,23 +1,16 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const EmbedReactComponent = ({ text }) => <div>{text}</div>;
 
 class SimpleMap extends React.Component {
   constructor(props) {
     super(props);
+    console.log('props', props);
     this.state = {
-      center: {lat: 59.95, lng: 30.33},
-      zoom: 11
+      center: {lat: this.props.latitude, lng: this.props.longitude},
+      zoom: 14
     };
-  }
-
-  componentWillMount() {
-
-  }
-
-  getLatLong() {
-
   }
 
   render() {
@@ -28,10 +21,10 @@ class SimpleMap extends React.Component {
         defaultCenter={this.state.center}
         defaultZoom={this.state.zoom}
       >
-        <AnyReactComponent
-          lat={59.955413}
-          lng={30.337844}
-          text={'Kreyser Avrora'}
+        <EmbedReactComponent
+          lat={this.props.latitude}
+          lng={this.props.longitude}
+          text={this.props.name}
         />
       </GoogleMapReact>
       </div>

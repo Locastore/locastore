@@ -114,7 +114,7 @@ class BusinessDetail extends React.Component {
               { hours }
               { website }
               {favoriteComponent}
-              <SimpleMap />
+              <SimpleMap latitude={this.props.business.latitude} longitude={this.props.business.longitude}/>
           </div>
         </div>
       </div>
