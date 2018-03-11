@@ -17,6 +17,14 @@ class Profile extends React.Component {
   }
 
   componentWillMount() {
+    this.getFavorites();
+  }
+
+  componentDidUpdate() {
+    this.getFavorites();
+  }
+
+  getFavorites() {
     if(this.props.loginStatus && this.state.favorites.length === 0) {
       axios.get('/favorite')
       .then((res) => {
@@ -39,7 +47,7 @@ class Profile extends React.Component {
         <div>
           <h3 className="favoritesTitle">Your Favorites</h3>
           <hr className="favoritesHr" />
-          <BusinessList 
+          <BusinessList
             handleDetail={this.props.handleDetail}
             businesses={this.state.favorites}
             loginStatus={this.props.loginStatus}
