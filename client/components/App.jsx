@@ -225,6 +225,8 @@ class App extends React.Component {
           store.hours = res.data.hours;
           store.extra_photos = res.data.photos;
           store.website = res.data.website;
+          store.latitude = res.data.latitude;
+          store.longitude = res.data.longitude;
           this.setState({
             imgLoading: false
           });
