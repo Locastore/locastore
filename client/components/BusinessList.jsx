@@ -22,6 +22,7 @@ class BusinessList extends React.Component {
                 loginStatus={this.props.loginStatus}
                 favorites={this.props.favorites}
                 favorited={this.props.favorited}
+                setNew={this.props.setNew}
               />
             )
           });
