@@ -48,7 +48,7 @@ class Search extends React.Component {
     }
 
     return (
-      <div class="search-bar">
+      <div className="search-bar">
           <PlacesAutocomplete
             classNames={cssClasses}
             inputProps={inputProps}

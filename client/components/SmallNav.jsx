@@ -4,11 +4,6 @@ import '../styles/SmallNav.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { NavBar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 
-const logoStyle = {
-  "fontFamily": "Sacramento",
-  "fontSize": "30px"
-}
-
 class SmallNav extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +14,7 @@ class SmallNav extends React.Component {
         <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
-        <a className="navbar-brand" style={logoStyle} href="/">Locastore</a>
+        <a className="navbar-brand" href="/">Locastore</a>
 
         {/*Collapsible content*/}
         <div className="collapse navbar-collapse" id="navbarNav">

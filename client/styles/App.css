@@ -3,6 +3,8 @@ body {
   font-size: 18px;
 }
 
+/*MAIN COMPONENTS*/
+
 /*== LANDING ===*/
 .home {
   background-image: url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a4deb7be2c7c79941884cdf35c1cee8e&auto=format&fit=crop&w=1050&q=80');
@@ -63,7 +65,16 @@ body {
   color: black;
 }
 
+.navItem {
+  display: block;
+  font-size: 2rem;
+  padding-right: 10px;
+  text-decoration: none;
+  color: #282828;
+}
+
 /*SEARCHBAR LANDING*/
+
 .search-bar {
   text-align: center;
 }
@@ -103,17 +114,158 @@ body {
 }
 
 
+
+
+/*=== NAVBAR (SMALLNAV) ===*/
+
+.navbar-brand {
+  font-family: "Sacramento", cursive;
+  font-size: 2em;
+}
+
+
+/*PRODUCT SEARCH*/
+
+.randomRenderTitle {
+  color: #212529;
+  font-family: "Sacramento", cursive;
+  font-size: 4rem;
+  margin: 0.5em 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.productSearch {
+  text-align: center;
+  margin: 1em 0;
+}
+
+
+/*SMALL COMPONENTS*/
+
 /*=== ALERTS ===*/
 /*.alert-box {
   width: 40%;
   margin: 0 auto;
 }*/
 
+/*=== SEARCH CARDS ===*/
+
+.cardColumn {
+  margin-bottom: 20px;
+}
+
+.card-img-wrapper {
+  position: relative;
+  height: 210px;
+  width: 320px;
+}
+
+.card-img-text {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(29, 106, 154, 0.72);
+  color: #fff;
+  visibility: hidden;
+  opacity: 0;
+  text-align: center;
+  transition: opacity .2s, visibility .2s;
+}
+
+.card-img-wrapper:hover .card-img-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.cardImg {
+  height: 210px;
+  object-fit: cover;
+  object-position: center center;
+  width: 320px;
+}
+
+.details-text {
+  font-size: 20px;
+  top: 50%;
+  position: relative;
+}
+
+.cardBody {
+  padding: 10px;
+}
+
+.card-text {
+  color: #2bb9a8;
+  margin: 0;
+}
+
+.favorite-btn {
+  text-align: right;
+  position: relative;
+  bottom: 20px;
+  right: 20px;
+}
+
+.fa-heart, .far .fa-heart {
+  font-size: 24px;
+}
+
+/*=== RATINGS ===*/
+
+.ratings-text {
+  color: #f38938;
+  display: inline-block;
+  margin: 0;
+  margin-right: 10px;
+}
+.star-ratings-css {
+  unicode-bidi: bidi-override;
+  color: #c5c5c5;
+  display: inline-block;
+  font-size: 20px;
+  height: 25px;
+  width: 114px;
+  position: relative;
+  padding: 0;
+  text-shadow: 0px 1px 0 #a2a2a2;
+}
+
+.star-ratings-css-top {
+  color: #f38938;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: block;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.star-ratings-css-bottom {
+  padding: 0;
+  display: block;
+  z-index: 0;
+}
+
+span {
+  padding-right: 3px;
+}
+
+
+
+
+
+
+
+
+
 
 
 /*MEDIA QUERIES*/
-
-
 
 .homeLogo {
   color: maroon;
@@ -126,21 +278,6 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-.navItem {
-  display: block;
-  font-size: 2rem;
-  padding-right: 10px;
-  text-decoration: none;
-  color: #282828;
-}
 
 .navItem:hover {
   text-decoration: none;
