@@ -43,6 +43,9 @@ class App extends React.Component {
     this.prodsearch = this.prodsearch.bind(this);
     this.retrieveDetail = this.retrieveDetail.bind(this);
     this.cacheBusiness = this.cacheBusiness.bind(this);
+    this.checkLogin = this.checkLogin.bind(this);
+    this.getFavorites = this.getFavorites.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentDidMount() {
@@ -51,11 +54,12 @@ class App extends React.Component {
 
   componentWillMount() {
     this.cacheBusiness();
-    this.getFavorites();
   }
 
   componentWillReceiveProps() {
+    this.checkLogin();
     this.cacheBusiness();
+    this.getFavorites();
   }
 
   componentDidUpdate() {
@@ -73,6 +77,21 @@ class App extends React.Component {
       sessionStorage.setItem('businesses', businesses);
       this.setState({
         stores: JSON.parse(businesses)
+      });
+    }
+  }
+
+  cacheFavorites() {
+    let favorites = JSON.stringify(this.state.favorites);
+    let cached = sessionStorage.getItem('favorites');
+    if (cached && !JSON.parse(favorites).length) {
+      this.setState({
+        favorites: JSON.parse(cached)
+      });
+    } else {
+      sessionStorage.setItem('favorites', favorites);
+      this.setState({
+        favorites: JSON.parse(favorites)
       });
     }
   }
@@ -95,10 +114,6 @@ class App extends React.Component {
     if (cookie.load('loggedIn') === 'true' && this.state.loggedIn === false) {
       this.setState({
         loggedIn: true
-      });
-    } else {
-      this.setState({
-        loggedIn: false
       });
     }
   }
@@ -296,12 +311,8 @@ class App extends React.Component {
             }
           />
 
-          <Route path="/location"
-            handleDetail={this.retrieveDetail}
-            businesses={this.state.stores}
-            loading={this.state.loading}
-            loginStatus={this.state.loggedIn}
-            imgLoading={this.state.imgLoading}
+          <Route
+            path="/location"
           />
 
           <Route
@@ -318,6 +329,7 @@ class App extends React.Component {
                 favorites={this.state.favorites}
                 loading={this.state.loading}
                 imgLoading={this.state.imgLoading}
+                favorites={this.state.favorites}
               />
             }
           />
@@ -343,6 +355,7 @@ class App extends React.Component {
           loading={this.state.loading}
           loginStatus={this.state.loggedIn}
           imgLoading={this.state.imgLoading}
+          favorites={this.state.favorites}
         />
 
       </div>

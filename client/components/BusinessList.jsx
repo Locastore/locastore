@@ -20,6 +20,8 @@ class BusinessList extends React.Component {
                 key={index}
                 business={business}
                 loginStatus={this.props.loginStatus}
+                favorites={this.props.favorites}
+                favorited={this.props.favorited}
               />
             )
           });

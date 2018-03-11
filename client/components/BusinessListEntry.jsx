@@ -11,31 +11,36 @@ class BusinessListEntry extends React.Component {
     super(props);
     this.handleFavorite = this.handleFavorite.bind(this);
     this.state = {
-      userFavorites: [],
       favorited: false,
       buttonText: 'Favorite'
     };
     this.isFavorited = this.isFavorited.bind(this);
-    this.getFavorites = this.getFavorites.bind(this);
   }
 
-  getFavorites() {
-    if (this.props.loginStatus && this.state.userFavorites.length === 0) {
-      axios.get('/favorite')
-      .then((res) => {
-        this.setState({
-          userFavorites: res.data
-        }, this.isFavorited);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+  componentWillMount() {
+    if (this.props.favorited && !this.state.favorited) {
+      this.setState({
+        favorited: true
+      });
+    } else {
+      console.log('willmount')
+      this.isFavorited();
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.favorited && !this.state.favorited) {
+      this.setState({
+        favorited: true
+      });
+    } else if (!this.state.favorited) {
+      this.isFavorited();
     }
   }
 
   isFavorited() {
     let businessId = this.props.business.place_id;
-    let userFavorites = this.state.userFavorites;
+    let userFavorites = this.props.favorites;
     for (var i = 0; i < userFavorites.length; i++) {
       if (businessId === userFavorites[i].place_id) {
         this.setState({ favorited: true });
@@ -80,7 +85,6 @@ class BusinessListEntry extends React.Component {
 
   render() {
     let favoriteComponent = null;
-    this.getFavorites();
     if (this.props.loginStatus && this.state.favorited) {
       favoriteComponent =
         <IconButton iconStyle={{ color:'#f95b48'}} iconClassName="fa fa-heart" onClick={() => {this.handleUnfavorite(this.props.business)}} />
