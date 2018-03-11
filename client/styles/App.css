@@ -64,10 +64,13 @@ body {
 }
 
 /*SEARCHBAR LANDING*/
+.search-bar {
+  text-align: center;
+}
 
 .form-group {
   display: inline-block;
-  margin-top: 30%;
+  margin-top: 26%;
   width: 100%;
   margin-bottom: 1rem;
 }
@@ -91,14 +94,12 @@ body {
   text-align: left;
 }
 .spinner-container {
-  display: inline-block;
-  margin: 10px;
-  vertical-align: middle;
+  margin: 1rem auto;
 }
 
 .spinner {
-  color: #224b67;
-  font-size: 30px;
+  color: #fff;
+  font-size: 2.5rem;
 }
 
 
