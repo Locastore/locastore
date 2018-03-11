@@ -49,6 +49,10 @@ class App extends React.Component {
       this.setState({
         loggedIn: true
       });
+    } else {
+      this.setState({
+        loggedIn: false
+      });
     }
   }
 
@@ -272,7 +276,11 @@ class App extends React.Component {
         <Route
           path='/profile'
           render={ () =>
-            <ProfileWithRouter loginStatus={this.state.loggedIn} handleDetail={this.retrieveDetail} />
+            <ProfileWithRouter 
+              loginStatus={this.state.loggedIn} 
+              handleDetail={this.retrieveDetail} 
+              loading={this.props.loading}
+            />
           }
         />
 
@@ -287,6 +295,27 @@ class App extends React.Component {
       </div>
       </MuiThemeProvider>
     );
+  }
+}
+
+const throttle = (func, limit) => {
+  let lastFunc
+  let lastRan
+  return function() {
+    const context = this
+    const args = arguments
+    if (!lastRan) {
+      func.apply(context, args)
+      lastRan = Date.now()
+    } else {
+      clearTimeout(lastFunc)
+      lastFunc = setTimeout(function() {
+        if ((Date.now() - lastRan) >= limit) {
+          func.apply(context, args)
+          lastRan = Date.now()
+        }
+      }, limit - (Date.now() - lastRan))
+    }
   }
 }
 

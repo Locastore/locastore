@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Route, Switch } from 'react-router-dom';
 import BusinessListEntry from './BusinessListEntry.jsx';
 import BusinessDetail from './BusinessDetail.jsx';
+import BusinessList from './BusinessList.jsx';
 import { withRouter } from 'react-router';
 import SmallNav from './SmallNav.jsx';
 import '../styles/Profile.css';
@@ -16,15 +17,17 @@ class Profile extends React.Component {
   }
 
   componentWillMount() {
-    axios.get('/favorite')
-    .then((res) => {
-      this.setState({
-        favorites: res.data
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    if(this.props.loginStatus && this.state.favorites.length === 0) {
+      axios.get('/favorite')
+      .then((res) => {
+        this.setState({
+          favorites: res.data
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
   }
 
   render() {
@@ -36,22 +39,19 @@ class Profile extends React.Component {
         <div>
           <h3 className="favoritesTitle">Your Favorites</h3>
           <hr className="favoritesHr" />
-          {this.state.favorites.map((business, index) => {
-            return (
-              <BusinessListEntry
-                handleDetail={this.props.handleDetail}
-                key={index}
-                business={business}
-              />
-            )
-          })}
+          <BusinessList 
+            handleDetail={this.props.handleDetail}
+            businesses={this.state.favorites}
+            loginStatus={this.props.loginStatus}
+            loading={this.props.loading}
+          />
         </div>
       )
     }
     return (
       <div>
         <Switch>
-          <Route path="/profile/:place" render={ (props) =>
+          <Route path="/location/:place" render={ (props) =>
             this.state.favorites.map((business, index) => {
               if (business.place_id === props.match.params.place) {
                 return (<BusinessDetail
@@ -59,6 +59,7 @@ class Profile extends React.Component {
                           match={props.match}
                           business={business}
                           loginStatus={this.props.loginStatus}
+                          imgLoading={this.state.imgLoading}
                         />)
               }
             })
