@@ -67,11 +67,6 @@ class ProductSearch extends React.Component {
               hintStyle={{ width: '100%', textAlign: 'center' }}
               dataSource={this.state.suggestions}
               />
-           {
-            // <Link to="/location">
-            //   <FlatButton label="Search" onClick={this.prodsearch}/>
-            // </Link>
-          }
           {this.props.alertVisible && (
             <Alert
               align="center"

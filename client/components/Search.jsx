@@ -42,7 +42,7 @@ class Search extends React.Component {
     }
 
     const cssClasses = {
-      root: 'form-group',
+      root: 'form-group-search',
       input: 'search-input',
       autocompleteContainer: 'autocomplete-container'
     }
