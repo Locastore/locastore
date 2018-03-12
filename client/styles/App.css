@@ -134,7 +134,6 @@ body {
 
 .randomRenderTitle {
   color: #212529;
-  font-family: "Sacramento", cursive;
   font-size: 4rem;
   margin: 0.5em 0;
   white-space: nowrap;
@@ -277,6 +276,8 @@ h5 {
   position: relative;
   height: 210px;
   width: 320px;
+  cursor: pointer;
+
 }
 
 .card-img-text {
@@ -298,6 +299,7 @@ h5 {
   opacity: 1;
 }
 
+
 .cardImg {
   height: 210px;
   object-fit: cover;
@@ -305,6 +307,7 @@ h5 {
   width: 320px;
 }
 
+/*
 .details-text {
   font-size: 2em;
   font-family: "Sacramento";
@@ -313,6 +316,7 @@ h5 {
   margin-top: 28%;
   position: relative;
 }
+*/
 
 .cardBody {
   padding: 10px;

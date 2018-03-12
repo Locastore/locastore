@@ -22,7 +22,7 @@ class SmallNav extends React.Component {
           {/*Links*/}
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <a className="nav-link" href="/">Home</a>
+              <a className="nav-link" href="/location">Search</a>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/profile">Profile</Link>
