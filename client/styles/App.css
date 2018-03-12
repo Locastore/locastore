@@ -26,7 +26,7 @@ body {
 .searchcol {
   width: 370px;
   margin: 0 auto;
-  margin-top: 10%;
+  margin-top: 15%;
 }
 
 /*=== SIDE NAV ===*/
@@ -151,12 +151,14 @@ body {
 /*BUSINESS DETAIL*/
 
 .bizContainer {
-  /*width: 85%;*/
-  margin-left: 350px;
+  padding: 0 5em 0 5em;
+  display: grid;
+  grid-template-columns: 1fr;
 }
 
 .carousel {
   width: 500px;
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.4), 0 0 0 1px rgba(0,0,0,0.08);
 }
 
 .carouselItem {
@@ -189,8 +191,7 @@ body {
 
 .ratings {
   width: 25%;
-  display: inline;
-  margin-bottom: 10px;
+  padding-bottom: 1em;
 }
 
 h4 {
@@ -211,27 +212,29 @@ h5 {
   margin-right: 2.6rem;
 }
 
-.mainRow {
-  margin-top: 15px;
-  width: 500px;
+.bizTail {
+  padding-top: 2rem;
   color: #292B2C;
   font-size: 1.5rem;
-  display: inline-block;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2em;
 }
 
 .bizBody {
   width: 300px;
   color: #292B2C;
-  padding: 15px;
-  margin-top: 20px;
-  margin-left: 20px;
   display: inline-block;
-  position: absolute;
 }
 
 .bodyText {
   margin-bottom: 20px;
   font-size: 20px;
+}
+
+.price {
+  color: #2bb9a8;
+  margin-left: 0.5em;
 }
 
 .hoursText {
@@ -240,7 +243,6 @@ h5 {
 }
 
 .slider {
-  background-color: salmon;
   display: inline;
   width: 500px;
 }
@@ -248,12 +250,6 @@ h5 {
 .googleMap {
   height: 196px;
   width: 300px;
-}
-
-@media (max-width: 767px) {
-  .container {
-    margin: 0 15px;
-  }
 }
 
 /*SMALL COMPONENTS*/

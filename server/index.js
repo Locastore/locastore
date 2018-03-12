@@ -251,7 +251,6 @@ app.get('/location/*', (req, res) => {
 });
 
 app.get('/*', (req, res) => {
-  console.log(req.session);
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 

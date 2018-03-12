@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Slider from './Slider.jsx';
 import axios from 'axios';
@@ -76,7 +77,7 @@ class BusinessDetail extends React.Component {
     let hours = null;
     let website = null;
     if (this.props.imgLoading) {
-      hours = <Loading />;
+      website = <Loading />;
     } else if (this.props.business.hours) {
       photos = <Slider photos={this.props.business.extra_photos}/>;
       hours = (this.props.business.hours.map((openTime, index) =>
@@ -89,38 +90,40 @@ class BusinessDetail extends React.Component {
     }
     if (this.props.loginStatus && this.state.favorited) {
       favoriteComponent =
-        <Button onClick={() => {this.handleUnfavorite(this.props.business)}}>Unfavorite</Button>
+        <Button onClick={() => {this.handleUnfavorite(this.props.business)}} outline color="danger">Unfavorite</Button>
     } else if (this.props.loginStatus) {
       favoriteComponent =
-        <Button onClick={() => {this.handleFavorite(this.props.business)}}>Favorite</Button>
+        <Button onClick={() => {this.handleFavorite(this.props.business)}} color="danger">Favorite</Button>
     } else {
-      favoriteComponent = <span></span>
+      favoriteComponent = <Button color="danger" disabled>Favorite</Button>
     }
     return (
       <div>
         <SmallNav />
         <div className="bizContainer">
+          <div className="bizHead">
             <h2 className="bizTitle">{this.props.business.name}</h2>
             <div className="ratings">
              <StarRatings rating={this.props.business.rating}/>
             </div>
+            {favoriteComponent}
+            <span><h5 className="bodyText price">{this.props.business.price}</h5></span>
             <div className="contact">
-            <h5 className="bodyText address">📍 {this.props.business.address}</h5>
-            <h5 className="bodyText phone">📞 Phone: {this.props.business.phone}</h5>
-            <h5 className="bodyText">Price: {this.props.business.price}</h5>
+              <h5 className="bodyText address">📍 {this.props.business.address}</h5>
+              <h5 className="bodyText phone">📞 {this.props.business.phone}</h5>
             </div>
-          <div className="mainRow">
+          </div>
+          <div className="bizTail">
             <div className="slider">
               { photos }
             </div>
-          </div>
-          <div className="bizBody">
-
+            <div className="bizBody">
+              <SimpleMap latitude={this.props.business.latitude} longitude={this.props.business.longitude}/>
+              <br/>
               <h4 className="bodyText">Business Hours:</h4>
               { hours }
               { website }
-              {favoriteComponent}
-              <SimpleMap latitude={this.props.business.latitude} longitude={this.props.business.longitude}/>
+            </div>
           </div>
         </div>
       </div>
