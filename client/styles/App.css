@@ -24,7 +24,7 @@ body {
 }
 
 .searchcol {
-  width: 50%;
+  width: 370px;
   margin: 0 auto;
   margin-top: 10%;
 }
@@ -92,13 +92,7 @@ body {
 
 .search-bar {
   text-align: center;
-}
-
-.form-group-search {
-  display: inline-block;
   margin-top: 26%;
-  width: 100%;
-  margin-bottom: 1rem;
 }
 
 .search-input,
@@ -458,6 +452,10 @@ span {
     position: relative;
     top: 0;
     left: 0;
+  }
+
+  .search-bar {
+    margin-top: 0;
   }
 
   .search-input {

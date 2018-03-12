@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import '../styles/Login.css';
+import '../styles/Forms.css';
 
 class Login extends React.Component {
   constructor (props) {
@@ -41,41 +41,45 @@ class Login extends React.Component {
 
   render () {
     return (
-      <div className="login">
-        <div className="loginLogo">
-          <a className="homeLogo" href="/">
-            <h2 className="companyName">Locastore</h2>
-          </a>
+      <div className="forms-grid">
+        <div className="banner login left-col">
+          <div className="loginLogo">
+            <a className="homeLogo" href="/">
+              <h2 className="companyName">Locastore</h2>
+            </a>
+          </div>
+          <div className="imgCaption">
+            <h6>Common Grounds Coffee Shop</h6>
+            <h6 className="captionLocation">Spearfish, South Dakota, USA</h6>
+          </div>
         </div>
-        <div className="imgCaption">
-          <h6>Common Grounds Coffee Shop</h6>
-          <h6 className="captionLocation">Spearfish, South Dakota, USA</h6>
-        </div>
-        <div className="loginForm">
-          <h3 className="welcomeBack">Welcome Back</h3>
-          <Form >
-            <FormGroup>
-              <Label>Username</Label>
-              <Input
-                type="text"
-                name="username"
-                onChange={this.onChangeUsername}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Password</Label>
-              <Input
-                type="password"
-                name="password"
-                onChange={this.onChangePassword}
-              />
-            </FormGroup>
-              <Button onClick={this.onFormSubmit}>Login</Button>
-              <Button href='/auth/google' className='googleButton'>
-                <img src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg' className='icon'/>
-                <span className='buttonText'>Sign in With Google</span>
-              </Button>
-          </Form>
+        <div className="right-col">
+          <div className="submitForm">
+            <h3 className="formGreeting">Welcome Back</h3>
+            <Form >
+              <FormGroup>
+                <Label>Username</Label>
+                <Input
+                  type="text"
+                  name="username"
+                  onChange={this.onChangeUsername}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Password</Label>
+                <Input
+                  type="password"
+                  name="password"
+                  onChange={this.onChangePassword}
+                />
+              </FormGroup>
+                <Button onClick={this.onFormSubmit}>Login</Button>
+                <Button href='/auth/google' className='googleButton'>
+                  <img src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg' className='icon'/>
+                  <span className='buttonText'>Sign in With Google</span>
+                </Button>
+            </Form>
+          </div>
         </div>
       </div>
     )
