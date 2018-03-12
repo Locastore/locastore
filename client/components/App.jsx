@@ -9,6 +9,7 @@ import Business from './Business.jsx';
 import Signup from './Signup.jsx';
 import Login from './Login.jsx';
 import About from './About.jsx';
+import Footer from './Footer.jsx'
 import ProfileWithRouter from './Profile.jsx';
 import SmallNav from './SmallNav.jsx';
 import $ from 'jquery';
@@ -276,13 +277,16 @@ class App extends React.Component {
           <Route
             exact path="/"
             render={ () =>
-              <div className="home">
-                <div className="overlay">
-                  <Nav loginStatus={this.state.loggedIn} logout={this.handleLogout}/>
+              <div>
+                <div className="home">
+                  <div className="overlay">
+                    <Nav loginStatus={this.state.loggedIn} logout={this.handleLogout}/>
+                  </div>
+                  <div className="searchcol">
+                    <Search onSearch={this.search} alertVisible={this.state.alertVisible} onDismiss={this.onDismiss}/>
+                  </div>
                 </div>
-                <div className="searchcol">
-                  <Search onSearch={this.search} alertVisible={this.state.alertVisible} onDismiss={this.onDismiss}/>
-                </div>
+                <Footer footerside={'left'}/>
               </div>
             }
           />
