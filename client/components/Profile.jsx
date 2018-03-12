@@ -19,7 +19,7 @@ class Profile extends React.Component {
       favorites = <NoFavorites onSearch={this.props.onSearch} alertVisible={this.props.alertVisible} onDismiss={this.props.onDismiss}/>
     } else {
       favorites = (
-        <div>
+        <div className="container">
           <h3 className="favoritesTitle">Your Favorites</h3>
           <hr className="favoritesHr" />
           <BusinessList
