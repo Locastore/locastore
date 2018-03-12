@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Alert } from 'reactstrap';
 import SmallNav from './SmallNav.jsx';
-import '../styles/ProductSearch.css';
 import ChipInput from 'material-ui-chip-input';
 import YelpCategories from '../../helpers/yelpcategories.js';
 import FlatButton from 'material-ui/FlatButton';
@@ -67,16 +66,6 @@ class ProductSearch extends React.Component {
               hintText="Search for local products and services"
               hintStyle={{ width: '100%', textAlign: 'center' }}
               dataSource={this.state.suggestions}
-              chipRenderer={({ value, isFocused, isDisabled, handleRequestDelete }, key) => (
-                <Chip
-                  key={key}
-                  style={{ margin: '8px 8px 0 0', float: 'left', pointerEvents: isDisabled ? 'none' : undefined }}
-                  backgroundColor="#fff"
-                  onRequestDelete={handleRequestDelete}
-                >
-                  {value}
-                </Chip>
-              )}
               />
            {
             // <Link to="/location">

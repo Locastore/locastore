@@ -73,6 +73,21 @@ body {
   color: #282828;
 }
 
+.navItem:hover {
+  text-decoration: none;
+  color: #4b4b4c;
+}
+
+.navItem i {
+  display: none;
+  padding-right: 3px;
+}
+
+.navItem:hover i {
+  display: inline-block;
+  animation: horizontal 1s ease infinite;
+}
+
 /*SEARCHBAR LANDING*/
 
 .search-bar {
@@ -132,7 +147,6 @@ body {
   font-size: 4rem;
   margin: 0.5em 0;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -149,6 +163,11 @@ body {
   width: 40%;
   margin: 0 auto;
 }*/
+
+.alert-box-product {
+  width: 30%;
+  margin: 1.2rem auto;
+}
 
 /*=== SEARCH CARDS ===*/
 
@@ -256,15 +275,6 @@ span {
 }
 
 
-
-
-
-
-
-
-
-
-
 /*MEDIA QUERIES*/
 
 .homeLogo {
@@ -276,37 +286,9 @@ span {
   text-decoration: none;
 }
 
-
-
-
-.navItem:hover {
-  text-decoration: none;
-  color: #4b4b4c;
-}
-
-.navItemCont {
-  padding: 0;
-}
-
-.navItem i {
-  display: none;
-  padding-right: 3px;
-}
-
-.navItem:hover i {
-  display: inline-block;
-  animation: horizontal 1s ease infinite;
-}
-
-.nav-list {
-  list-style-type: none;
-}
-
-
-
 .loader {
-  border: 15px solid #f3f3f3; /* Light grey */
-  border-top: 15px solid #708090; /* Slate grey */
+  border: 15px solid #f3f3f3;
+  border-top: 15px solid #708090;
   border-radius: 50%;
   width: 100px;
   height: 100px;
@@ -320,8 +302,8 @@ span {
 }
 
 .loader.small {
-  border: 5px solid #f3f3f3; /* Light grey */
-  border-top: 5px solid #708090; /* Slate grey */
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #708090;
   width: 50px;
   height: 50px;
 }
