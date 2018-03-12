@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import '../styles/Forms.css';
+import Footer from './Footer.jsx'
 
 class Login extends React.Component {
   constructor (props) {
