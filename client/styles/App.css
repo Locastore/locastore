@@ -320,11 +320,17 @@ h5 {
 
 .cardBody {
   padding: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-text {
   color: #2bb9a8;
   margin: 0;
+}
+
+.card-title {
+  white-space: nowrap;
 }
 
 .favorite-btn {
