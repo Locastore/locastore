@@ -76,7 +76,7 @@
   margin-left: 3%;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 767px) {
   .forms-grid {
     grid-template-columns: 1fr;
   }
@@ -98,5 +98,11 @@
 
   .submitForm {
     padding-left: 10%;
+  }
+}
+
+@media (min-width: 768px) {
+  .right-col {
+    padding-top: 25%;
   }
 }
