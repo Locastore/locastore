@@ -286,7 +286,7 @@ class App extends React.Component {
                     <Search onSearch={this.search} alertVisible={this.state.alertVisible} onDismiss={this.onDismiss}/>
                   </div>
                 </div>
-                <Footer footerside={'left'}/>
+                <Footer/>
               </div>
             }
           />
@@ -337,6 +337,9 @@ class App extends React.Component {
                 imgLoading={this.state.imgLoading}
                 favorites={this.state.favorites}
                 setNew={this.setNew}
+                onSearch={this.search}
+                alertVisible={this.state.alertVisible}
+                onDismiss={this.onDismiss}
               />
             }
           />

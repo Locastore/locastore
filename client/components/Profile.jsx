@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Route, Switch } from 'react-router-dom';
 import BusinessDetail from './BusinessDetail.jsx';
 import BusinessList from './BusinessList.jsx';
+import Search from './Search.jsx';
 import { withRouter } from 'react-router';
 import SmallNav from './SmallNav.jsx';
 import '../styles/Profile.css';
@@ -15,7 +16,7 @@ class Profile extends React.Component {
   render() {
     let favorites = null;
     if (this.props.favorites.length === 0) {
-      favorites = <NoFavorites />
+      favorites = <NoFavorites onSearch={this.props.onSearch} alertVisible={this.props.alertVisible} onDismiss={this.props.onDismiss}/>
     } else {
       favorites = (
         <div>
@@ -64,9 +65,12 @@ class Profile extends React.Component {
 
 function NoFavorites(props) {
   return (
-    <div>
+    <div className="profileImg">
       <h3 className="favoritesTitle">No current favorites - explore your city and add some!</h3>
       <hr className="favoritesHr" />
+      <div className="profileSearch">
+       <Search onSearch={props.onSearch} alertVisible={props.alertVisible} onDismiss={props.onDismiss}/>
+      </div>
     </div>
   )
 }

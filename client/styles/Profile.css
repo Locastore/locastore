@@ -1,9 +1,23 @@
 .favoritesTitle {
-  margin: 20px;
-  color: #212529;
+  color: #fff;
+  font-weight: bold;
 }
 
 .favoritesHr {
   margin: 20px;
   text-align: left;
+}
+
+.profileImg {
+  text-align: center;
+  height: 100vh;
+  padding-top: 20px;
+  background-image: url(https://source.unsplash.com/mmuMa7VXL1Y);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.profileSearch {
+  width: 40%;
+  margin: 0 auto;
 }
