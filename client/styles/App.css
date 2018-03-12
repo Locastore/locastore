@@ -164,7 +164,8 @@ body {
 .carouselItem {
   height: 400px;
   width: auto;
-  max-width: 600px;
+  object-fit: cover;
+  min-width: 600px;
   display: inline;
 }
 
@@ -263,8 +264,10 @@ h5 {
 
 /*=== SEARCH CARDS ===*/
 
-.cardColumn {
-  margin-bottom: 20px;
+.business-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
 }
 
 .card-img-wrapper {
@@ -437,6 +440,12 @@ a.footer:hover {
     100% {margin-right:0;}
 }
 
+@media (max-width: 1000px) {
+  .business-wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media (max-width: 700px) {
   .home {
     grid-gap: 0;
@@ -489,5 +498,15 @@ a.footer:hover {
 
   a.footer:hover {
     color: orange;
+  }
+}
+
+@media (max-width: 500px) {
+  .business-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  h3.randomRenderTitle {
+    font-size: 2em;
   }
 }

@@ -29,7 +29,7 @@ class BusinessList extends React.Component {
       }
 
     return (
-      <div className="row">
+      <div className="business-wrapper">
         {businesses}
       </div>
   );
