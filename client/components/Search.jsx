@@ -2,7 +2,6 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import { Alert } from 'reactstrap';
-import '../styles/Search.css';
 
 class Search extends React.Component {
   constructor (props) {
@@ -43,13 +42,13 @@ class Search extends React.Component {
     }
 
     const cssClasses = {
-      root: 'form-group',
+      root: 'form-group-search',
       input: 'search-input',
       autocompleteContainer: 'autocomplete-container'
     }
 
     return (
-      <div>
+      <div className="search-bar">
           <PlacesAutocomplete
             classNames={cssClasses}
             inputProps={inputProps}

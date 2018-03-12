@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Alert } from 'reactstrap';
 import SmallNav from './SmallNav.jsx';
-import '../styles/ProductSearch.css';
 import ChipInput from 'material-ui-chip-input';
 import YelpCategories from '../../helpers/yelpcategories.js';
 import FlatButton from 'material-ui/FlatButton';
+import Chip from 'material-ui/Chip'
 
 class ProductSearch extends React.Component {
   constructor(props) {
@@ -60,12 +60,13 @@ class ProductSearch extends React.Component {
         <div className="productSearch">
           <h3 className="randomRenderTitle">{this.state.location}</h3>
           <div style={{width: '80%', margin: '0 auto'}}>
-            <ChipInput onChange={this.onChange} style={{width: '50%', marginBottom: '20px'}} hintText="Search for local products and services" dataSource={this.state.suggestions} />
-           {
-            // <Link to="/location">
-            //   <FlatButton label="Search" onClick={this.prodsearch}/>
-            // </Link>
-          }
+            <ChipInput
+              onChange={this.onChange}
+              style={{width: '50%', marginBottom: '20px'}}
+              hintText="Search for local products and services"
+              hintStyle={{ width: '100%', textAlign: 'center' }}
+              dataSource={this.state.suggestions}
+              />
           {this.props.alertVisible && (
             <Alert
               align="center"

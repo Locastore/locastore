@@ -108,7 +108,7 @@ class BusinessListEntry extends React.Component {
         <div className="card-img-wrapper" onClick={() => {this.props.handleDetail(this.props.business.place_id)}}>
           <img className="cardImg" src={this.props.business.photos} onError={this.imageFallback} />
           <div className="card-img-text">
-          <p className="details-text">More Details</p>
+          <p className="details-text">Discover</p>
           </div>
         </div>
           <CardBody className="cardBody">

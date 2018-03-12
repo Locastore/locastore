@@ -1,12 +1,16 @@
 body {
   font-family: "Roboto", Verdana, sans-serif;
-  font-size: 20px;
+  font-size: 18px;
 }
 
+/*MAIN COMPONENTS*/
+
+/*== LANDING ===*/
 .home {
-  background-image: url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a4deb7be2c7c79941884cdf35c1cee8e&auto=format&fit=crop&w=1050&q=80');
+  background-image: url('https://source.unsplash.com/qnKhZJPKFD8');
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center center;
   position: fixed;
   opacity: 0.85;
   padding: 0;
@@ -16,51 +20,46 @@ body {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-gap: 15%;
-  grid-template-columns: minmax(200px, auto) 1fr;
-}
-
-.homeLogo {
-  color: maroon;
-}
-
-.homeLogo:hover {
-  color: steelblue;
-  text-decoration: none;
+  grid-template-columns: minmax(250px, auto) 1fr;
 }
 
 .searchcol {
-  position: absolute;
-  top: 100px;
-  left: 300px;
   width: 50%;
-  min-width: 370px;
   margin: 0 auto;
-  text-align: center;
+  margin-top: 10%;
 }
 
-.form-group {
+/*=== SIDE NAV ===*/
+
+.overlay {
+  margin: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
   width: 100%;
-}
-
-.companyName {
-  font-family: "Sacramento", cursive;
-  font-size: 2.5rem;
-  font-weight: bold;
-  text-decoration: none;
+  background: rgba(255,255,255,.5);
 }
 
 .companyDiv {
   display: block;
   text-align: center;
   margin: 1rem;
+  margin-top: 20%;
+}
+
+.companyName {
+  font-family: "Sacramento", cursive;
+  font-size: 3.2rem;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .nav {
-  display: inline-block !important;
+  display: inline-block;
   text-align: right;
   width: 100%;
-  margin-top: 10rem;
+  margin-top: 40%;
+  padding-right: 1rem;
   line-height: 1.8;
   font-weight: bold;
   color: black;
@@ -79,10 +78,6 @@ body {
   color: #4b4b4c;
 }
 
-.navItemCont {
-  padding: 0;
-}
-
 .navItem i {
   display: none;
   padding-right: 3px;
@@ -93,23 +88,314 @@ body {
   animation: horizontal 1s ease infinite;
 }
 
-.nav-list {
-  list-style-type: none;
+/*SEARCHBAR LANDING*/
+
+.search-bar {
+  text-align: center;
 }
 
-.overlay {
+.form-group-search {
+  display: inline-block;
+  margin-top: 26%;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.search-input,
+.search-input:focus,
+.search-input:active {
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.4), 0 0 0 1px rgba(0,0,0,0.08);
+  border: honeydew;
+  width: 100%;
+  padding: 14px;
+  border-radius: 2px;
+  outline: none;
+}
+
+.autocomplete-container {
+  border: honeydew;
+  border-top: 1px solid #e6e6e6;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border-radius: 0 0 2px 2px;
+  text-align: left;
+}
+.spinner-container {
+  margin: 1rem auto;
+}
+
+.spinner {
+  color: #fff;
+  font-size: 2.5rem;
+}
+
+
+/*=== NAVBAR (SMALLNAV) ===*/
+
+.navbar-brand {
+  font-family: "Sacramento", cursive;
+  font-size: 2em;
+}
+
+
+/*PRODUCT SEARCH*/
+
+.randomRenderTitle {
+  color: #212529;
+  font-family: "Sacramento", cursive;
+  font-size: 4rem;
+  margin: 0.5em 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.productSearch {
+  text-align: center;
+  margin: 1em 0;
+}
+
+
+/*BUSINESS DETAIL*/
+
+.bizContainer {
+  /*width: 85%;*/
+  margin-left: 350px;
+}
+
+.carousel {
+  width: 500px;
+}
+
+.carouselItem {
+  height: 400px;
+  width: auto;
+  max-width: 600px;
+  display: inline;
+}
+
+.bizTitle {
+  margin-top: 75px;
+  padding-bottom: 7px;
+  text-transform: uppercase;
+  letter-spacing: .5em;
+  /*position: absolute;*/
+  top: 15%;
+  width: 100%;
+  color: black;
+  opacity: 70%;
+}
+
+.contact {
+  /*width: 35%;*/
+  margin: 2px;
+  margin-top: 10px;
+  padding-top: 5px;
+  padding-right: 4%;
+  display: block;
+}
+
+.ratings {
+  width: 25%;
+  display: inline;
+  margin-bottom: 10px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  width: 35%;
+  display: inline;
+}
+
+.address {
+  margin-left: 2px;
+}
+
+.phone {
+  margin-left: 2.5rem;
+  margin-right: 2.6rem;
+}
+
+.mainRow {
+  margin-top: 15px;
+  width: 500px;
+  color: #292B2C;
+  font-size: 1.5rem;
+  display: inline-block;
+}
+
+.bizBody {
+  width: 300px;
+  color: #292B2C;
+  padding: 15px;
+  margin-top: 20px;
+  margin-left: 20px;
+  display: inline-block;
+  position: absolute;
+}
+
+.bodyText {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.hoursText {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.slider {
+  background-color: salmon;
+  display: inline;
+  width: 500px;
+}
+
+.googleMap {
+  height: 196px;
+  width: 300px;
+}
+
+@media (max-width: 767px) {
+  .container {
+    margin: 0 15px;
+  }
+}
+
+/*SMALL COMPONENTS*/
+
+/*=== ALERTS ===*/
+
+.alert-box-product {
+  width: 30%;
+  margin: 1.2rem auto;
+}
+
+/*=== SEARCH CARDS ===*/
+
+.cardColumn {
+  margin-bottom: 20px;
+}
+
+.card-img-wrapper {
+  position: relative;
+  height: 210px;
+  width: 320px;
+}
+
+.card-img-text {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(21, 96, 87, 0.52);
+  color: #fff;
+  visibility: hidden;
+  opacity: 0;
+  text-align: center;
+  transition: opacity .2s, visibility .2s;
+}
+
+.card-img-wrapper:hover .card-img-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.cardImg {
+  height: 210px;
+  object-fit: cover;
+  object-position: center center;
+  width: 320px;
+}
+
+.details-text {
+  font-size: 2em;
+  font-family: "Sacramento";
+  border-bottom: 2px solid white;
+  display: inline-block;
+  margin-top: 28%;
+  position: relative;
+}
+
+.cardBody {
+  padding: 10px;
+}
+
+.card-text {
+  color: #2bb9a8;
   margin: 0;
-  height: 100%;
+}
+
+.favorite-btn {
+  text-align: right;
+  position: relative;
+  bottom: 20px;
+  right: 20px;
+}
+
+.fa-heart, .far .fa-heart {
+  font-size: 24px;
+}
+
+
+
+/*=== RATINGS ===*/
+
+.ratings-text {
+  color: #f38938;
+  display: inline-block;
+  margin: 0;
+  margin-right: 10px;
+}
+.star-ratings-css {
+  unicode-bidi: bidi-override;
+  color: #c5c5c5;
+  display: inline-block;
+  font-size: 20px;
+  height: 25px;
+  width: 114px;
+  position: relative;
+  padding: 0;
+  text-shadow: 0px 1px 0 #a2a2a2;
+}
+
+.star-ratings-css-top {
+  color: #f38938;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: block;
   top: 0;
   left: 0;
-  width: 20%;
-  min-width: 200px;
-  background: rgba(255,255,255,.5);
+  overflow: hidden;
+}
+
+.star-ratings-css-bottom {
+  padding: 0;
+  display: block;
+  z-index: 0;
+}
+
+span {
+  padding-right: 3px;
+}
+
+
+/*MEDIA QUERIES*/
+
+.homeLogo {
+  color: maroon;
+}
+
+.homeLogo:hover {
+  color: steelblue;
+  text-decoration: none;
 }
 
 .loader {
-  border: 15px solid #f3f3f3; /* Light grey */
-  border-top: 15px solid #708090; /* Slate grey */
+  border: 15px solid #f3f3f3;
+  border-top: 15px solid #708090;
   border-radius: 50%;
   width: 100px;
   height: 100px;
@@ -123,8 +409,8 @@ body {
 }
 
 .loader.small {
-  border: 5px solid #f3f3f3; /* Light grey */
-  border-top: 5px solid #708090; /* Slate grey */
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #708090;
   width: 50px;
   height: 50px;
 }
