@@ -266,7 +266,11 @@ h5 {
 .business-wrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1em;
+  grid-gap: 0.5em;
+}
+
+.business-card.col {
+  padding: 0;
 }
 
 .card-img-wrapper {
