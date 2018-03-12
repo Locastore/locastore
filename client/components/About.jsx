@@ -55,7 +55,7 @@ class About extends React.Component {
           </div>
           <div>
             <a href="https://github.com/connectblocks">
-              <img className="aboutImg sienna" src="https://i.imgur.com/WAxcZ6k.png"/>
+              <img className="aboutImg sienna" src="https://avatars1.githubusercontent.com/u/35247504?s=400&v=4"/>
             </a>
             <div className="aboutInfo sienna">
               <h4>Michael Shin</h4>
