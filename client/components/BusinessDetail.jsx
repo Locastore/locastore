@@ -77,7 +77,7 @@ class BusinessDetail extends React.Component {
     let hours = null;
     let website = null;
     if (this.props.imgLoading) {
-      website = <Loading />;
+      hours = <Loading />;
     } else if (this.props.business.hours) {
       photos = <Slider photos={this.props.business.extra_photos}/>;
       hours = (this.props.business.hours.map((openTime, index) =>

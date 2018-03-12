@@ -103,7 +103,7 @@ class BusinessListEntry extends React.Component {
     }
 
     return (
-      <Col className="cardColumn" xs="6" sm="4">
+      <Col className="business-card">
         <Card style={{height: '350px', width:'330px', padding: '5px'}}>
         <div className="card-img-wrapper" onClick={() => {this.props.handleDetail(this.props.business.place_id)}}>
           <img className="cardImg" src={this.props.business.photos} onError={this.imageFallback} />
