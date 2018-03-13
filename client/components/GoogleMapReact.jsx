@@ -11,6 +11,17 @@ class SimpleMap extends React.Component {
       center: {lat: this.props.latitude, lng: this.props.longitude},
       zoom: 14
     };
+    this.renderMarkers = this.renderMarkers.bind(this);
+  }
+
+
+
+  renderMarkers(map, maps) {
+    let marker = new google.maps.Marker({
+      position: this.state.center,
+      map: map,
+      title: 'Hello World!'
+    });
   }
 
   render() {
@@ -20,6 +31,8 @@ class SimpleMap extends React.Component {
         bootstrapURLKeys={{ key: process.env.googleMapKey }}
         defaultCenter={this.state.center}
         defaultZoom={this.state.zoom}
+
+        onGoogleApiLoaded={({map, maps}) => this.renderMarkers(map, maps)}
       >
         <EmbedReactComponent
           lat={this.props.latitude}
