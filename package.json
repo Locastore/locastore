@@ -5,7 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress",
-    "start": "node server/index.js",
+    "start": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "build": "webpack --mode production",
     "server-dev": "NODE_ENV=dev nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "lint": "./node_modules/.bin/eslint"
@@ -74,7 +75,8 @@
     "less-loader": "^4.0.5",
     "style-loader": "^0.20.2",
     "url-loader": "^0.6.2",
-    "webpack": "^3.11.0",
-    "webpack-dev-server": "^2.11.1"
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.10",
+    "webpack-dev-server": "^3.1.0"
   }
 }
