@@ -1,50 +1,69 @@
-var path = require('path');
-var webpack = require('webpack');
-var comp_dir = path.join(__dirname, '/client/components');
-var dist_dir = path.join(__dirname, '/client/dist');
+var path = require("path");
+var webpack = require("webpack");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+var comp_dir = path.join(__dirname, "/client/components");
+var dist_dir = path.join(__dirname, "/client/dist");
+
 module.exports = {
-  devtool: 'inline-source-map',
   entry: `${comp_dir}/Index.jsx`,
-  resolve: {
-    extensions: ['.js', '.jsx', '.css']
-  },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
-      },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
-      {
-        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000
-        }
-      },
-      {
-        test: /\.(png|jpg|gif)$/,
-        loader: 'file-loader',
-        options: {}
+        use: ["babel-loader"]
       },
       {
         test: /\.less$/,
-        use: [{
-          loader: "style-loader"
-        }, {
-          loader: "css-loader"
-        }, {
-          loader: "less-loader"
-        }]
+        loader: "style-loader!css-loader!less-loader"
+      },
+      {
+        test: /\.css/,
+        loader: "style-loader!css-loader"
+      },
+      {
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        loader: "url-loader"
       }
     ]
   },
+  resolve: {
+    extensions: ["*", ".js", ".jsx"]
+  },
   output: {
-    filename: 'bundle.js',
-    path: dist_dir
+    path: dist_dir, // eslint-disable-line no-undef
+    publicPath: "/",
+    chunkFilename: "[name].bundle.js",
+    filename: "bundle.js"
+  },
+  devServer: {
+    contentBase: "./client/dist",
+    historyApiFallback: true
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        uglifyOptions: {
+          compress: true,
+          ecma: 6,
+          mangle: true
+        },
+        sourceMap: true
+      })
+    ],
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendor",
+          chunks: "initial"
+        }
+      }
+    }
+  },
+  performance: {
+    hints: false
   }
-}
+};
